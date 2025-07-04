@@ -1,0 +1,193 @@
+/* ===== تنظیمات کلی و رفع مشکل اسکرول ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== متغیرهای رنگ و استایل ===== */
+:root {
+  --primary-color: #3f51b5; /* Indigo */
+  --primary-light: #7986cb;
+  --secondary-color: #1a237e; /* Darker Indigo */
+  --accent-color: #ff4081; /* Pink */
+  --text-dark: #212121;
+  --text-medium: #757575;
+  --white: #ffffff;
+  --white-soft: rgba(255, 255, 255, 0.95);
+  --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --transition-fast: all 0.2s ease-in-out;
+  --transition-slow: all 0.4s ease-in-out;
+}
+
+/* ===== استایل‌های پایه و چیدمان Flexbox ===== */
+.login-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 1rem;
+  font-family: Tahoma, Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* ===== انیمیشن پس‌زمینه ===== */
+.login-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(-45deg, #7986cb, #3f51b5, #ff4081, #303f9f);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== کانتینر و کادر اصلی فرم ===== */
+.login-container {
+  max-width: 480px !important;
+  width: 100%;
+}
+
+.login-form-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  background-color: var(--white-soft);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-medium);
+  transition: var(--transition-slow); /* این خط برای انیمیشن نرم ضروری است */
+}
+
+/* ✅ این بخش جدید را اضافه کنید */
+.login-form-box:hover {
+  transform: translateY(-10px) scale(1.02); /* کمی به بالا حرکت کرده و بزرگ می‌شود */
+  box-shadow: 5px 60px 45px rgba(0, 0, 0, 0.2); /* سایه واضح‌تر برای حس سه‌بعدی */
+}
+
+.login-form {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* ===== عناصر داخلی فرم ===== */
+.login-avatar {
+  /* background-color: var(--primary-color) !important; */
+  width: 80px !important;
+  height: 80px !important;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(63, 81, 181, 0.4);
+}
+
+.login-logo{
+  width: 100%;
+  height: 100%;
+}
+
+.login-title {
+  color: var(--secondary-color) !important;
+  font-weight: 700 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* ===== فیلدهای ورودی ===== */
+.login-textfield .MuiOutlinedInput-root {
+  border-radius: 12px;
+  background-color: rgba(245, 245, 245, 0.5);
+  transition: var(--transition-fast);
+}
+
+.login-textfield .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-light);
+}
+
+.login-textfield .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-color);
+  border-width: 2px;
+}
+
+.login-textfield .MuiFormLabel-root.Mui-focused {
+  color: var(--primary-color);
+}
+
+/* ===== دکمه ورود (طراحی جدید با انیمیشن) ===== */
+.login-button {
+  margin: 1.5rem 0 1rem !important;
+  padding: 0.8rem 0 !important;
+  border-radius: 12px !important;
+  font-size: 1.1rem !important;
+  font-weight: bold !important;
+  color: var(--white) !important;
+  text-transform: none !important;
+  background: linear-gradient(45deg, var(--accent-color) 30%, var(--primary-color) 90%) !important;
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(255, 64, 129, 0.4) !important;
+  transition: all 0.3s ease !important;
+  position: relative; /* برای جای‌گیری انیمیشن */
+  overflow: hidden;   /* برای مخفی کردن بخش‌های اضافی انیمیشن */
+}
+
+/* ✅ انیمیشن درخشش دکمه */
+.login-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: button-shine 4s infinite linear;
+}
+
+@keyframes button-shine {
+  from {
+    left: -75%;
+  }
+  to {
+    left: 125%;
+  }
+}
+
+.login-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 25px rgba(255, 64, 129, 0.5) !important;
+}
+
+.login-button:active {
+  transform: translateY(-1px);
+}
+
+.login-button.Mui-disabled {
+  background: #9e9e9e !important;
+  box-shadow: none !important;
+}
+
+/* ===== طراحی واکنش‌گرا برای موبایل ===== */
+@media (max-width: 600px) {
+  .login-form-box {
+    padding: 2rem 1.5rem;
+  }
+  .login-title {
+    font-size: 1.5rem !important;
+  }
+}

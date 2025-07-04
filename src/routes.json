@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/login",
+    "elementName": "LoginForm",
+    "isPublic": true
+  },
+  {
+    "path": "/dashboard",
+    "elementName": "DashboardPage",
+    "isPrivate": true
+  },
+  {
+    "path": "/products",
+    "elementName": "ProductsPage",
+    "isPrivate": true
+  },
+  {
+    "path": "*",
+    "elementName": "NotFoundPage",
+    "isPublic": true
+  }
+]

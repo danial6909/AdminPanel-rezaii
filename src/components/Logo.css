@@ -1,0 +1,15 @@
+.logo-container {
+  background-color: blueviolet;
+  text-align: center;
+  height: 50px;
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 0.5rem;
+}
+.user-image {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(233, 5, 5);
+  border-radius: 100%;
+}

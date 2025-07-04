@@ -1,0 +1,156 @@
+/* تعریف متغیرهای رنگی برای مدیریت آسان‌تر و ظاهر جدید */
+:root {
+  --primary-color: #6a11cb;
+  --secondary-color: #2575fc;
+  --header-bg: #ffffff;
+  --header-shadow: rgba(0, 0, 0, 0.05);
+  --text-color: #333;
+  --icon-color: #555;
+  --icon-hover-bg: rgba(106, 27, 203, 0.1); /* پس‌زمینه هاور با شفافیت */
+  --menu-bg: #ffffff;
+  --menu-shadow: rgba(40, 40, 90, 0.15);
+  --menu-item-hover: linear-gradient(45deg, #f0eaff, #e6f0ff); /* گرادینت برای هاور آیتم‌ها */
+  --logout-hover-bg: rgba(211, 47, 47, 0.1);
+  --logout-hover-color: #d32f2f;
+}
+
+/* --- انیمیشن‌ها --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- استایل اصلی هدر --- */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 28px;
+  height: 85px;
+  background-color: var(--header-bg);
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 4px 20px var(--header-shadow);
+  transition: all 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+}
+
+/* --- عنوان پنل --- */
+.header-title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- استایل آیکون‌های هدر --- */
+.header-icon {
+  color: var(--icon-color) !important;
+  margin-inline: 6px !important;
+  transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease !important;
+}
+
+.header-icon:hover {
+  background-color: var(--icon-hover-bg) !important;
+  color: var(--primary-color) !important;
+  transform: scale(1.15) rotate(10deg);
+}
+
+.language-button:hover {
+  transform: scale(1.15); /* عدم چرخش برای پرچم */
+}
+
+/* کلاس برای انیمیشن چرخش آیکون تم */
+.rotate-icon {
+  animation: rotate 0.5s ease-in-out;
+}
+
+/* --- استایل پرچم‌ها --- */
+.flag-icon {
+  font-size: 36px; /* سایز پرچم اصلی */
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-flag-icon {
+    font-size: 24px; /* سایز پرچم داخل منو */
+    line-height: 1;
+}
+
+/* --- آواتار پروفایل --- */
+.profile-avatar {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px var(--secondary-color), 0 0 30px var(--primary-color);
+}
+
+/* --- استایل سفارشی و جذاب برای منوها --- */
+.custom-menu {
+  margin-top: 15px !important;
+  background-color: var(--menu-bg) !important;
+  border-radius: 16px !important;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 10px 30px var(--menu-shadow) !important;
+  animation: fadeIn 0.3s ease-out;
+  padding: 6px !important;
+}
+
+.language-menu .MuiMenuItem-root {
+  gap: 12px;
+  font-size: 1rem;
+}
+
+.profile-menu .MuiMenuItem-root {
+  font-size: 0.95rem;
+}
+
+/* استایل آیتم‌های داخل منو */
+.custom-menu .MuiMenuItem-root {
+  font-weight: 500;
+  padding: 12px 20px !important;
+  margin: 4px !important;
+  border-radius: 12px !important;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  color: #444;
+}
+
+.custom-menu .MuiMenuItem-root:hover {
+  background: var(--menu-item-hover) !important;
+  color: var(--primary-color) !important;
+  transform: translateX(3px);
+}
+
+.custom-menu .MuiMenuItem-root:hover .MuiListItemIcon-root {
+  color: var(--primary-color) !important;
+}
+
+/* استایل خاص برای آیتم خروج */
+.logout-item:hover {
+  background-color: var(--logout-hover-bg) !important;
+  color: var(--logout-hover-color) !important;
+}
+.logout-item:hover .MuiListItemIcon-root {
+  color: var(--logout-hover-color) !important;
+}
