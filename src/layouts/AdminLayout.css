@@ -1,53 +1,26 @@
-.container {
-  width: 100%;
-  height: 10%;
-}
+/* src/layouts/AdminLayout.css */
+
+
 .admin-layout {
-  background-color: #f4f7fc;
   display: flex;
+  background-color: var(--color-background-main);
+  transition: background-color 0.3s ease;
 }
 
 .admin-left {
-  width:100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-
-
-.admin-appbar {
-  position: sticky;
-  top: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(to left, #6a11cb, #2575fc);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1001;
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
 .admin-main {
-  background-color: transparent;
   padding: 24px;
-  background-color: rgb(208, 216, 216);
-  min-height: calc(
-    100vh - 90px
-  ); /* ارتفاع را طوری تنظیم می‌کند که کل صفحه را پر کند */
+  min-height: calc(100vh - 95px); /* ارتفاع هدر */
   animation: fadeInMain 0.4s ease;
 }
 
 @keyframes fadeInMain {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+

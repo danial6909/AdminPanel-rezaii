@@ -1,0 +1,19 @@
+/* src/styles/fonts.css */
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
+
+:root {
+  --font-family-main: 'Vazirmatn', sans-serif;
+
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.5rem;
+  --font-size-body: 1rem;
+  --font-size-menu: 0.95rem;
+  --font-size-verysmall: 0.875rem;
+  --font-size-small: 1rem;
+  --font-size-large: 1.125rem;
+  --font-size-verylarge: 1.25rem;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+}

@@ -19,7 +19,8 @@ import ProductsPage from "./pages/ProductsPage";
 import OrdersPage from "./pages/OrdersPage";
 import UsersPage from "./pages/UsersPage";
 import "./i18"; 
-
+import "./styles/colors.css";
+import "./styles/fonts.css";
 
 function App() {
 

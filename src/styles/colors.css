@@ -1,0 +1,46 @@
+/* src/styles/colors.css */
+
+/* --- تم روشن (پیش‌فرض) --- */
+:root {
+    --color-primary: #4A90E2;
+    --color-accent: #50E3C2;
+    --color-error: #E94E77;
+    --color-success: #2ECC71;
+  
+    --color-text-primary: #4A4A4A;
+    --color-text-secondary: #757575;
+    --color-text-on-primary: #FFFFFF; /* متن روی دکمه‌های اصلی */
+  
+    --color-background-main: #F8F9FA; /* پس‌زمینه اصلی صفحات */
+    --color-background-content: #FFFFFF; /* پس‌زمینه کارت‌ها، سایدبار، هدر */
+    --color-background-hover: #F1F3F4; /* هاور آیتم‌های منو */
+  
+    --color-border: #EAEAEA;
+    --color-shadow: rgba(74, 74, 74, 0.08);
+  
+    --gradient-primary: linear-gradient(98deg, var(--color-primary), #50E3C2);
+    --gradient-avatar: linear-gradient(45deg, var(--color-primary), #63a4ff);
+  }
+  
+  /* --- تم تیره --- */
+  html[data-theme='dark'] {
+    --color-primary: #4A90E2; /* رنگ اصلی در حالت تیره هم جذاب است */
+    --color-accent: #50E3C2;
+    --color-error: #E94E77;
+    --color-success: #2ECC71;
+  
+    --color-text-primary: #E4E4E7; /* متن اصلی روشن */
+    --color-text-secondary: #A1A1AA; /* متن فرعی */
+    --color-text-on-primary: #FFFFFF;
+  
+    --color-background-main: #18181B; /* پس‌زمینه اصلی تیره */
+    --color-background-content: #27272A; /* پس‌زمینه کارت‌ها، سایدبار، هدر */
+    --color-background-hover: #3F3F46; /* هاور آیتم‌های منو */
+  
+    --color-border: #3F3F46;
+    --color-shadow: rgba(0, 0, 0, 0.2);
+  
+    /* گرادینت‌ها می‌توانند ثابت بمانند یا تغییر کنند */
+    --gradient-primary: linear-gradient(98deg, var(--color-primary), var(--color-accent));
+    --gradient-avatar: linear-gradient(45deg, var(--color-primary), #63a4ff);
+  }

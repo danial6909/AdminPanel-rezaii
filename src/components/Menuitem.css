@@ -1,58 +1,200 @@
-/* Menuitem.css */
+/* =================================================================== */
+/* =================== CSS کامل برای کامپوننت منو =================== */
+/* =================================================================== */
 
-.menu-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+/* بخش ۱: استایل‌های پایه و مشترک
+-------------------------------------------------------------------- */
+.menu-list, .submenu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-main);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-menu);
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.menu-list.collapsed .menu-link {
+    justify-content: center;
+}
+
+.menu-link:hover {
+  background-color: var(--color-background-hover);
+  color: var(--color-text-primary);
+}
+
+.menu-link.active {
+  background: var(--gradient-primary);
+  color: var(--color-text-on-primary);
+  box-shadow: 0 4px 10px -2px var(--color-primary);
+}
+
+.menu-link.active .menu-icon,
+.menu-link.active .dropdown-icon {
+  color: var(--color-text-on-primary);
+}
+
+.menu-icon {
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.menu-text {
+  margin-inline-start: 1.25rem;
+  flex-grow: 1;
+  font-size: var(--font-size-verylarge);
+}
+
+.dropdown-icon {
+  display: flex;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.dropdown-icon.open {
+  transform: rotate(180deg);
+}
+
+/* بخش ۲: زیرمنوی آکاردئونی (برای حالت باز)
+-------------------------------------------------------------------- */
+@keyframes slideInFade {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
   }
-  
-  .menu-item {
-    margin: 12px 0;
-    transition: all 0.3s ease;
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
-  .menu-link {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    text-decoration: none;
-    color: #555;
-    padding: 12px 18px;
-    border-radius: 12px;
-    font-weight: 500;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    position: relative;
-  }
-  
-  .menu-link:hover {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateX(4px);
-  }
-  
-  .menu-link.active {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    color: white;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  }
-  
-  .menu-icon {
-    margin-left: 12px;
-    color: inherit;
-    font-size: 30px;
-    transition: transform 0.3s ease;
-  }
-  
-  .menu-link:hover .menu-icon {
-    transform: scale(1.1);
-  }
-  
-  .menu-text {
-    font-size: 25px;
-    margin-left: 15px;
-  }
+}
+
+.submenu-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.3s ease;
+  margin: 0 0 0 2.5rem;
+  padding-left: 0;
+  opacity: 0;
+}
+
+.submenu-list.open {
+  max-height: 500px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 1;
+}
+
+.submenu-item {
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  will-change: transform, opacity;
+}
+
+.submenu-list.open .submenu-item {
+  animation: slideInFade 0.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* تاخیر پلکانی برای ایجاد افکت آبشاری */
+.submenu-list.open .submenu-item:nth-child(1) { animation-delay: 0.05s; }
+.submenu-list.open .submenu-item:nth-child(2) { animation-delay: 0.1s; }
+.submenu-list.open .submenu-item:nth-child(3) { animation-delay: 0.15s; }
+.submenu-list.open .submenu-item:nth-child(4) { animation-delay: 0.2s; }
+
+.submenu-link {
+  display: block;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  border-radius: 6px;
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-small);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.submenu-link:hover {
+  background-color: var(--color-background-hover);
+  color: var(--color-text-primary);
+}
+
+.submenu-link.active {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  background-color: transparent;
+}
 
 
- 
+/* بخش ۳: استایل‌های نمایش زیرآیکون‌ها (برای حالت بسته)
+-------------------------------------------------------------------- */
+.sub-icon-container {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  padding: 12px;
+  background-color: var(--color-background-content, #fff);
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1300;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  /* در حالت عادی پنهان است */
+  opacity: 0;
+  visibility: hidden;
+  /* انیمیشن با تاخیر برای بسته شدن اعمال می‌شود */
+  transition: opacity 0.2s ease, visibility 0s linear 0.3s;
+}
+
+/* وقتی کلاس visible اضافه می‌شود، بلافاصله نمایش داده شود */
+.sub-icon-container.visible {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.sub-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease;
+  gap: 4px;
+}
+
+.sub-icon-item:hover,
+.sub-icon-item.active {
+  color: var(--color-primary);
+}
+
+.sub-icon-image .MuiSvgIcon-root {
+   font-size: 1.75rem;
+}
+
+.sub-icon-text {
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}

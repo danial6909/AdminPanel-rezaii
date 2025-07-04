@@ -1,25 +1,33 @@
-
-
-
 // src/layouts/AdminLayout.js
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../components/Header"; // وارد کردن Header
+import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import "./AdminLayout.css"; // وارد کردن فایل CSS
+import "./AdminLayout.css";
 
 function AdminLayout() {
+  // مرحله ۱: استیت و تابع کنترل‌کننده در اینجا تعریف می‌شوند
+  const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarCollapsed((prevState) => !prevState);
+  };
+
   return (
     <div className="admin-container">
       <div className="admin-layout">
         <div className="admin-right">
-          <Sidebar />
+          {/* مرحله ۲: ارسال وضعیت به سایدبار */}
+          <Sidebar isCollapsed={isSidebarCollapsed} />
         </div>
 
         <div className="admin-left">
-          <Header /> {/* استفاده از کامپوننت Header */}
+          {/* مرحله ۳: ارسال تابع و وضعیت به هدر */}
+          <Header
+            toggleSidebar={toggleSidebar}
+            isSidebarCollapsed={isSidebarCollapsed}
+          />
           <main className="admin-main">
-            {/* اینجا Outlet قرار می‌گیرد که محتوای Route های فرزند را رندر می‌کند */}
             <Outlet />
           </main>
         </div>

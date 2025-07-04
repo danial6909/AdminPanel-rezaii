@@ -1,15 +1,64 @@
+/* src/components/Logo.css */
+
+/* کانتینر اصلی لوگو */
 .logo-container {
-  background-color: blueviolet;
-  text-align: center;
-  height: 50px;
   display: flex;
-  padding: 1rem;
-  gap: 1rem;
-  border-radius: 0.5rem;
+  align-items: center;
+  justify-content: flex-start; /* آیتم‌ها از چپ تراز می‌شوند */
+  padding: 10px;
+  gap: 20px;
+  border-radius: 12px;
+  background-color: var(--color-background-hover);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
 }
-.user-image {
+
+/* در حالت بسته، کانتینر برای جا دادن فقط آیکون، مربعی می‌شود */
+.logo-container.collapsed {
+  justify-content: center; /* آیکون در مرکز قرار می‌گیرد */
+  padding: 0;
   width: 50px;
   height: 50px;
-  background-color: rgb(233, 5, 5);
-  border-radius: 100%;
+}
+
+/* استایل آیکون لوگو */
+.logo-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50px; /* حداقل عرض برای جلوگیری از کوچک شدن ناگهانی */
+  height: 50px;
+  border-radius: 10px;
+  color: var(--color-text-on-primary);
+  font-size: 28px;
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0; /* جلوگیری از فشرده شدن آیکون */
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover  {
+  text-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* نگه‌دارنده متن برای مدیریت انیمیشن محو شدن */
+.logo-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  white-space: nowrap; /* جلوگیری از شکستن متن */
+}
+
+/* وقتی سایدبار بسته است، این بخش محو می‌شود */
+.logo-container.collapsed .logo-text-wrapper {
+  opacity: 0;
+}
+
+/* استایل متن نام شرکت */
+.logo-text {
+  margin: 0;
+  font-size: 19pt;
+  font-family: 'Vazirmatn';
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
 }
