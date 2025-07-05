@@ -18,25 +18,45 @@ i18n
       en: {
         translation: {
           // کلیدهای انگلیسی
-          adminPanelTitle: "Store Management Panel",
+          adminPanelTitle: "Management Panel",
           profile: "Profile",
           logout: "Logout",
           changeLanguage: "Change Language",
           theme_light: "Light Mode",
           theme_dark: "Dark Mode",
-          dashboard: "Dashboard"
+          // کلیدهای جدید برای منو
+          dashboard: "Dashboard",
+          products: "Products",
+          orders: "Orders",
+          users: "Users",
+          settings: "Settings",
+          security: "Security",
+          authentication: "Authentication",
+          login: "Login",
+          register: "Register",
+          change_password: "Change Password",
         },
       },
       fa: {
         translation: {
           // کلیدهای فارسی
-          adminPanelTitle: "پنل مدیریت فروشگاه",
+          adminPanelTitle: "پنل مدیریت",
           profile: "پروفایل",
           logout: "خروج از حساب",
           changeLanguage: "تغییر زبان",
           theme_light: "حالت روشن",
           theme_dark: "حالت تاریک",
-          dashboard:"داشبورد"
+          // کلیدهای جدید برای منو
+          dashboard: "داشبورد",
+          products: "محصولات",
+          orders: "سفارشات",
+          users: "کاربران",
+          settings: "تنظیمات",
+          security: "امنیت",
+          authentication: "احراز هویت",
+          login: "ورود",
+          register: "ثبت نام",
+          change_password: "رمز عبور",
         },
       },
     },

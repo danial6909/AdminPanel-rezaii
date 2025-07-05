@@ -49,7 +49,8 @@
 }
 
 .language-button:hover, .profile-avatar:hover {
-  transform: scale(1.1); /* جلوگیری از چرخش */
+  transform: scale(1.1);
+  background-color: transparent !important; 
 }
 
 .rotate-icon {
@@ -62,15 +63,15 @@
 
 /* --- آواتار پروفایل --- */
 .profile-avatar {
-  background: var(--gradient-avatar);
   color: var(--color-text-on-primary);
   font-weight: var(--font-weight-bold);
   cursor: pointer;
+  border: 2px solid var(--color-text-secondary);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .profile-avatar:hover {
-  box-shadow: 0 0 15px var(--color-primary);
+  box-shadow: 0 0 5px var(--color-primary);
 }
 
 /* --- استایل منوها --- */
@@ -82,6 +83,7 @@
   box-shadow: 0 10px 30px var(--color-shadow) !important;
   animation: fadeIn 0.3s ease-out;
   padding: 6px !important;
+  
 }
 
 .custom-menu .MuiMenuItem-root {
@@ -104,6 +106,7 @@
 .custom-menu .MuiListItemIcon-root {
   color: var(--color-text-secondary);
   transition: color 0.2s ease;
+  margin-left: 5px;
 }
 
 .custom-menu .MuiMenuItem-root:hover .MuiListItemIcon-root {

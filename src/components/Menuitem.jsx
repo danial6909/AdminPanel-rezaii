@@ -1,7 +1,6 @@
-// src/components/MenuList.jsx
-
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next"; // ایمپورت هوک
 
 // آیکون‌ها
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -17,54 +16,110 @@ import LoginIcon from "@mui/icons-material/Login";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PasswordIcon from "@mui/icons-material/Password";
 
-const menuItems = [
-  { text: "داشبورد", icon: <DashboardIcon />, path: "/dashboard" },
-  { text: "محصولات", icon: <InventoryIcon />, path: "/products" },
-  { text: "سفارشات", icon: <ShoppingCartIcon />, path: "/orders" },
-  { text: "کاربران", icon: <PeopleIcon />, path: "/users" },
-  {
-    text: "تنظیمات",
-    icon: <SettingsIcon />,
-    path: "/settings",
-    subItems: [
-      {
-        text: "پروفایل",
-        icon: <AccountCircleIcon />,
-        path: "/settings/profile",
-      },
-      { text: "امنیت", icon: <VpnKeyIcon />, path: "/settings/security" },
-    ],
-  },
-  {
-    text: "احراز هویت",
-    icon: <SecurityIcon />,
-    path: "/auth",
-    subItems: [
-      {
-        text: "ورود",
-        icon: <LoginIcon />,
-        path: "/auth/login",
-      },
-      {
-        text: "ثبت نام",
-        icon: <PersonAddIcon />,
-        path: "/auth/register",
-      },
-      {
-        text: "رمز عبور",
-        icon: <PasswordIcon />,
-        path: "/auth/change-password",
-      },
-    ],
-  },
-];
-
 function MenuList({ isCollapsed }) {
+  const { t } = useTranslation(); // استفاده از هوک برای دسترسی به تابع ترجمه
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // تعریف منو در داخل کامپوننت تا به تابع 't' دسترسی داشته باشد
+  const menuItems = React.useMemo(
+    () => [
+      { text: t("dashboard"), icon: <DashboardIcon />, path: "/dashboard" },
+      { text: t("products"), icon: <InventoryIcon />, path: "/products" },
+      { text: t("orders"), icon: <ShoppingCartIcon />, path: "/orders" },
+      { text: t("users"), icon: <PeopleIcon />, path: "/users" },
+      {
+        text: t("settings"),
+        icon: <SettingsIcon />,
+        path: "/settings",
+        subItems: [
+          {
+            text: t("profile"),
+            icon: <AccountCircleIcon />,
+            path: "/settings/profile",
+          },
+          {
+            text: t("security"),
+            icon: <VpnKeyIcon />,
+            path: "/settings/security",
+          },
+        ],
+      },
+      {
+        text: t("authentication"),
+        icon: <SecurityIcon />,
+        path: "/auth",
+        subItems: [
+          {
+            text: t("login"),
+            icon: <LoginIcon />,
+            path: "/auth/login",
+          },
+          {
+            text: t("register"),
+            icon: <PersonAddIcon />,
+            path: "/auth/register",
+          },
+          {
+            text: t("change_password"),
+            icon: <PasswordIcon />,
+            path: "/auth/change-password",
+          },
+        ],
+      },
+    ],
+    [t]
+  );
+
+  // const menuItems = [
+  //   { text: t("dashboard"), icon: <DashboardIcon />, path: "/dashboard" },
+  //   { text: t("products"), icon: <InventoryIcon />, path: "/products" },
+  //   { text: t("orders"), icon: <ShoppingCartIcon />, path: "/orders" },
+  //   { text: t("users"), icon: <PeopleIcon />, path: "/users" },
+  //   {
+  //     text: t("settings"),
+  //     icon: <SettingsIcon />,
+  //     path: "/settings",
+  //     subItems: [
+  //       {
+  //         text: t("profile"),
+  //         icon: <AccountCircleIcon />,
+  //         path: "/settings/profile",
+  //       },
+  //       {
+  //         text: t("security"),
+  //         icon: <VpnKeyIcon />,
+  //         path: "/settings/security",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     text: t("authentication"),
+  //     icon: <SecurityIcon />,
+  //     path: "/auth",
+  //     subItems: [
+  //       {
+  //         text: t("login"),
+  //         icon: <LoginIcon />,
+  //         path: "/auth/login",
+  //       },
+  //       {
+  //         text: t("register"),
+  //         icon: <PersonAddIcon />,
+  //         path: "/auth/register",
+  //       },
+  //       {
+  //         text: t("change_password"),
+  //         icon: <PasswordIcon />,
+  //         path: "/auth/change-password",
+  //       },
+  //     ],
+  //   },
+  // ];
+
   const [openMenu, setOpenMenu] = useState(null);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [activeParent, setActiveParent] = useState(null);
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const currentParent = menuItems.find(
@@ -73,16 +128,14 @@ function MenuList({ isCollapsed }) {
     if (currentParent) {
       setActiveParent(currentParent.path);
     }
-  }, [location.pathname]);
+  }, [location.pathname, menuItems]);
 
   const handleParentMenuClick = (item) => {
-    // با کلیک روی والد، همیشه به اولین فرزند برو تا URL آپدیت شود
     if (item.subItems && item.subItems.length > 0) {
       navigate(item.subItems[0].path);
     }
     const path = item.path;
     setActiveParent(path);
-    // منوی آکاردئونی فقط در حالت باز، باز و بسته شود
     if (!isCollapsed) {
       setOpenMenu(openMenu === path ? null : path);
     }
@@ -105,7 +158,7 @@ function MenuList({ isCollapsed }) {
 
           return (
             <li
-              key={item.text}
+              key={item.path} // استفاده از path به عنوان کلید منحصر به فرد
               className="menu-item"
               onMouseEnter={() =>
                 isCollapsed && hasSubItems && setHoveredItem(item.path)
@@ -136,11 +189,10 @@ function MenuList({ isCollapsed }) {
                     )}
                   </div>
 
-                  {/* زیرمنوی آکاردئونی برای حالت باز */}
                   {!isCollapsed && (
                     <ul className={`submenu-list ${isOpen ? "open" : ""}`}>
                       {item.subItems.map((subItem) => (
-                        <li key={subItem.text} className="submenu-item">
+                        <li key={subItem.path} className="submenu-item">
                           <NavLink
                             to={subItem.path}
                             end
@@ -156,7 +208,6 @@ function MenuList({ isCollapsed }) {
                     </ul>
                   )}
 
-                  {/* کادر شناور برای حالت بسته */}
                   {isCollapsed && (
                     <div
                       className={`sub-icon-container ${
