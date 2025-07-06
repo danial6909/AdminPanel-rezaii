@@ -1,17 +1,15 @@
-/* src/components/Header.css */
-
-/* --- انیمیشن‌ها (بدون تغییر) --- */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* --- استایل اصلی هدر --- */
+/* --- Estilo Principal do Header --- */
 .app-header {
   display: flex;
   justify-content: space-between;
@@ -27,54 +25,19 @@
   z-index: 1100;
 }
 
-/* --- عنوان پنل --- */
+/* --- Título do Painel --- */
 .header-title {
   font-family: var(--font-family-main);
   font-size: var(--font-size-h1);
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary); /* استفاده از رنگ اصلی به جای گرادینت برای خوانایی بهتر */
+  color: var(--color-primary);
 }
 
-/* --- استایل آیکون‌های هدر --- */
+/* --- Ícones Genéricos e Menus --- */
 .header-icon {
-  color: var(--color-text-secondary) !important;
   margin-inline: 6px !important;
-  transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease !important;
 }
 
-.header-icon:hover {
-  background-color: var(--color-background-hover) !important;
-  color: var(--color-primary) !important;
-  transform: scale(1.15);
-}
-
-.language-button:hover, .profile-avatar:hover {
-  transform: scale(1.1);
-  background-color: transparent !important; 
-}
-
-.rotate-icon {
-  animation: rotate 0.5s ease-in-out;
-}
-
-/* --- استایل پرچم‌ها --- */
-.flag-icon { font-size: 30px; }
-.menu-flag-icon { font-size: 24px; }
-
-/* --- آواتار پروفایل --- */
-.profile-avatar {
-  color: var(--color-text-on-primary);
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-  border: 2px solid var(--color-text-secondary);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.profile-avatar:hover {
-  box-shadow: 0 0 5px var(--color-primary);
-}
-
-/* --- استایل منوها --- */
 .custom-menu {
   margin-top: 15px !important;
   background-color: var(--color-background-content) !important;
@@ -83,7 +46,6 @@
   box-shadow: 0 10px 30px var(--color-shadow) !important;
   animation: fadeIn 0.3s ease-out;
   padding: 6px !important;
-  
 }
 
 .custom-menu .MuiMenuItem-root {
@@ -103,40 +65,17 @@
   transform: translateX(3px);
 }
 
-.custom-menu .MuiListItemIcon-root {
-  color: var(--color-text-secondary);
-  transition: color 0.2s ease;
-  margin-left: 5px;
-}
-
-.custom-menu .MuiMenuItem-root:hover .MuiListItemIcon-root {
-  color: var(--color-primary) !important;
-}
-
-/* استایل خاص برای آیتم پروفایل */
-.profile-menu-icon {
-  color: var(--color-primary) !important;
-}
-
-/* استایل خاص برای آیتم خروج */
-.logout-item:hover {
-  background-color: rgba(233, 78, 119, 0.1) !important;
-  color: var(--color-error) !important;
-}
-.logout-item:hover .MuiListItemIcon-root {
-  color: var(--color-error) !important;
-}
-
+/* --- Botão de Alternância da Sidebar --- */
 .sidebar-toggle-btn {
-  margin-inline-end: 16px !important; /* فاصله از عنوان پنل */
+  margin-inline-end: 16px !important;
   background-color: var(--color-background-hover) !important;
   color: var(--color-primary) !important;
   border-radius: 12px !important;
   width: 44px !important;
   height: 44px !important;
+  transition: transform 0.3s ease !important;
 }
 
 .sidebar-toggle-btn:hover {
-  /* افکت چرخش و بزرگنمایی جذاب در حالت هاور */
   transform: scale(1.1) rotate(-15deg) !important;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react"; // useEffect حذف شد
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "./LoginForm.css";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 // ابزارهای لازم برای راست‌چین‌سازی کامل MUI
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -26,8 +26,7 @@ import {
   IconButton,
   InputAdornment,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import LoginIcon from "@mui/icons-material/Login";
+import LoginIcon from "@mui/icons-material/Login"; 
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
@@ -119,7 +118,11 @@ export default function LoginForm() {
               <Box className="login-form-box">
                 <motion.div variants={itemAnimation}>
                   <Avatar className="login-avatar">
-                    <img className="login-logo" src="/src/assets/images/logos/logo1.svg" alt="Logo" />
+                    <img
+                      className="login-logo"
+                      src="/src/assets/images/logos/logo1.svg"
+                      alt="Logo"
+                    />
                   </Avatar>
                 </motion.div>
 

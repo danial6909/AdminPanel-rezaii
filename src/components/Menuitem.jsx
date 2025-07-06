@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next"; // ایمپورت هوک
+import { useTranslation } from "react-i18next"; 
 
 // آیکون‌ها
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -17,6 +17,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PasswordIcon from "@mui/icons-material/Password";
 
 function MenuList({ isCollapsed }) {
+
   const { t } = useTranslation(); // استفاده از هوک برای دسترسی به تابع ترجمه
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,10 +25,15 @@ function MenuList({ isCollapsed }) {
   // تعریف منو در داخل کامپوننت تا به تابع 't' دسترسی داشته باشد
   const menuItems = React.useMemo(
     () => [
+    
       { text: t("dashboard"), icon: <DashboardIcon />, path: "/dashboard" },
+
       { text: t("products"), icon: <InventoryIcon />, path: "/products" },
+
       { text: t("orders"), icon: <ShoppingCartIcon />, path: "/orders" },
+
       { text: t("users"), icon: <PeopleIcon />, path: "/users" },
+
       {
         text: t("settings"),
         icon: <SettingsIcon />,
@@ -45,6 +51,7 @@ function MenuList({ isCollapsed }) {
           },
         ],
       },
+      
       {
         text: t("authentication"),
         icon: <SecurityIcon />,

@@ -1,19 +1,19 @@
 // src/components/Logo.jsx
 import React from "react";
 import "./Logo.css"; 
+import logo from "../assets/images/logos/logo1.svg";
 
 const Logo = ({ isCollapsed }) => {
   return (
-    // به این کانتینر کلاس داینامیک می‌دهیم تا در حالت بسته بودن استایلش تغییر کند
+  
     <div className={`logo-container ${isCollapsed ? "collapsed" : ""}`}>
-      {/* بخش آیکون که همیشه نمایش داده می‌شود */}
-     
-        <img
-          className="logo-icon"
-          src="/src/assets/images/logos/logo1.svg"
-          alt="لوگو"
-        />
       
+      {/* بخش آیکون که همیشه نمایش داده می‌شود */}
+      <img
+        className="logo-icon"
+        src={logo}
+        alt="لوگو"
+      />
 
       {/* این بخش فقط در حالت باز بودن سایدبار نمایش داده می‌شود */}
       {!isCollapsed && (

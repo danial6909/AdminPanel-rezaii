@@ -6,7 +6,8 @@ import Sidebar from "../components/Sidebar";
 import "./AdminLayout.css";
 
 function AdminLayout() {
-  // مرحله ۱: استیت و تابع کنترل‌کننده در اینجا تعریف می‌شوند
+
+   //استیت کنترل باز و بسته شدن ساید بار
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const toggleSidebar = () => {
@@ -16,21 +17,26 @@ function AdminLayout() {
   return (
     <div className="admin-container">
       <div className="admin-layout">
+
         <div className="admin-right">
-          {/* مرحله ۲: ارسال وضعیت به سایدبار */}
+          {/*  ارسال وضعیت به سایدبار */}
           <Sidebar isCollapsed={isSidebarCollapsed} />
         </div>
 
         <div className="admin-left">
-          {/* مرحله ۳: ارسال تابع و وضعیت به هدر */}
+
+          {/* ارسال تابع و وضعیت به هدر */}
           <Header
             toggleSidebar={toggleSidebar}
             isSidebarCollapsed={isSidebarCollapsed}
           />
+
           <main className="admin-main">
             <Outlet />
           </main>
+          
         </div>
+
       </div>
     </div>
   );

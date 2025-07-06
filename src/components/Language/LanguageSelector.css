@@ -1,0 +1,23 @@
+.language-selector-btn {
+    color: var(--color-text-secondary) !important;
+    transition: transform 0.3s ease !important;
+  }
+  
+  .language-selector-btn:hover {
+    transform: scale(1.15);
+    background-color: transparent !important;
+  }
+  
+  .main-flag-icon {
+    width: 0.9em !important;
+    height: 0.9em !important;
+    font-size: 1.5em !important;
+  }
+  
+  .menu-flag-icon {
+    font-size: 1.8em !important;
+  }
+  
+  .language-menu .MuiListItemIcon-root {
+    margin-left: 5px;
+  }

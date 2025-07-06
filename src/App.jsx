@@ -1,62 +1,84 @@
-
-// src/App.js
-import React, { useEffect } from "react";
+import React from "react";
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
+  BrowserRouter as Router, // کامپوننت اصلی برای فعال‌سازی روتینگ
+  Routes, // کانتینری برای تعریف مسیرها
+  Route, // برای تعریف یک مسیر خاص
+  Navigate, // برای ریدایرکت کردن کاربر
 } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext"; // وارد کردن AuthProvider
-import PrivateRoute from "./components/PrivateRoute"; // وارد کردن PrivateRoute
 
-// وارد کردن کامپوننت‌های صفحات
+// وارد کردن Context ها برای فراهم کردن وضعیت‌های سراسری
+import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeContext";
+
+// وارد کردن کامپوننت مسیر خصوصی برای محافظت از مسیرهای پنل ادمین
+import PrivateRoute from "./components/PrivateRoute";
+
+// وارد کردن کامپوننت‌های مربوط به هر صفحه
 import AdminLayout from "./layouts/AdminLayout";
-import DashboardPage from "./pages/DashboardPage";
-import LoginForm from "./pages/LoginForm";
-import NotFound from "./pages/NotFound";
-import ProductsPage from "./pages/ProductsPage";
-import OrdersPage from "./pages/OrdersPage";
-import UsersPage from "./pages/UsersPage";
-import "./i18"; 
+import DashboardPage from "./pages/DashboardPage/DashboardPage";
+import LoginForm from "./pages/LoginFormPage/LoginForm";
+import NotFound from "./pages/NotFoundPage/NotFound";
+import ProductsPage from "./pages/ProductsPage/ProductsPage";
+import OrdersPage from "./pages/OrdersPage/OrdersPage";
+import UsersPage from "./pages/UsersPage/UsersPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+
+// وارد کردن فایل‌های تنظیمات عمومی برنامه
+import "./i18";
 import "./styles/colors.css";
 import "./styles/fonts.css";
 
+// کامپوننت اصلی برنامه
 function App() {
-
   return (
+    
+    // <Router> کل برنامه را برای استفاده از روتینگ در بر می‌گیرد
     <Router>
-      {/* AuthProvider کل برنامه را برای دسترسی به وضعیت احراز هویت پوشش می‌دهد */}
-      <AuthProvider>
-        <Routes>
-        
-          <Route path="/login" element={<LoginForm />} />
 
-          <Route
-            path="/"
-            element={
-              <PrivateRoute>
-                {/* PrivateRoute بررسی می‌کند که آیا کاربر احراز هویت شده است یا خیر */}
-                <AdminLayout />
-              </PrivateRoute>
-            }
-          >
-            {/* مسیر پیش‌فرض برای '/' که به داشبورد ریدایرکت می‌شود */}
-            <Route index element={<Navigate to="/dashboard" replace />} />
-            {/* مسیرهای داخل پنل ادمین (AdminLayout) */}
-            <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="products" element={<ProductsPage />} />
-            <Route path="orders" element={<OrdersPage />} />
-            <Route path="users" element={<UsersPage />} />
-            {/* مسیر برای صفحات 404 که داخل AdminLayout نشان داده می‌شوند */}
-            <Route path="*" element={<NotFound />} />
-          </Route>
+      {/* ThemeProvider وضعیت تم (روشن/تاریک) را در کل برنامه فراهم می‌کند */}
+      <ThemeProvider>
 
-          {/* اگر بخواهید یک 404 کاملاً خارج از AdminLayout داشته باشید
-          <Route path="*" element={<NotFound />} />
-          */}
-        </Routes>
-      </AuthProvider>
+        {/* AuthProvider وضعیت احراز هویت (ورود کاربر) را در کل برنامه فراهم می‌کند */}
+        <AuthProvider>
+
+          {/* <Routes> تمام مسیرهای ممکن در برنامه را مدیریت می‌کند */}
+          <Routes>
+
+            {/* مسیر عمومی برای صفحه ورود که برای همه قابل دسترس است */}
+            <Route path="/login" element={<LoginForm />} />
+
+            {/* گروه مسیرهای خصوصی که همگی داخل پنل ادمین (AdminLayout) قرار دارند */}
+            <Route
+              path="/"
+              element={
+                // PrivateRoute چک می‌کند که آیا کاربر وارد شده است یا خیر
+                <PrivateRoute>
+                  <AdminLayout />
+                </PrivateRoute>
+              }
+            >
+              {/* مسیر پیش‌فرض: اگر کاربر به آدرس اصلی ('/') برود، به '/dashboard' منتقل می‌شود */}
+              <Route index element={<Navigate to="/dashboard" replace />} />
+
+              {/* مسیرهای تو در تو که داخل کامپوننت AdminLayout رندر می‌شوند */}
+              <Route path="dashboard" element={<DashboardPage />} />
+              <Route path="products" element={<ProductsPage />} />
+              <Route path="orders" element={<OrdersPage />} />
+              <Route path="users" element={<UsersPage />} />
+
+              <Route path="profile" element={<ProfilePage />} />
+
+              {/* مسیر catch-all: اگر هیچ‌یک از مسیرهای بالا مطابقت نداشت، صفحه NotFound نمایش داده می‌شود */}
+              <Route path="*" element={<NotFound />} />
+
+            </Route>
+
+          </Routes>
+
+        </AuthProvider>
+
+      </ThemeProvider>
+
     </Router>
   );
 }

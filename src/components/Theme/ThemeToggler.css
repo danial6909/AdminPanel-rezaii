@@ -1,0 +1,24 @@
+@keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .theme-toggler-btn {
+    color: var(--color-text-secondary) !important;
+    transition: transform 0.3s ease, color 0.3s ease,
+      background-color 0.3s ease !important;
+  }
+  
+  .theme-toggler-btn:hover {
+    background-color: var(--color-background-hover) !important;
+    color: var(--color-primary) !important;
+    transform: scale(1.15);
+  }
+  
+  .rotate-icon {
+    animation: rotate 0.5s ease-in-out;
+  }

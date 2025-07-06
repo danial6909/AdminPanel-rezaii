@@ -5,19 +5,21 @@ import Logo from "./Logo";
 import "./Sidebar.css";
 import "./Menuitem.css";
 
-// کامپوننت حالا prop به نام isCollapsed را مستقیماً دریافت و استفاده می‌کند
 function Sidebar({ isCollapsed }) {
   return (
-    // کلاس 'collapsed' مستقیماً بر اساس prop تنظیم می‌شود
+
     <div className={`sidebar-container ${isCollapsed ? "collapsed" : ""}`}>
+
+      {/* هدر ساید بار  */}
       <div className="sidebar-header">
         <Logo isCollapsed={isCollapsed} />
       </div>
 
+      {/* ایتم های ساید بار  */}
       <div className="menu-wrapper">
         <Menuitem isCollapsed={isCollapsed} />
       </div>
-
+      
     </div>
   );
 }
