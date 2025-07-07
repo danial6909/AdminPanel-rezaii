@@ -2,12 +2,11 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar";
 import "./AdminLayout.css";
 
 function AdminLayout() {
-
-   //استیت کنترل باز و بسته شدن ساید بار
+  //استیت کنترل باز و بسته شدن ساید بار
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const toggleSidebar = () => {
@@ -17,14 +16,12 @@ function AdminLayout() {
   return (
     <div className="admin-container">
       <div className="admin-layout">
-
         <div className="admin-right">
           {/*  ارسال وضعیت به سایدبار */}
           <Sidebar isCollapsed={isSidebarCollapsed} />
         </div>
 
         <div className="admin-left">
-
           {/* ارسال تابع و وضعیت به هدر */}
           <Header
             toggleSidebar={toggleSidebar}
@@ -34,9 +31,7 @@ function AdminLayout() {
           <main className="admin-main">
             <Outlet />
           </main>
-          
         </div>
-
       </div>
     </div>
   );

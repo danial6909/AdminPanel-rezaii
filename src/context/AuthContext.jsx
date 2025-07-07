@@ -202,10 +202,6 @@ export const AuthProvider = ({ children }) => {
     logout,
   };
 
-  if (loading) {
-    return <div>درحال بارگذاری...</div>;
-  }
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

@@ -1,0 +1,221 @@
+/* =================================================================== */
+/* تنظیمات کلی و راست‌چین سازی */
+/* =================================================================== */
+.p-user-card .MuiFormLabel-root {
+  left: auto !important;
+  transform-origin: top right !important;
+}
+.p-user-card {
+  border-radius: 28px !important;
+  overflow: hidden !important;
+  background: var(--color-background-content);
+  box-shadow: 0 15px 50px -15px var(--color-shadow);
+  border: 1px solid var(--color-border);
+}
+.p-user-card .MuiInputLabel-formControl {
+  transform: translate(-14px, 16px) scale(1) !important;
+}
+.p-user-card .MuiInputLabel-shrink {
+  transform: translate(-14px, -9px) scale(0.75) !important;
+}
+.p-user-card .MuiOutlinedInput-notchedOutline legend {
+  text-align: right !important;
+}
+.p-user-card .MuiInputBase-input {
+  text-align: right !important;
+}
+.p-user-card .MuiInputBase-adornedEnd {
+  padding-left: 0 !important;
+}
+
+/* =================================================================== */
+/* استایل اینپوت‌ها */
+/* =================================================================== */
+.p-user-input-field .MuiOutlinedInput-root {
+  border-radius: 12px;
+  background-color: rgba(241, 243, 244, 0.7);
+  transition: all 0.2s ease-in-out;
+}
+.p-user-input-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-color);
+}
+.p-user-input-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-color);
+  border-width: 2px;
+}
+.p-user-input-field .MuiFormLabel-root.Mui-focused {
+  color: var(--primary-color);
+}
+.p-user-inline-form .p-user-input-field {
+  flex-grow: 1;
+}
+.p-user-inline-form .p-user-input-field .MuiInputBase-input{
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+  padding: 14px 16px !important;
+}
+.p-user-inline-form .p-user-input-field .MuiInputLabel-root{
+  font-size: 1rem !important;
+}
+
+/* =================================================================== */
+/* راه حل نهایی برای Border Radius */
+/* =================================================================== */
+.p-user-page-wrapper {
+  background-color: var(--color-background-main);
+  padding: 50px 0;
+  min-height: 100vh;
+}
+
+/* ✨ ۱. کانتینر اصلی فقط مسئول سایه است و هیچ پس‌زمینه یا بردر مستقیمی ندارد */
+.p-user-card {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: 0 15px 50px -15px var(--color-shadow);
+  border: none;
+}
+
+/* ✨ ۲. کاور، گوشه‌های گرد بالایی را می‌گیرد */
+.p-user-card-banner {
+  height: 280px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  cursor: pointer;
+  border-radius: 28px 28px 0 0; /* فقط گوشه‌های بالا */
+  border: 1px solid var(--color-border);
+  border-bottom: none; /* بردر پایین حذف می‌شود تا به بخش بعدی بچسبد */
+}
+
+/* ✨ ۳. بخش اطلاعات هویتی، پس‌زمینه و بردرهای کناری را می‌گیرد */
+.p-user-identity-area {
+  background-color: var(--color-background-content);
+  padding: 24px 48px 32px 48px;
+  display: flex;
+  align-items: flex-end;
+  gap: 28px;
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+}
+
+/* ✨ ۴. بخش محتوای اصلی، پس‌زمینه و گوشه‌های گرد پایینی را می‌گیرد */
+.p-user-main-settings {
+  background-color: var(--color-background-content);
+  padding: 40px 48px;
+  border-radius: 0 0 28px 28px; /* فقط گوشه‌های پایین */
+  border: 1px solid var(--color-border);
+  border-top: none; /* بردر بالا حذف می‌شود تا به بخش قبلی بچسبد */
+}
+
+/* =================================================================== */
+/* سایر استایل‌ها (بدون تغییر) */
+/* =================================================================== */
+.p-user-banner-uploader {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  color: var(--color-text-primary);
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  z-index: 10;
+}
+.p-user-banner-uploader:hover { transform: scale(1.05); }
+.p-user-hidden-input { display: none; }
+.p-user-avatar-wrapper {
+  margin-top: -120px;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.p-user-avatar-img {
+  width: 180px !important;
+  height: 180px !important;
+  border: 8px solid var(--color-background-content);
+  background-image: var(--gradient-avatar);
+}
+.p-user-avatar-uploader {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: var(--color-text-on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  border: 4px solid var(--color-background-content);
+  transition: transform 0.2s ease;
+}
+.p-user-avatar-wrapper:hover .p-user-avatar-uploader { transform: scale(1.1); }
+.p-user-details {
+  padding-bottom: 20px;
+  width: 100%;
+}
+.p-user-name {
+  font-weight: 700 !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.p-user-edit-icon {
+  opacity: 0;
+  transition: all 0.3s;
+  background-color: var(--color-background-hover);
+}
+.p-user-name:hover .p-user-edit-icon { opacity: 1; transform: scale(1.1); }
+.p-user-role-badge {
+  color: var(--primary-color);
+  background-color: var(--color-background-hover);
+  margin-top: 12px !important;
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+}
+.p-user-inline-form { display: flex; align-items: center; gap: 16px; width: 100%; }
+.p-user-inline-action {
+  width: 48px !important;
+  height: 48px !important;
+  color: white !important;
+  transition: all 0.2s ease !important;
+  border-radius: 12px !important;
+}
+.p-user-inline-action.action-save { background-color: var(--color-success) !important; }
+.p-user-inline-action.action-save:hover { background-color: #29b765 !important; }
+.p-user-inline-action.action-cancel { background-color: var(--color-text-secondary) !important; }
+.p-user-inline-action.action-cancel:hover { background-color: #6a6a6a !important; }
+
+.p-user-content-divider { height: 1px; margin: 0 48px !important; border: none !important; background: linear-gradient(to left, transparent, var(--color-border), transparent); }
+.p-user-settings-title-group { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; color: var(--color-text-primary); }
+.p-user-settings-title { font-weight: 700 !important; font-size: 1.7rem !important; }
+.p-user-password-view { display: flex; justify-content: space-between; align-items: center; background-color: var(--color-background-hover); padding: 20px 24px; border-radius: 16px; border: 1px solid var(--color-border); }
+.p-user-password-form { display: flex; flex-direction: column; gap: 24px; }
+.p-user-form-buttons { display: flex; gap: 16px; align-items: center; margin-top: 8px; }
+.p-user-main-btn {
+  border-radius: 14px !important;
+  padding: 12px 28px !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  transition: all 0.25s ease !important;
+}
+.p-user-main-btn.p-user-btn-primary {
+  background-image: var(--gradient-primary) !important;
+  color: var(--color-text-on-primary) !important;
+  box-shadow: 0 4px 15px -5px var(--primary-color);
+}
+.p-user-main-btn.p-user-btn-primary:hover { transform: translateY(-3px); box-shadow: 0 7px 20px -5px var(--primary-color) !important; }
+.p-user-main-btn.p-user-btn-secondary { background-color: var(--primary-color) !important; color: var(--color-text-on-primary) !important; }
+.p-user-main-btn.p-user-btn-secondary:hover { opacity: 0.9; }

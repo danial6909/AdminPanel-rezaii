@@ -3,3 +3,8 @@ body{
   direction: rtl;
 
 }
+
+.right{
+  direction: ltr;
+
+}

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next"; // هوک برای دسترسی به توابع ترجمه
 import ReactCountryFlag from "react-country-flag"; // کامپوننت برای نمایش پرچم کشورها
+
+import "../../index.css";
+
 import {
   Menu,
   MenuItem,
@@ -35,7 +38,13 @@ const LanguageSelector = () => {
   // تابعی که زبان برنامه را تغییر می‌دهد و سپس منو را می‌بندد
   const handleLanguageSelect = (lang) => {
     i18n.changeLanguage(lang);
-    handleMenuClose(); 
+    handleMenuClose();
+    if (lang === "en") {
+      document.body.setAttribute("class","right")
+    }
+    else {
+      document.body.removeAttribute("class","right")
+    }
   };
 
   return (
