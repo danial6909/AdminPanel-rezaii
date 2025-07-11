@@ -6,15 +6,12 @@
     --color-accent: #50E3C2;
     --color-error: #E94E77;
     --color-success: #2ECC71;
-  
     --color-text-primary: #4A4A4A;
     --color-text-secondary: #757575;
-    --color-text-on-primary: #FFFFFF; /* متن روی دکمه‌های اصلی */
-  
-    --color-background-main: #F8F9FA; /* پس‌زمینه اصلی صفحات */
-    --color-background-content: #FFFFFF; /* پس‌زمینه کارت‌ها، سایدبار، هدر */
-    --color-background-hover: #F1F3F4; /* هاور آیتم‌های منو */
-  
+    --color-text-on-primary: #FFFFFF; 
+    --color-background-main: #F8F9FA; 
+    --color-background-content: #FFFFFF; 
+    --color-background-hover: #F1F3F4;
     --color-border: #EAEAEA;
     --color-shadow: rgba(74, 74, 74, 0.08);
   

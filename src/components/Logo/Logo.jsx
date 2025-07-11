@@ -1,7 +1,7 @@
 // src/components/Logo.jsx
 import React from "react";
 import "./Logo.css"; 
-import logo from "../assets/images/logos/logo1.svg";
+import logo from "../../assets/images/logos/logo1.svg";
 
 const Logo = ({ isCollapsed }) => {
   return (

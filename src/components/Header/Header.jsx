@@ -4,9 +4,9 @@ import { Box, IconButton, Tooltip } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 
-import ThemeToggler from "./Theme/ThemeToggler";
-import LanguageSelector from "./Language/LanguageSelector";
-import UserProfileMenu from "./User/UserProfileMenu";
+import ThemeToggler from "../Theme/ThemeToggler";
+import LanguageSelector from "../Language/LanguageSelector";
+import UserProfileMenu from "../User/UserProfileMenu";
 import "./Header.css";
 
 const Header = ({ toggleSidebar, isSidebarCollapsed }) => {

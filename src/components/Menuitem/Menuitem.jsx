@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next"; 
+import { useTranslation } from "react-i18next";
+import "./Menuitem.css";
 
-// آیکون‌ها
+// آیکون های مورد نیاز
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import PeopleIcon from "@mui/icons-material/People";
@@ -15,9 +16,10 @@ import SecurityIcon from "@mui/icons-material/Security";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PasswordIcon from "@mui/icons-material/Password";
+import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 function MenuList({ isCollapsed }) {
-
   const { t } = useTranslation(); // استفاده از هوک برای دسترسی به تابع ترجمه
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,14 +27,29 @@ function MenuList({ isCollapsed }) {
   // تعریف منو در داخل کامپوننت تا به تابع 't' دسترسی داشته باشد
   const menuItems = React.useMemo(
     () => [
-    
       { text: t("dashboard"), icon: <DashboardIcon />, path: "/dashboard" },
 
       { text: t("products"), icon: <InventoryIcon />, path: "/products" },
 
       { text: t("orders"), icon: <ShoppingCartIcon />, path: "/orders" },
 
-      { text: t("users"), icon: <PeopleIcon />, path: "/users" },
+      {
+        text: t("users"),
+        icon: <PeopleIcon />,
+        path: "/users",
+        subItems: [
+          {
+            text: "لیست کاربران",
+            icon: <ChecklistRtlIcon />,
+            path: "/users/userslist",
+          },
+          {
+            text: "نقش ها",
+            icon: <AdminPanelSettingsIcon />,
+            path: "user/roles",
+          },
+        ],
+      },
 
       {
         text: t("settings"),
@@ -51,7 +68,7 @@ function MenuList({ isCollapsed }) {
           },
         ],
       },
-      
+
       {
         text: t("authentication"),
         icon: <SecurityIcon />,

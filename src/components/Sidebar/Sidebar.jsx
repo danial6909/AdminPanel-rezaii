@@ -1,9 +1,9 @@
 // src/components/Sidebar.jsx
 import React from "react";
-import Menuitem from "../Menuitem";
-import Logo from "../Logo";
+import Logo from "../Logo/Logo";
 import "./Sidebar.css";
-import "../Menuitem.css";
+import Menuitem from "../Menuitem/Menuitem";
+
 
 function Sidebar({ isCollapsed }) {
   return (
