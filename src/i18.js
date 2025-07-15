@@ -3,22 +3,18 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 i18n
-  // افزونه تشخیص زبان مرورگر را فعال می‌کند
   .use(LanguageDetector)
-  // i18next را به react-i18next متصل می‌کند
   .use(initReactI18next)
-  // پیکربندی اولیه
   .init({
-    // حالت دیباگ برای مشاهده لاگ‌ها در کنسول در حین توسعه
     debug: true,
-    // زبان پیش‌فرض در صورتی که زبان مرورگر کاربر پشتیبانی نشود
     fallbackLng: "fa",
-    // منابع ترجمه ما
     resources: {
       en: {
         translation: {
-          // کلیدهای انگلیسی
+          // --- کلیدهای عمومی منو ---
           adminPanelTitle: "Management Panel",
+          open_btn: "open menu",
+          close_btn: "close menu",
           profile: "Profile",
           logout: "Logout",
           changeLanguage: "Change Language",
@@ -28,53 +24,81 @@ i18n
           products: "Products",
           orders: "Orders",
           users: "Users",
+          users_list: "Users List", // کلید جدید برای زیرمنو
+          roles: "Roles", // کلید جدید برای زیرمنو و صفحه نقش‌ها
           settings: "Settings",
           security: "Security",
           authentication: "Authentication",
           login: "Login",
           register: "Register",
           change_password: "Change Password",
-          
-          // کلیدهای مربوط به مدیریت کاربران (UsersPage)
+
+          // --- کلیدهای عمومی برای کامپوننت مدیریت ---
+          management: {
+            loading: "Loading...",
+            actions: "Actions",
+            edit: "Edit",
+            delete: "Delete",
+            save: "Save",
+            cancel: "Cancel",
+            searchPlaceholder: "Search...",
+            confirmDeleteTitle: "Confirm Delete",
+            confirmDeleteMessage:
+              "Are you sure you want to delete item with ID {{id}}? This action cannot be undone.",
+          },
+
+          // --- کلیدهای اختصاصی مدیریت کاربران ---
           userManagement: {
             title: "User Management",
-            searchPlaceholder: "Search users...",
-            allRoles: "All Roles",
-            addUserButton: "Add User",
-            noUsersFound: "No users found.",
+            addButton: "Add User",
+            noItemsFound: "No users found.",
             addTitle: "Add New User",
             editTitle: "Edit User",
-            validationError: "Please fill in all required fields.",
-            table: {
-              id: "ID",
-              firstName: "First Name",
-              lastName: "Last Name",
-              username: "Username",
-              password: "Password",
-              role: "Role",
-              actions: "Actions",
-              edit: "Edit",
-              delete: "Delete",
-            },
+            fetchError: "Error fetching users.",
+            allRoles: "All Roles",
             form: {
               firstName: "First Name",
               lastName: "Last Name",
               username: "Username",
               password: "Password",
+              passwordPlaceholder: "Leave blank to keep current password",
               role: "Role",
-              cancel: "Cancel",
-              save: "Save",
             },
-       
-            confirmDeleteTitle: "Confirm Delete",
-            confirmDeleteMessage: "Are you sure you want to delete user ID {{userId}}? This action cannot be undone.",
+            table: {
+              id: "ID",
+              firstName: "First Name",
+              lastName: "Last Name",
+              username: "Username",
+              role: "Role",
+            },
+          },
+
+          // --- کلیدهای اختصاصی مدیریت نقش‌ها (بخش جدید) ---
+          roleManagement: {
+            title: "Role Management",
+            addButton: "Add Role",
+            noItemsFound: "No roles found.",
+            addTitle: "Add New Role",
+            editTitle: "Edit Role",
+            fetchError: "Error fetching roles.",
+            form: {
+              name: "Role Name",
+              rank: "Rank",
+            },
+            table: {
+              id: "ID",
+              name: "Role Name",
+              rank: "Rank",
+            },
           },
         },
       },
       fa: {
         translation: {
-          // کلیدهای فارسی
+          // --- کلیدهای عمومی منو ---
           adminPanelTitle: "پنل مدیریت",
+          open_btn: "بازکردن منو",
+          close_btn: "بستن منو",
           profile: "پروفایل",
           logout: "خروج از حساب",
           changeLanguage: "تغییر زبان",
@@ -84,6 +108,8 @@ i18n
           products: "محصولات",
           orders: "سفارشات",
           users: "کاربران",
+          users_list: "لیست کاربران", // کلید جدید
+          roles: "نقش‌ها", // کلید جدید
           settings: "تنظیمات",
           security: "امنیت",
           authentication: "احراز هویت",
@@ -91,45 +117,69 @@ i18n
           register: "ثبت نام",
           change_password: "رمز عبور",
 
-          // کلیدهای مربوط به مدیریت کاربران (UsersPage)
+          // --- کلیدهای عمومی برای کامپوننت مدیریت ---
+          management: {
+            loading: "در حال بارگذاری...",
+            actions: "عملیات",
+            edit: "ویرایش",
+            delete: "حذف",
+            save: "ذخیره",
+            cancel: "لغو",
+            searchPlaceholder: "جستجو...",
+            confirmDeleteTitle: "تأیید حذف",
+            confirmDeleteMessage:
+              "آیا از حذف مورد با شناسه {{id}} مطمئن هستید؟ این عمل قابل بازگشت نیست.",
+          },
+
+          // --- کلیدهای اختصاصی مدیریت کاربران ---
           userManagement: {
             title: "مدیریت کاربران",
-            searchPlaceholder: "جستجو کاربران...",
-            allRoles: "همه نقش‌ها",
-            addUserButton: "افزودن کاربر",
-            noUsersFound: "هیچ کاربری یافت نشد.",
+            addButton: "افزودن کاربر",
+            noItemsFound: "هیچ کاربری یافت نشد.",
             addTitle: "افزودن کاربر جدید",
             editTitle: "ویرایش کاربر",
-            validationError: "لطفاً تمام فیلدهای الزامی را پر کنید.",
-            table: {
-              id: "شناسه",
-              firstName: "نام",
-              lastName: "نام خانوادگی",
-              username: "نام کاربری",
-              password: "رمز عبور",
-              role: "نقش",
-              actions: "عملیات",
-              edit: "ویرایش",
-              delete: "حذف",
-            },
+            fetchError: "خطا در دریافت لیست کاربران.",
+            allRoles: "همه نقش‌ها",
             form: {
               firstName: "نام",
               lastName: "نام خانوادگی",
               username: "نام کاربری",
               password: "رمز عبور",
+              passwordPlaceholder: "برای عدم تغییر، خالی بگذارید",
               role: "نقش",
-              cancel: "لغو",
-              save: "ذخیره",
             },
+            table: {
+              id: "شناسه",
+              firstName: "نام",
+              lastName: "نام خانوادگی",
+              username: "نام کاربری",
+              role: "نقش",
+            },
+          },
 
-            confirmDeleteTitle: "تأیید حذف",
-            confirmDeleteMessage: "آیا مطمئن هستید که می‌خواهید کاربر با ID {{userId}} را حذف کنید؟ این عمل قابل بازگشت نیست.",
+          // --- کلیدهای اختصاصی مدیریت نقش‌ها (بخش جدید) ---
+          roleManagement: {
+            title: "مدیریت نقش‌ها",
+            addButton: "افزودن نقش",
+            noItemsFound: "هیچ نقشی یافت نشد.",
+            addTitle: "افزودن نقش جدید",
+            editTitle: "ویرایش نقش",
+            fetchError: "خطا در دریافت لیست نقش‌ها.",
+            form: {
+              name: "نام نقش",
+              rank: "رتبه",
+            },
+            table: {
+              id: "شناسه",
+              name: "نام نقش",
+              rank: "رتبه",
+            },
           },
         },
       },
     },
     interpolation: {
-      escapeValue: false, // برای React لازم است چون به طور پیش‌فرض از XSS محافظت می‌کند
+      escapeValue: false,
     },
   });
 

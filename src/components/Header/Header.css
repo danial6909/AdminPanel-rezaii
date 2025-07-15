@@ -15,7 +15,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 28px;
-  height: 95px;
+  height: 75px;
   background-color: var(--color-background-content);
   border-bottom: 1px solid var(--color-border);
   box-shadow: 0 4px 20px var(--color-shadow);
@@ -28,7 +28,7 @@
 /* --- Título do Painel --- */
 .header-title {
   font-family: var(--font-family-main);
-  font-size: var(--font-size-h1);
+  font-size: var(--font-size-h2);
   font-weight: var(--font-weight-bold);
   color: var(--color-primary);
 }
@@ -51,9 +51,8 @@
 .custom-menu .MuiMenuItem-root {
   font-family: var(--font-family-main);
   font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-menu);
-  padding: 12px 20px !important;
-  margin: 4px !important;
+  font-size: var(--font-size-verysmall);
+  padding: 10px 20px ;
   border-radius: 12px !important;
   color: var(--color-text-primary);
   transition: all 0.2s ease;
@@ -61,13 +60,12 @@
 
 .custom-menu .MuiMenuItem-root:hover {
   background-color: var(--color-background-hover) !important;
-  color: var(--color-primary) !important;
+  color: var(--color-primary) ;
   transform: translateX(3px);
 }
 
 /* --- Botão de Alternância da Sidebar --- */
 .sidebar-toggle-btn {
-  margin-inline-end: 16px !important;
   background-color: var(--color-background-hover) !important;
   color: var(--color-primary) !important;
   border-radius: 12px !important;

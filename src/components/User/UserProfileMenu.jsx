@@ -55,12 +55,12 @@ const UserProfileMenu = () => {
         <IconButton onClick={handleMenuOpen} size="small" sx={{ ml: 1 }}>
           <Avatar
             className="profile-avatar"
-            sx={{ width: "55px", height: "55px" }}
-            src="/src/assets/images/icons/user.jpg"
+            sx={{ width: "45px", height: "45px" }}
+            src={user.avatar}
             alt={user?.username || "User Avatar"} // متن جایگزین برای عکس
           >
             {/* اگر عکسی وجود نداشت یا بارگذاری نشد، حرف اول نام کاربری را نمایش بده */}
-            {user?.username ? user.username.charAt(0).toUpperCase() : "U"}
+            {user.firstName ? user.firstName.charAt(0).toUpperCase() : "U"}
           </Avatar>
         </IconButton>
       </Tooltip>
@@ -85,7 +85,7 @@ const UserProfileMenu = () => {
         {/* آیتم منو برای خروج از سیستم */}
         <MenuItem onClick={handleLogout} className="logout-item">
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout fontSize="small" className="icon-logout" />
           </ListItemIcon>
           {t("logout")}
         </MenuItem>

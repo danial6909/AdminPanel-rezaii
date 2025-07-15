@@ -4,20 +4,19 @@
   }
   
   .language-selector-btn:hover {
-    transform: scale(1.15);
+    transform: scale(1.1);
     background-color: transparent !important;
   }
   
   .main-flag-icon {
-    width: 0.9em !important;
-    height: 0.9em !important;
-    font-size: 1.5em !important;
+    font-size: 1.2em !important;
   }
   
   .menu-flag-icon {
-    font-size: 1.8em !important;
+    font-size: 1.3em !important;
   }
   
-  .language-menu .MuiListItemIcon-root {
-    margin-left: 5px;
+  .MuiListItemIcon-root{
+    margin-left:  0 !important;
   }
+

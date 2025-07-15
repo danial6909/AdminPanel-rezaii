@@ -9,15 +9,18 @@ import LanguageSelector from "../Language/LanguageSelector";
 import UserProfileMenu from "../User/UserProfileMenu";
 import "./Header.css";
 
+
 const Header = ({ toggleSidebar, isSidebarCollapsed }) => {
   const { t } = useTranslation();
+ 
+
 
   return (
     <header className="app-header">
 
       {/* دکمه باز بسته کردن ساید بار */}
       <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-        <Tooltip title={isSidebarCollapsed ? t("باز کردن منو") : t("بستن منو")}>
+        <Tooltip title={isSidebarCollapsed ? t("open_btn") : t("close_btn")}>
           <IconButton onClick={toggleSidebar} className="sidebar-toggle-btn">
             {isSidebarCollapsed ? <MenuIcon /> : <MenuOpenIcon />}
           </IconButton>

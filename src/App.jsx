@@ -22,6 +22,7 @@ import ProductsPage from "./pages/ProductsPage/ProductsPage";
 import OrdersPage from "./pages/OrdersPage/OrdersPage";
 import UsersPage from "./pages/UsersPage/UsersPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import RolesPage from "./pages/RolesPage/RolesPage";
 
 // وارد کردن فایل‌های تنظیمات عمومی برنامه
 import "./i18";
@@ -31,19 +32,14 @@ import "./styles/fonts.css";
 // کامپوننت اصلی برنامه
 function App() {
   return (
-    
     // <Router> کل برنامه را برای استفاده از روتینگ در بر می‌گیرد
     <Router>
-
       {/* ThemeProvider وضعیت تم (روشن/تاریک) را در کل برنامه فراهم می‌کند */}
       <ThemeProvider>
-
         {/* AuthProvider وضعیت احراز هویت (ورود کاربر) را در کل برنامه فراهم می‌کند */}
         <AuthProvider>
-
           {/* <Routes> تمام مسیرهای ممکن در برنامه را مدیریت می‌کند */}
           <Routes>
-
             {/* مسیر عمومی برای صفحه ورود که برای همه قابل دسترس است */}
             <Route path="/login" element={<LoginForm />} />
 
@@ -65,20 +61,19 @@ function App() {
               <Route path="products" element={<ProductsPage />} />
               <Route path="orders" element={<OrdersPage />} />
               <Route path="users/userslist" element={<UsersPage />} />
+              {/* <Route path="/roles" element={<RolesPage/>} /> */}
+              <Route path="users/roles" element={<RolesPage />} />
 
+
+              
               <Route path="profile" element={<ProfilePage />} />
 
               {/* مسیر catch-all: اگر هیچ‌یک از مسیرهای بالا مطابقت نداشت، صفحه NotFound نمایش داده می‌شود */}
               <Route path="*" element={<NotFound />} />
-
             </Route>
-
           </Routes>
-
         </AuthProvider>
-
       </ThemeProvider>
-
     </Router>
   );
 }

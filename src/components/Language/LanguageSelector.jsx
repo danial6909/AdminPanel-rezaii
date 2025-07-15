@@ -49,7 +49,6 @@ const LanguageSelector = () => {
 
   return (
     <>
-      
       {/* ایکن زبان  */}
       <Tooltip title={t("changeLanguage")}>
         {/* دکمه‌ای که آیکون پرچم را نمایش می‌دهد و با کلیک روی آن منو باز می‌شود */}
@@ -60,13 +59,12 @@ const LanguageSelector = () => {
           {/* نمایش پرچم کشور بر اساس زبان فعلی برنامه */}
           <ReactCountryFlag
             countryCode={languageCountryMap[i18n.language] || "US"}
-            svg 
+            svg
             className="main-flag-icon"
             title={i18n.language.toUpperCase()} // نمایش کد زبان با حروف بزرگ
           />
         </IconButton>
       </Tooltip>
-
 
       {/* کامپوننت منو از کتابخانه MUI */}
       <Menu
@@ -76,7 +74,10 @@ const LanguageSelector = () => {
         PaperProps={{ className: "custom-menu language-menu" }} // اعمال کلاس‌های CSS سفارشی به منو
       >
         {/* آیتم منو برای زبان فارسی */}
-        <MenuItem onClick={() => handleLanguageSelect("fa")}>
+        <MenuItem
+          className="language-item"
+          onClick={() => handleLanguageSelect("fa")}
+        >
           <ListItemIcon>
             <ReactCountryFlag countryCode="IR" svg className="menu-flag-icon" />
           </ListItemIcon>
@@ -84,15 +85,16 @@ const LanguageSelector = () => {
         </MenuItem>
 
         {/* آیتم منو برای زبان انگلیسی */}
-        <MenuItem onClick={() => handleLanguageSelect("en")}>
-          <ListItemIcon>
+        <MenuItem
+          className="language-item"
+          onClick={() => handleLanguageSelect("en")}
+        >
+          <ListItemIcon >
             <ReactCountryFlag countryCode="US" svg className="menu-flag-icon" />
           </ListItemIcon>
-          <Typography variant="inherit">English</Typography>
+          <Typography className="lan" variant="inherit">English</Typography>
         </MenuItem>
-
       </Menu>
-      
     </>
   );
 };
