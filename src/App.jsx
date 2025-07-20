@@ -18,7 +18,7 @@ import AdminLayout from "./layouts/AdminLayout";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import LoginForm from "./pages/LoginFormPage/LoginForm";
 import NotFound from "./pages/NotFoundPage/NotFound";
-import ProductsPage from "./pages/ProductsPage/ProductsPage";
+import CardsPage from "./pages/CardsPage/CardsPage";
 import OrdersPage from "./pages/OrdersPage/OrdersPage";
 import UsersPage from "./pages/UsersPage/UsersPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
@@ -58,7 +58,7 @@ function App() {
 
               {/* مسیرهای تو در تو که داخل کامپوننت AdminLayout رندر می‌شوند */}
               <Route path="dashboard" element={<DashboardPage />} />
-              <Route path="products" element={<ProductsPage />} />
+              <Route path="Cards" element={<CardsPage />} />
               <Route path="orders" element={<OrdersPage />} />
               <Route path="users/userslist" element={<UsersPage />} />
               {/* <Route path="/roles" element={<RolesPage/>} /> */}
@@ -70,10 +70,15 @@ function App() {
 
               {/* مسیر catch-all: اگر هیچ‌یک از مسیرهای بالا مطابقت نداشت، صفحه NotFound نمایش داده می‌شود */}
               <Route path="*" element={<NotFound />} />
+
             </Route>
+
           </Routes>
+
         </AuthProvider>
+
       </ThemeProvider>
+      
     </Router>
   );
 }
