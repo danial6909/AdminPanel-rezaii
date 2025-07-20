@@ -15,6 +15,8 @@
     --color-border: #EAEAEA;
     --color-shadow: rgba(74, 74, 74, 0.08);
     --color-filter-btn: #0783filter--ff;
+  --color-table-header: #e9ecef;
+
   
     --gradient-primary: linear-gradient(30deg, var(--color-primary), #1fdedb);
     --gradient-avatar: linear-gradient(45deg, var(--color-primary), #63a4ff);
@@ -37,6 +39,8 @@
     --color-filter-btn: #536475;
     --color-border: #484848;
     --color-shadow: rgba(0, 0, 0, 0.2);
+  --color-table-header: #343a40;
+
   
     /* گرادینت‌ها می‌توانند ثابت بمانند یا تغییر کنند */
    --gradient-primary: linear-gradient(98deg, var(--color-primary), #12dac6);

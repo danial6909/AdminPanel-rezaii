@@ -13,6 +13,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import { useAuth } from "../context/AuthContext";
 
 // --- کامپوننت‌های مودال (بدون تغییر باقی می‌مانند) ---
 const Modal = ({ isOpen, onClose, children, title }) => {
@@ -73,8 +74,13 @@ const ResourceManagementPage = ({
   initialState,
   // برای فیلتر کردن اضافی (مانند فیلتر نقش‌ها در صفحه کاربران)
   FilterComponent,
+
+  filterField,
+
+  filterValue,
 }) => {
   const { t, i18n } = useTranslation();
+  const { user } = useAuth();
 
   // --- State ها ---
   const [items, setItems] = useState([]); // لیست آیتم‌ها (کاربران یا نقش‌ها)
@@ -115,10 +121,21 @@ const ResourceManagementPage = ({
   // --- فیلتر کردن آیتم‌ها ---
   const filteredItems = items.filter((item) => {
     if (!item) return false;
-    // جستجو در فیلدهای مشخص شده
-    return searchFields.some((field) =>
-      item[field]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // شرط اول: بررسی تطابق با جستجوی متنی
+    if (searchFields) {
+      const matchesSearch = searchFields.some((field) =>
+        item[field]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      // شرط دوم: بررسی تطابق با فیلتر کشویی
+      // اگر فیلتری انتخاب نشده (!filterValue)، شرط درست است
+      const matchesSelect = !filterValue || item[filterField] === filterValue;
+      return matchesSearch && matchesSelect;
+    } else {
+      return items;
+    }
+
+    // یک آیتم باید هر دو شرط را داشته باشد تا نمایش داده شود
   });
 
   // --- مدیریت رویدادها ---
@@ -138,6 +155,7 @@ const ResourceManagementPage = ({
     setItemToDeleteId(id);
     setIsConfirmDialogOpen(true);
   };
+
   const handleConfirmDelete = async () => {
     try {
       await axiosInstance.delete(`/${resourceName}/${itemToDeleteId}`);
@@ -198,6 +216,8 @@ const ResourceManagementPage = ({
         err.response.status === 400 &&
         err.response.data?.message?.includes("username is unique")
       ) {
+        setIsModalOpen(false);
+
         Swal.fire({
           title: "خطا!",
           text: "این نام کاربری قبلاً استفاده شده است. لطفاً نام دیگری انتخاب کنید.",
@@ -207,6 +227,8 @@ const ResourceManagementPage = ({
       }
       // START NEW CODE: Check for permission error (403)
       else if (err.response && err.response.status === 403) {
+        setIsModalOpen(false);
+
         Swal.fire({
           title: "خطای دسترسی!",
           text: "شما سطح دسترسی لازم برای انجام این عملیات را ندارید.",
@@ -216,6 +238,8 @@ const ResourceManagementPage = ({
       }
       // END NEW CODE
       else {
+        setIsModalOpen(false);
+
         // General error for other issues
         Swal.fire({
           title: "عملیات ناموفق!",
@@ -265,30 +289,36 @@ const ResourceManagementPage = ({
       );
 
     return filteredItems.map((item) => (
-      <tr key={item.id}>
+      <tr
+        key={item.id}
+        className={item.id === user.id ? "highlighted-row" : ""}
+      >
         {columns.map((col) => (
-          // اگر ستون تابع render سفارشی داشت از آن استفاده می‌کند، در غیر این صورت مقدار فیلد را نمایش می‌دهد
           <td key={col.key}>{col.render ? col.render(item) : item[col.key]}</td>
         ))}
 
-        <td>
-          <div className="action-buttons">
-            <button
-              className="btn btn-edit"
-              title={t("management.edit")}
-              onClick={() => handleEditClick(item)}
-            >
-              <EditIcon fontSize="small" />
-            </button>
-            <button
-              className="btn btn-delete"
-              title={t("management.delete")}
-              onClick={() => handleDeleteClick(item.id)}
-            >
-              <DeleteIcon fontSize="small" />
-            </button>
-          </div>
-        </td>
+        {item.id !== user.id ? (
+          <td>
+            <div className="action-buttons">
+              <button
+                className="btn btn-edit"
+                title={t("management.edit")}
+                onClick={() => handleEditClick(item)}
+              >
+                <EditIcon fontSize="small" />
+              </button>
+              <button
+                className="btn btn-delete"
+                title={t("management.delete")}
+                onClick={() => handleDeleteClick(item.id)}
+              >
+                <DeleteIcon fontSize="small" />
+              </button>
+            </div>
+          </td>
+        ) : (
+          <td></td>
+        )}
       </tr>
     ));
   };

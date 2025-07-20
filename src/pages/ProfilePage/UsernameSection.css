@@ -1,0 +1,56 @@
+/* =================================================================== */
+/* ۴. بخش نام کاربری */
+/* =================================================================== */
+.p-user-section {
+  padding: 24px 48px;
+  background-color: var(--color-background-content);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.p-user-username-view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p-user-username-view .MuiButton-root {
+  border-radius: 12px !important;
+  background-color: var(--color-background-hover);
+  color: var(--color-primary);
+  font-weight: 600 !important;
+  padding: 8px 20px !important;
+  transition: all 0.2s ease !important;
+}
+.p-user-username-view .MuiButton-root:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px -5px var(--color-primary);
+}
+
+.p-user-username-form {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.p-user-username-form .p-user-input-field {
+  flex-grow: 1;
+}
+.p-user-username-form .MuiButton-root {
+  padding: 12px 28px !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+  transition: all 0.25s ease !important;
+  border-radius: 14px !important;
+}
+.p-user-username-form .MuiButton-root[type="submit"] {
+  background-image: var(--gradient-primary) !important;
+  color: var(--color-text-on-primary) !important;
+  box-shadow: 0 4px 15px -5px var(--color-primary);
+}
+.p-user-username-form .MuiButton-root[type="submit"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px -5px var(--color-primary) !important;
+}

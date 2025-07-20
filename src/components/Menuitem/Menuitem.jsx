@@ -54,7 +54,7 @@ function MenuList({ isCollapsed }) {
   const menuItems = React.useMemo(
     () => [
       { text: t("dashboard"), icon: <DashboardIcon />, path: "/dashboard" },
-      { text: t("products"), icon: <InventoryIcon />, path: "/products" },
+      { text: t("Cards"), icon: <InventoryIcon />, path: "/cards" },
       { text: t("orders"), icon: <ShoppingCartIcon />, path: "/orders" },
       {
         text: t("users"),

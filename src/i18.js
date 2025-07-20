@@ -11,7 +11,7 @@ i18n
     resources: {
       en: {
         translation: {
-          // --- کلیدهای عمومی منو ---
+          // --- General Menu Keys ---
           adminPanelTitle: "Management Panel",
           open_btn: "open menu",
           close_btn: "close menu",
@@ -21,11 +21,11 @@ i18n
           theme_light: "Light Mode",
           theme_dark: "Dark Mode",
           dashboard: "Dashboard",
-          products: "Products",
+          Cards: "Cards",
           orders: "Orders",
           users: "Users",
-          users_list: "Users List", // کلید جدید برای زیرمنو
-          roles: "Roles", // کلید جدید برای زیرمنو و صفحه نقش‌ها
+          users_list: "Users List", // New key for submenu
+          roles: "Roles", // New key for submenu and roles page
           settings: "Settings",
           security: "Security",
           authentication: "Authentication",
@@ -33,7 +33,7 @@ i18n
           register: "Register",
           change_password: "Change Password",
 
-          // --- کلیدهای عمومی برای کامپوننت مدیریت ---
+          // --- General Management Component Keys ---
           management: {
             loading: "Loading...",
             actions: "Actions",
@@ -47,7 +47,7 @@ i18n
               "Are you sure you want to delete item with ID {{id}}? This action cannot be undone.",
           },
 
-          // --- کلیدهای اختصاصی مدیریت کاربران ---
+          // --- User Management Specific Keys ---
           userManagement: {
             title: "User Management",
             addButton: "Add User",
@@ -73,7 +73,7 @@ i18n
             },
           },
 
-          // --- کلیدهای اختصاصی مدیریت نقش‌ها (بخش جدید) ---
+          // --- Role Management Specific Keys ---
           roleManagement: {
             title: "Role Management",
             addButton: "Add Role",
@@ -91,6 +91,67 @@ i18n
               rank: "Rank",
             },
           },
+
+          "dvb/cardsManagement": {
+            addButton: "Cards Scan",
+          },
+
+          cards: {
+            scan: "Cards Scan",
+            table: {
+              device: "Device",
+              adapter: "Adapter",
+              frontend: "Frontend",
+              name: "name",
+              type: "Type",
+              frequency: "Frequency",
+              enabled: "Enabled",
+            },
+          },
+          // --- Profile Page Specific Keys ---
+          profilePage: {
+            fetchErrorTitle: "Error Fetching Information",
+            fetchErrorMessage:
+              "An issue occurred while fetching user information.",
+            avatarUpdateSuccess: "Profile picture updated successfully!",
+            avatarUpdateError:
+              "An issue occurred while uploading the profile picture.",
+            coverUpdateSuccess: "Cover photo updated successfully!",
+          },
+          // --- Profile Header Specific Keys ---
+          profileHeader: {
+            changeCover: "Change Cover",
+            nameSaveSuccess: "Name saved successfully!",
+            nameSaveError: "An issue occurred while saving the name.",
+          },
+          // --- Username Section Specific Keys ---
+          usernameSection: {
+            newUsernameLabel: "New Username",
+            usernameLabel: "Username",
+            saveSuccess: "Username saved successfully!",
+            saveError: "An issue occurred while saving the username.",
+          },
+          // --- Password Change Section Specific Keys ---
+          passwordChangeSection: {
+            changePasswordTitle: "Change Password",
+            currentPasswordLabel: "Current Password",
+            newPasswordLabel: "New Password",
+            confirmNewPasswordLabel: "Confirm New Password",
+            savePasswordButton: "Save Password",
+            passwordLabel: "Password",
+            changePasswordButton: "Change Password",
+            newPasswordEmpty: "New password cannot be empty.",
+            newPasswordLength:
+              "New password must be at least 8 characters long.",
+            passwordMismatch: "New password and confirmation do not match.",
+            changeSuccess: "Password changed successfully!",
+            currentPasswordIncorrect: "Current password is incorrect.",
+            changeError: "An issue occurred while changing the password.",
+          },
+          common: {
+            success: "Success",
+            error: "Error",
+          },
         },
       },
       fa: {
@@ -105,7 +166,7 @@ i18n
           theme_light: "حالت روشن",
           theme_dark: "حالت تاریک",
           dashboard: "داشبورد",
-          products: "محصولات",
+          Cards: "کارت ها",
           orders: "سفارشات",
           users: "کاربران",
           users_list: "لیست کاربران", // کلید جدید
@@ -174,6 +235,63 @@ i18n
               name: "نام نقش",
               rank: "رتبه",
             },
+          },
+
+          "dvb/cardsManagement": {
+            addButton: "اسکن کارت ها",
+          },
+
+          cards: {
+            table: {
+              device: "دستگاه",
+              adapter: "کارت",
+              frontend: "جلو",
+              name: "نام",
+              type: "نوع",
+              frequency: "فرکانس",
+              enabled: "فعال",
+            },
+          },
+          // --- کلیدهای اختصاصی صفحه پروفایل ---
+          profilePage: {
+            fetchErrorTitle: "خطا در دریافت اطلاعات",
+            fetchErrorMessage: "مشکلی در دریافت اطلاعات کاربری پیش آمد.",
+            avatarUpdateSuccess: "عکس پروفایل با موفقیت به‌روزرسانی شد!",
+            avatarUpdateError: "مشکلی در آپلود عکس پروفایل پیش آمد.",
+            coverUpdateSuccess: "عکس کاور با موفقیت به‌روزرسانی شد!",
+          },
+          // --- کلیدهای اختصاصی هدر پروفایل ---
+          profileHeader: {
+            changeCover: "تغییر کاور",
+            nameSaveSuccess: "نام با موفقیت ذخیره شد!",
+            nameSaveError: "مشکلی در ذخیره نام پیش آمد.",
+          },
+          // --- بخش نام کاربری ---
+          usernameSection: {
+            newUsernameLabel: "نام کاربری جدید",
+            usernameLabel: "نام کاربری",
+            saveSuccess: "نام کاربری با موفقیت ذخیره شد!",
+            saveError: "مشکلی در ذخیره نام کاربری پیش آمد.",
+          },
+          // --- بخش تغییر رمز عبور ---
+          passwordChangeSection: {
+            changePasswordTitle: "تغییر رمز عبور",
+            currentPasswordLabel: "رمز عبور فعلی",
+            newPasswordLabel: "رمز عبور جدید",
+            confirmNewPasswordLabel: "تکرار رمز عبور جدید",
+            savePasswordButton: "ذخیره رمز",
+            passwordLabel: "رمز عبور",
+            changePasswordButton: "تغییر رمز",
+            newPasswordEmpty: "رمز عبور جدید نمی‌تواند خالی باشد.",
+            newPasswordLength: "رمز عبور جدید باید حداقل 8 کاراکتر باشد.",
+            passwordMismatch: "رمز عبور جدید و تکرار آن یکسان نیستند.",
+            changeSuccess: "رمز عبور با موفقیت تغییر یافت!",
+            currentPasswordIncorrect: "رمز عبور فعلی اشتباه است.",
+            changeError: "مشکلی در تغییر رمز عبور پیش آمد.",
+          },
+          common: {
+            success: "موفق",
+            error: "خطا",
           },
         },
       },

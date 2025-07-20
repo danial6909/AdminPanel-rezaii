@@ -1,11 +1,11 @@
 // src/pages/UsersPage/UsersPage.js
-
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import ResourceManagementPage from "../../components/ResourceManagementPage";
 import axiosInstance from "../../utils/axiosInstance";
+//////////////////////////////////////////////////////////////////////////////////////
 
-// کامپوننت UsersPage به عنوان یک "نقشه" یا "پیکربندی" برای کامپوننت عمومی ResourceManagementPage عمل می‌کند.
+
 const UsersPage = () => {
   const { t } = useTranslation();
 
@@ -128,23 +128,20 @@ const UsersPage = () => {
 
   // 6. تعریف یک کامپوننت کوچک برای فیلتر کردن کاربران بر اساس نقش
   // این کامپوننت به عنوان prop به موتور اصلی ارسال می‌شود
-  const RoleFilterComponent = () => (
-   
-      <select
-      className="filter-select"
-      value={roleFilter}
-      onChange={(e) => setRoleFilter(e.target.value)}
-    >
-      <option value="">{t("userManagement.allRoles")}</option>
-      {roles.map((role) => (
-        <option key={role.id} value={role.name}>
-          {role.name}
-        </option>
-      ))}
-    </select>
-
-    
-  );
+ const RoleFilterComponent = () => (
+   <select
+     className="filter-select"
+     value={roleFilter}
+     onChange={(e) => setRoleFilter(e.target.value)}
+   >
+     <option value="">{t("userManagement.allRoles")}</option>
+     {roles.map((role) => (
+       <option key={role.id} value={role.name}>
+         {role.name}
+       </option>
+     ))}
+   </select>
+ );
 
   return (
     // رندر کردن کامپوننت عمومی و ارسال تمام پیکربندی‌ها به عنوان props
@@ -156,6 +153,8 @@ const UsersPage = () => {
       initialState={initialUserState}
       formatDataForDisplay={formatUserData}
       FilterComponent={RoleFilterComponent}
+      filterValue={roleFilter}
+      filterField="role" // نام فیلدی که در آبجکت کاربر باید چک شود
     />
   );
 };
