@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next"; // هوک برای دسترسی به توابع ترجمه
 import ReactCountryFlag from "react-country-flag"; // کامپوننت برای نمایش پرچم کشورها
-
 import "../../index.css";
-
 import {
   Menu,
   MenuItem,
@@ -22,12 +20,20 @@ const languageCountryMap = {
 
 // تعریف کامپوننت انتخاب‌گر زبان
 const LanguageSelector = () => {
-  
   // دسترسی به تابع ترجمه (t) و نمونه i18n برای تغییر زبان
   const { t, i18n } = useTranslation();
 
   // تعریف یک state برای مدیریت باز و بسته بودن منو. مقدار اولیه null یعنی منو بسته است.
   const [anchorEl, setAnchorEl] = useState(null);
+
+  // این کد با هر بار بارگذاری کامپوننت و تغییر زبان اجرا می‌شود
+  useEffect(() => {
+    if (i18n.language === "en") {
+      document.body.classList.add("right");
+    } else {
+      document.body.classList.remove("right");
+    }
+  }, [i18n.language]); // این افکت به تغییر زبان وابسته است
 
   // تابعی که هنگام کلیک روی آیکون زبان اجرا می‌شود و منو را باز می‌کند
   const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
@@ -40,10 +46,9 @@ const LanguageSelector = () => {
     i18n.changeLanguage(lang);
     handleMenuClose();
     if (lang === "en") {
-      document.body.setAttribute("class","right")
-    }
-    else {
-      document.body.removeAttribute("class","right")
+      document.body.setAttribute("class", "right");
+    } else {
+      document.body.removeAttribute("class", "right");
     }
   };
 
@@ -89,10 +94,12 @@ const LanguageSelector = () => {
           className="language-item"
           onClick={() => handleLanguageSelect("en")}
         >
-          <ListItemIcon >
+          <ListItemIcon>
             <ReactCountryFlag countryCode="US" svg className="menu-flag-icon" />
           </ListItemIcon>
-          <Typography className="lan" variant="inherit">English</Typography>
+          <Typography className="lan" variant="inherit">
+            English
+          </Typography>
         </MenuItem>
       </Menu>
     </>

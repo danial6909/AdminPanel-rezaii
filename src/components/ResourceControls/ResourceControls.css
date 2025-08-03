@@ -1,0 +1,98 @@
+/* --- استایل کنترل‌ها (جستجو، فیلتر، دکمه) --- */
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.search-box {
+  flex: 1;
+  position: relative;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--color-background-content);
+  color: var(--color-text-primary);
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+}
+
+.filter-select {
+  color: var(--color-text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: var(--color-background-hover);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+.add-user-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.add-user-btn:hover {
+  background-color: color-mix(in srgb, var(--color-primary) 85%, black);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px var(--color-shadow);
+}
+
+/* --- استایل‌های جهت‌بندی برای کنترل‌ها --- */
+[dir="ltr"] .search-icon {
+  left: 14px;
+}
+[dir="ltr"] .search-box input {
+  padding-left: 2.8rem;
+}
+
+[dir="rtl"] .controls {
+  flex-direction: row-reverse;
+}
+[dir="rtl"] .search-icon {
+  right: 14px;
+}
+[dir="rtl"] .search-box input {
+  padding-right: 2.8rem;
+  text-align: right;
+}
+[dir="rtl"] .search-box input::placeholder {
+  text-align: right;
+}

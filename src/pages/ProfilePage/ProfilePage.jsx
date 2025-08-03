@@ -15,9 +15,8 @@ import axiosInstance from "../../utils/axiosInstance";
 import ProfileHeader from "./ProfileHeader";
 import UsernameSection from "./UsernameSection";
 import PasswordChangeSection from "./PasswordChangeSection";
+import TotalLoader from "../../components/TotalLoader/DotSpinner"
 //////////////////////////////////////////////////////////////////
-
-
 
 const ProfilePage = () => {
 
@@ -65,6 +64,7 @@ const ProfilePage = () => {
           icon: "error",
           title: "خطا در دریافت اطلاعات",
           text: "مشکلی در دریافت اطلاعات کاربری پیش آمد.",
+          timer: 1500,
         });
       } finally {
         setIsLoading(false); // پایان حالت لودینگ، چه با موفقیت چه با خطا
@@ -169,7 +169,7 @@ const ProfilePage = () => {
           height: "100vh",
         }}
       >
-        <CircularProgress /> {/* نمایش آیکون لودینگ Material-UI */}
+        <TotalLoader /> {/* نمایش آیکون لودینگ Material-UI */}
       </Box>
     );
   }
@@ -244,5 +244,4 @@ const ProfilePage = () => {
   );
 };
 
-// اکسپورت کردن کامپوننت برای استفاده در جاهای دیگر پروژه
 export default ProfilePage;

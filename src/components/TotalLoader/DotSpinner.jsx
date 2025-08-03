@@ -3,16 +3,18 @@ import "./DotSpinner.css"; // فایل CSS را وارد می‌کنیم
 
 const DotSpinner = () => {
   return (
-    <div className="dot-spinner">
-      <div className="dot-spinner__dot"></div>
-      <div className="dot-spinner__dot"></div>
-      <div className="dot-spinner__dot"></div>
-      <div className="dot-spinner__dot"></div>
-      <div className="dot-spinner__dot"></div>
-      <div className="dot-spinner__dot"></div>
-      <div className="dot-spinner__dot"></div>
-      <div className="dot-spinner__dot"></div>
-    </div>
+
+    <div class="loader"></div>
+    // <div className="dot-spinner">
+    //   <div className="dot-spinner__dot"></div>
+    //   <div className="dot-spinner__dot"></div>
+    //   <div className="dot-spinner__dot"></div>
+    //   <div className="dot-spinner__dot"></div>
+    //   <div className="dot-spinner__dot"></div>
+    //   <div className="dot-spinner__dot"></div>
+    //   <div className="dot-spinner__dot"></div>
+    //   <div className="dot-spinner__dot"></div>
+    // </div>
   );
 };
 

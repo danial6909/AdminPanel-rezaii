@@ -146,6 +146,7 @@
 }
 
 .p-user-inline-form {
+  padding: 17px 17px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -176,4 +177,18 @@
 .p-user-inline-action.action-cancel:hover {
   transform: scale(1.1) translateY(-2px);
   box-shadow: 0 0 15px 0 var(--color-text-secondary);
+}
+
+
+.css-f84ov1-MuiTypography-root{
+    font-family: "Vazirmatn" !important;
+}
+.css-rizt0-MuiTypography-root{
+    font-family: "Vazirmatn" !important;
+
+}
+
+.p-user-edit-icon{
+  color: var(--color-text-primary) !important;
+font-size: 17pt !important;
 }

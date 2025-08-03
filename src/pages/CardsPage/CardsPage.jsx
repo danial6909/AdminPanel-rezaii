@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ResourceManagementPage from "../../components/ResourceManagementPage";
+import ResourceManagementPage from "../ResourceManagementPage/ResourceManagementPage";
 
 export default function CartsPage() {
   const { t } = useTranslation();
@@ -24,6 +24,9 @@ export default function CartsPage() {
     frequency: `${card.fmin}~${card.fmax}` || "N/A",
     enabled: card.enabled,
   });
+
+  const searchFields = ["adapter", "Name", "type"];
+
 
   const userFormFields = [
     {
@@ -58,7 +61,7 @@ export default function CartsPage() {
       resourceName="dvb/cards"
       columns={cardsColumns}
       formFields={userFormFields}
-      // searchFields={searchFields}
+      searchFields={searchFields}
       // initialState={initialUserState}
       formatDataForDisplay={formatUserData}
       // FilterComponent={RoleFilterComponent}

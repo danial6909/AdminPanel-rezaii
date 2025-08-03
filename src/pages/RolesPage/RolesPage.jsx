@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import ResourceManagementPage from "../../components/ResourceManagementPage";
+import ResourceManagementPage from "../ResourceManagementPage/ResourceManagementPage";
 
 const RolesPage = () => {
   const { t } = useTranslation();

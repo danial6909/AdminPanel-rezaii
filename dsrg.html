@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامه بدنسازی دانیال</title>
+    <!-- Tailwind CSS CDN for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for better Persian text readability and table appearance */
+        body {
+            font-family: 'Inter', sans-serif; /* Using Inter font for better modern look */
+            direction: rtl; /* Set text direction to right-to-left for Persian */
+            text-align: right; /* Align text to the right */
+            background-color: #f0f4f8; /* Lighter background for a cleaner look */
+            color: #2d3748; /* Darker text for better contrast */
+            line-height: 1.6;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border-radius: 12px; /* More rounded corners for the table */
+            overflow: hidden; /* Ensures rounded corners apply to content */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Softer shadow */
+        }
+        th, td {
+            border: 1px solid #e2e8f0; /* Light gray border */
+            padding: 14px; /* Increased padding for more breathing room */
+            text-align: right; /* Ensure text is right-aligned in cells */
+        }
+        th {
+            background-color: #4f46e5; /* Indigo 600 */
+            color: white;
+            font-weight: 700; /* Bolder headings */
+            text-transform: uppercase; /* Uppercase for table headers */
+            letter-spacing: 0.05em; /* Slight letter spacing */
+        }
+        tr:nth-child(even) {
+            background-color: #f8fafc; /* Lightest blue-gray for even rows */
+        }
+        tr:hover {
+            background-color: #e0e7ff; /* Light indigo on hover for table rows */
+            transition: background-color 0.2s ease-in-out; /* Smooth transition */
+        }
+        .exercise-image {
+            width: 100px; /* Fixed width for images */
+            height: 70px; /* Fixed height for images */
+            object-fit: cover; /* Ensure image covers the area without distortion */
+            border-radius: 8px; /* Rounded corners for images */
+            display: block; /* Remove extra space below image */
+            margin: 0 auto; /* Center the image in its cell */
+            border: 1px solid #c3dafe; /* Subtle border for images */
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                margin-bottom: 20px; /* More space between mobile rows */
+                border: 1px solid #cbd5e0; /* Slightly darker border for mobile cards */
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* More prominent shadow on mobile */
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #edf2f7; /* Lighter border for mobile cells */
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+            td:last-child {
+                border-bottom: 0;
+            }
+            td:before {
+                content: attr(data-label);
+                position: absolute;
+                right: 12px; /* Adjusted right position */
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                color: #4338ca; /* Darker indigo for labels */
+            }
+            .exercise-image {
+                margin: 15px auto; /* More space around image on mobile */
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 p-4">
+    <header class="bg-indigo-700 text-white p-8 rounded-xl shadow-lg mb-10 text-center">
+        <h1 class="text-5xl font-extrabold mb-3 tracking-wide">برنامه بدنسازی شخصی</h1>
+        <p class="text-xl opacity-90">مربی: دانیال</p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4">
+        <!-- Day 1 Workout Plan -->
+        <section class="bg-white p-8 rounded-xl shadow-lg mb-10" id="day1">
+            <h2 class="text-4xl font-bold text-indigo-700 border-b-4 border-indigo-300 pb-5 mb-8">
+                روز اول: عضلات سینه + عضلات سرشانه + عضلات پشت بازو
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th>عکس حرکت</th>
+                            <th>نام حرکت</th>
+                            <th>تعداد ست</th>
+                            <th>تعداد تکرار</th>
+                            <th>توضیحات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="day1-body">
+                        <!-- Exercise data will be populated here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Day 2 Workout Plan -->
+        <section class="bg-white p-8 rounded-xl shadow-lg mb-10" id="day2">
+            <h2 class="text-4xl font-bold text-indigo-700 border-b-4 border-indigo-300 pb-5 mb-8">
+                روز دوم: عضلات پشت و زیر بغل + عضلات جلو بازو
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th>عکس حرکت</th>
+                            <th>نام حرکت</th>
+                            <th>تعداد ست</th>
+                            <th>تعداد تکرار</th>
+                            <th>توضیحات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="day2-body">
+                        <!-- Exercise data will be populated here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Day 3 Workout Plan -->
+        <section class="bg-white p-8 rounded-xl shadow-lg mb-10" id="day3">
+            <h2 class="text-4xl font-bold text-indigo-700 border-b-4 border-indigo-300 pb-5 mb-8">
+                روز سوم: عضلات پا + عضلات شکم و پهلو
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th>عکس حرکت</th>
+                            <th>نام حرکت</th>
+                            <th>تعداد ست</th>
+                            <th>تعداد تکرار</th>
+                            <th>توضیحات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="day3-body">
+                        <!-- Exercise data will be populated here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-indigo-700 text-white p-8 rounded-xl shadow-lg mt-10 text-center">
+        <p class="text-base opacity-90">&copy; 2025 برنامه بدنسازی دانیال - تمامی حقوق محفوظ است.</p>
+    </footer>
+
+    <script>
+        // Data for the workout program, including text for placeholder images
+        const workoutData = {
+            day1: [
+                { name: "پرس سینه هالتر", sets: "۳", reps: "۸-۱۲", description: "روی نیمکت صاف، وزنه را کنترل شده و آهسته پایین بیاور و سپس با قدرت به بالا پرس کن.", imageText: "پرس سینه هالتر" },
+                { name: "پرس بالا سینه دمبل", sets: "۳", reps: "۸-۱۲", description: "روی نیمکت شیب‌دار (حدود ۳۰-۴۵ درجه) تمرکز روی بخش بالایی سینه. آرنج‌ها را کنترل شده پایین بیاور.", imageText: "پرس بالا سینه دمبل" },
+                { name: "فلای سینه دستگاه + کراس اوور (سوپرست)", sets: "۳", reps: "۱۲-۱۵", description: "ابتدا فلای دستگاه را انجام بده، بلافاصله بعدش برو سراغ کراس اوور سیم‌کش. هر دو حرکت را کنترل شده و با تمرکز بر انقباض سینه انجام بده.", imageText: "فلای سینه" },
+                { name: "پرس سرشانه دمبل نشسته", sets: "۳", reps: "۸-۱۲", description: "کمر را صاف نگه دار و از تاب خوردن بدن جلوگیری کن. تمرکز بر عضلات سرشانه.", imageText: "پرس سرشانه دمبل" },
+                { name: "نشر جانب دمبل + نشر روبرو دمبل (سوپرست)", sets: "۳", reps: "۱۲-۱۵", description: "وزنه‌های سبک استفاده کن. در نشر جانب، آرنج‌ها را کمی خم نگه دار و بالا بیاور؛ در نشر روبرو، دمبل‌ها را تا ارتفاع شانه بالا بیاور.", imageText: "نشر جانب و روبرو" },
+                { name: "پرس سرشانه هالتر از جلو", sets: "۳", reps: "۱۰-۱۵", description: "(جایگزین پرس اسمیت از پشت) این حرکت برای سرشانه ایمن‌تر و موثرتر است. هالتر را از جلو و بالای سینه به سمت بالا پرس کن.", imageText: "پرس سرشانه هالتر" },
+                { name: "پشت بازو هالتر خوابیده", sets: "۳", reps: "۱۰-۱۵", description: "هالتر را روی سینه ببر و با کنترل به سمت پیشانی پایین بیاور. تمرکز بر پشت بازو.", imageText: "پشت بازو هالتر" },
+                { name: "پشت بازو دیپ + پشت بازو سیم‌کش (سوپرست)", sets: "۳", reps: "۱۲-۱۵", description: "ابتدا دیپ (روی نیمکت یا دستگاه کمکی) را انجام بده، سپس بلافاصله برو سراغ پشت بازو سیم‌کش (با میله صاف یا طناب).", imageText: "پشت بازو دیپ و سیمکش" },
+                { name: "پشت بازو طناب", sets: "۳", reps: "۱۵-۲۰", description: "دست‌ها را در پایین کاملاً باز کن تا نهایت انقباض در پشت بازو ایجاد شود.", imageText: "پشت بازو طناب" }
+            ],
+            day2: [
+                { name: "زیر بغل سیم‌کش دست باز از جلو", sets: "۳", reps: "۱۰-۱۵", description: "میله را با دست باز بگیر. هنگام کشیدن میله به سمت پایین، کتف‌هایت را به هم نزدیک کن.", imageText: "زیر بغل سیم‌کش" },
+                { name: "زیر بغل پارویی + هالتر خم (سوپرست)", sets: "۳", reps: "۱۰-۱۵", description: "ابتدا زیربغل پارویی (با دمبل یا دستگاه) را انجام بده، سپس بلافاصله سراغ زیربغل هالتر خم برو. کمر را در حرکت هالتر خم، صاف نگه دار.", imageText: "زیر بغل پارویی" },
+                { name: "بارفیکس", sets: "۳", reps: "در حد توان", description: "اگر توانایی کامل بارفیکس را نداری: از دستگاه بارفیکس کمکی استفاده کن یا تعداد تکرارها را کاهش بده (مثلاً ۶-۸ تکرار). هدف، یادگیری فرم صحیح و افزایش تدریجی قدرت است.", imageText: "بارفیکس" },
+                { name: "جلو بازو هالتر ایستاده", sets: "۳", reps: "۸-۱۲", description: "هالتر را بدون تاب دادن بدن و با کنترل کامل بالا بیاور و پایین ببر.", imageText: "جلو بازو هالتر" },
+                { name: "جلو بازو لاری", sets: "۳", reps: "۱۰-۱۵", description: "روی دستگاه لاری، تمرکز کامل روی عضله جلو بازو. از وزنه خیلی سنگین پرهیز کن تا فرمت بهم نریزد.", imageText: "جلو بازو لاری" },
+                { name: "جلو بازو دمبل تک دست (نشسته یا ایستاده)", sets: "۳", reps: "۱۰-۱۲ (هر دست)", description: "هر دست را جداگانه و با تمرکز کامل انجام بده.", imageText: "جلو بازو دمبل" }
+            ],
+            day3: [
+                { name: "اسکوات", sets: "۳", reps: "۸-۱۲", description: "وزنه را کنترل شده پایین بیاور تا ران‌ها تقریباً موازی زمین شوند. کمر را صاف نگه دار و زانوها را در راستای پنجه پا نگه دار.", imageText: "اسکوات" },
+                { name: "پرس پا ماشین", sets: "۳", reps: "۱۰-۱۵", description: "پاها را در عرض شانه روی سکو قرار بده. زانوها را کاملاً باز نکن تا فشار از روی مفصل زانو برداشته شود.", imageText: "پرس پا ماشین" },
+                { name: "جلو ران دستگاه + پشت پا دستگاه (سوپرست)", sets: "۳", reps: "۱۲-۱۵", description: "ابتدا جلو ران را انجام بده و بلافاصله بعد از آن پشت پا دستگاه. هر دو را با انقباض کامل عضلات مربوطه انجام بده.", imageText: "جلو و پشت ران" },
+                { name: "اسکوات پا باز", sets: "۱", reps: "در حد توان", description: "این ست بیشتر برای به حداکثر رساندن پمپاژ خون و خستگی نهایی عضله است. با فرم صحیح تا جایی که می‌توانی انجام بده.", imageText: "اسکوات پا باز" },
+                { name: "کرانچ ۴۵ درجه", sets: "۳", reps: "۱۵-۲۰", description: "روی نیمکت شیب‌دار (Decline Bench) یا با استفاده از وزنه سبک روی سینه، عضلات شکم را کاملاً منقبض کن.", imageText: "کرانچ ۴۵ درجه" },
+                { name: "کرانچ معکوس + زیر شکم خلبانی (سوپرست)", sets: "۳", reps: "۱۵-۲۰", description: "ابتدا کرانچ معکوس را انجام بده (پاها را به سمت سینه جمع کن)، سپس بلافاصله زیر شکم خلبانی (بالا آوردن زانوها در حالت آویزان یا با دستگاه کمکی) را انجام بده.", imageText: "کرانچ معکوس و خلبانی" },
+                { name: "پلانک", sets: "۳", reps: "در حد توان (۳۰-۶۰ ثانیه)", description: "بدن را کاملاً صاف و در یک خط مستقیم نگه دار. عضلات شکم و باسن را منقبض کن.", imageText: "پلانک" }
+            ]
+        };
+
+        /**
+         * Creates a table row (<tr>) for an exercise.
+         * @param {object} exercise - The exercise object containing name, sets, reps, description, and imageText.
+         * @returns {HTMLTableRowElement} The created table row element.
+         */
+        function createTableRow(exercise) {
+            const row = document.createElement('tr');
+            // Encode the image text for use in URL
+            const encodedImageText = encodeURIComponent(exercise.imageText);
+            // Construct the placeholder image URL using placehold.co with improved colors
+            const imageUrl = `https://placehold.co/100x70/e0e7ff/4f46e5?text=${encodedImageText}`;
+
+            row.innerHTML = `
+                <td data-label="عکس حرکت"><img src="${imageUrl}" alt="${exercise.name}" class="exercise-image" onerror="this.onerror=null;this.src='https://placehold.co/100x70/E0E0E0/333333?text=عکس+موجود+نیست';"></td>
+                <td data-label="نام حرکت">${exercise.name}</td>
+                <td data-label="تعداد ست">${exercise.sets}</td>
+                <td data-label="تعداد تکرار">${exercise.reps}</td>
+                <td data-label="توضیحات">${exercise.description}</td>
+            `;
+            return row;
+        }
+
+        // Wait for the DOM to be fully loaded before populating the tables
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get the tbody elements for each day
+            const day1Body = document.getElementById('day1-body');
+            const day2Body = document.getElementById('day2-body');
+            const day3Body = document.getElementById('day3-body');
+
+            // Populate Day 1 exercises
+            workoutData.day1.forEach(exercise => {
+                day1Body.appendChild(createTableRow(exercise));
+            });
+
+            // Populate Day 2 exercises
+            workoutData.day2.forEach(exercise => {
+                day2Body.appendChild(createTableRow(exercise));
+            });
+
+            // Populate Day 3 exercises
+            workoutData.day3.forEach(exercise => {
+                day3Body.appendChild(createTableRow(exercise));
+            });
+        });
+    </script>
+</body>
+</html>

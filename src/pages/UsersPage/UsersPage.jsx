@@ -1,7 +1,7 @@
 // src/pages/UsersPage/UsersPage.js
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import ResourceManagementPage from "../../components/ResourceManagementPage";
+import ResourceManagementPage from "../ResourceManagementPage/ResourceManagementPage";
 import axiosInstance from "../../utils/axiosInstance";
 //////////////////////////////////////////////////////////////////////////////////////
 

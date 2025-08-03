@@ -2,8 +2,11 @@
 import React from "react";
 import "./Logo.css"; 
 import logo from "../../assets/images/logos/logo1.svg";
+import { useTranslation } from "react-i18next";
 
 const Logo = ({ isCollapsed }) => {
+  const { t } = useTranslation();
+
   return (
   
     <div className={`logo-container ${isCollapsed ? "collapsed" : ""}`}>
@@ -18,7 +21,7 @@ const Logo = ({ isCollapsed }) => {
       {/* این بخش فقط در حالت باز بودن سایدبار نمایش داده می‌شود */}
       {!isCollapsed && (
         <div className="logo-text-wrapper">
-          <h3 className="logo-text">مبنا رایانه کیان</h3>
+          <h3 className="logo-text">{t("logotitle")}</h3>
         </div>
       )}
     </div>

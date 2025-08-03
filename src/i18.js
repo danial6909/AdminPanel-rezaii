@@ -13,6 +13,7 @@ i18n
         translation: {
           // --- General Menu Keys ---
           adminPanelTitle: "Management Panel",
+          logotitle: "M R K",
           open_btn: "open menu",
           close_btn: "close menu",
           profile: "Profile",
@@ -20,12 +21,20 @@ i18n
           changeLanguage: "Change Language",
           theme_light: "Light Mode",
           theme_dark: "Dark Mode",
-          dashboard: "Dashboard",
+          ConfigPage: "Config",
+          Frequency: "Frequency",
+          Service: "Service",
+          Network: "Network",
+          Channel: "Channel",
+          ChannelGroup: "Channel Group",
+          ConnectedDevices: "Connected Devices",
+          StreamingChannels: "Streaming Channels",
+          Recordings: "Recordings",
           Cards: "Cards",
           orders: "Orders",
           users: "Users",
-          users_list: "Users List", // New key for submenu
-          roles: "Roles", // New key for submenu and roles page
+          user_list: "Users List",
+          roles: "Roles",
           settings: "Settings",
           security: "Security",
           authentication: "Authentication",
@@ -45,6 +54,7 @@ i18n
             confirmDeleteTitle: "Confirm Delete",
             confirmDeleteMessage:
               "Are you sure you want to delete item with ID {{id}}? This action cannot be undone.",
+            noItemsFound: "No items found.",
           },
 
           // --- User Management Specific Keys ---
@@ -152,12 +162,162 @@ i18n
             success: "Success",
             error: "Error",
           },
+
+          // --- Frequencies Management ---
+          frequenciesManagement: {
+            title: "Frequency Management",
+            addButton: "Add Frequency",
+            noItemsFound: "No frequencies found.",
+            addTitle: "Add New Frequency",
+            editTitle: "Edit Frequency",
+            fetchError: "Error fetching frequencies.",
+            form: {
+              name: "Frequency Name",
+              channelCount: "Channel Count",
+              providerCount: "Provider Count",
+              network: "Network",
+              status: "Scan Result",
+            },
+            table: {
+              id: "ID",
+              name: "Frequency Name",
+              channelCount: "Channel Count",
+              providerCount: "Provider Count",
+              network: "Network",
+              status: "Scan Result",
+            },
+          },
+
+          // --- Service Management ---
+          servicesManagement: {
+            title: "Service Management",
+            addButton: "Add Service",
+            noItemsFound: "No services found.",
+            fetchError: "Error fetching services.",
+            form: {
+              name: "Service Name",
+              channel: "Channel",
+              frequency: "Frequency",
+              provider: "Provider",
+              network: "Network",
+              status: "Status",
+            },
+            table: {
+              name: "Service Name",
+              channel: "Channel",
+              frequency: "Frequency",
+              provider: "Provider",
+              network: "Network",
+              status: "Status",
+            },
+          },
+
+          // --- Network Management ---
+          networksManagement: {
+            title: "Network Management",
+            addButton: "Add Network",
+            noItemsFound: "No networks found.",
+            fetchError: "Error fetching networks.",
+            form: {
+              name: "Network Name",
+              channelCount: "Channel Count",
+              status: "Status",
+            },
+            table: {
+              name: "Network Name",
+              channelCount: "Channel Count",
+              status: "Status",
+            },
+          },
+
+          // --- Channel Management ---
+          channelsManagement: {
+            title: "Channel Management",
+            addButton: "Add Channel",
+            noItemsFound: "No channels found.",
+            fetchError: "Error fetching channels.",
+            form: {
+              number: "Channel Number",
+              name: "Channel Name",
+              status: "Status",
+            },
+            table: {
+              number: "Channel Number",
+              name: "Channel Name",
+              status: "Status",
+            },
+          },
+
+          // --- Channel Group Management ---
+          channelGroupsManagement: {
+            title: "Channel Group Management",
+            addButton: "Add Group",
+            noItemsFound: "No groups found.",
+            fetchError: "Error fetching groups.",
+            form: {
+              name: "Group Name",
+            },
+            table: {
+              name: "Group Name",
+            },
+          },
+
+          // --- Connected Devices ---
+          connectedDevicesManagement: {
+            title: "Connected Devices",
+            addButton: "Add Device",
+            fetchError: "Error fetching connected devices.",
+            noItemsFound: "No devices found.",
+            active: "Connected",
+            table: {
+              id: "ID",
+              ip: "IP Address",
+              connectionDate: "Connection Date",
+              connectionTime: "Connection Time",
+              disconnectionTime: "Disconnection Time",
+            },
+          },
+
+          // --- Streaming Channels ---
+          streamingChannelsManagement: {
+            title: "Live Streaming Channels",
+            addButton: "Add Channel",
+            fetchError: "Error fetching streaming channels.",
+            noItemsFound: "No streams found.",
+            table: {
+              channel: "Channel",
+              ip: "IP Address",
+              date: "Date",
+              time: "Time",
+              input: "Input",
+              output: "Output",
+            },
+          },
+
+          // --- Recordings Management ---
+          recordingsManagement: {
+            title: "Recordings Management",
+            addButton: "Add Recording",
+            noItemsFound: "No recordings found.",
+            fetchError: "Error fetching recordings.",
+            form: {
+              name: "Recording Name",
+              channelName: "Channel Name",
+              status: "Status",
+            },
+            table: {
+              name: "Recording Name",
+              channelName: "Channel Name",
+              status: "Status",
+            },
+          },
         },
       },
       fa: {
         translation: {
           // --- کلیدهای عمومی منو ---
           adminPanelTitle: "پنل مدیریت",
+          logotitle: "مبنا رایانه کیان",
           open_btn: "بازکردن منو",
           close_btn: "بستن منو",
           profile: "پروفایل",
@@ -165,12 +325,20 @@ i18n
           changeLanguage: "تغییر زبان",
           theme_light: "حالت روشن",
           theme_dark: "حالت تاریک",
-          dashboard: "داشبورد",
+          ConfigPage: "پیکربندی",
+          Frequency: "فرکانس",
+          Service: "سرویس",
+          Network: "شبکه",
+          Channel: "کانال",
+          ChannelGroup: "گروه کانال",
+          ConnectedDevices: "دستگاه‌های متصل",
+          StreamingChannels: "کانال‌های در حال پخش",
+          Recordings: "موارد ضبط شده",
           Cards: "کارت ها",
           orders: "سفارشات",
           users: "کاربران",
-          users_list: "لیست کاربران", // کلید جدید
-          roles: "نقش‌ها", // کلید جدید
+          user_list: "لیست کاربران",
+          roles: "نقش‌ها",
           settings: "تنظیمات",
           security: "امنیت",
           authentication: "احراز هویت",
@@ -190,6 +358,7 @@ i18n
             confirmDeleteTitle: "تأیید حذف",
             confirmDeleteMessage:
               "آیا از حذف مورد با شناسه {{id}} مطمئن هستید؟ این عمل قابل بازگشت نیست.",
+            noItemsFound: "موردی یافت نشد.",
           },
 
           // --- کلیدهای اختصاصی مدیریت کاربران ---
@@ -292,6 +461,155 @@ i18n
           common: {
             success: "موفق",
             error: "خطا",
+          },
+
+          // --- مدیریت فرکانس‌ها ---
+          frequenciesManagement: {
+            title: "مدیریت فرکانس‌ها",
+            addButton: "افزودن فرکانس",
+            noItemsFound: "هیچ فرکانسی یافت نشد.",
+            addTitle: "افزودن فرکانس جدید",
+            editTitle: "ویرایش فرکانس",
+            fetchError: "خطا در دریافت لیست فرکانس‌ها.",
+            form: {
+              name: "نام فرکانس",
+              channelCount: "تعداد کانال‌ها",
+              providerCount: "تعداد سرویس‌ها",
+              network: "شبکه",
+              status: "نتیجه اسکن",
+            },
+            table: {
+              id: "شناسه",
+              name: "نام فرکانس",
+              channelCount: "تعداد کانال‌ها",
+              providerCount: "تعداد سرویس‌ها",
+              network: "شبکه",
+              status: "نتیجه اسکن",
+            },
+          },
+
+          // --- مدیریت سرویس‌ها ---
+          servicesManagement: {
+            title: "مدیریت سرویس‌ها",
+            addButton: "افزودن سرویس",
+            noItemsFound: "سرویسی یافت نشد.",
+            fetchError: "خطا در دریافت لیست سرویس‌ها.",
+            form: {
+              name: "نام سرویس",
+              channel: "شماره کانال",
+              frequency: "فرکانس",
+              provider: "ارائه‌دهنده",
+              network: "شبکه",
+              status: "وضعیت",
+            },
+            table: {
+              name: "نام سرویس",
+              channel: "شماره کانال",
+              frequency: "فرکانس",
+              provider: "ارائه‌دهنده",
+              network: "شبکه",
+              status: "وضعیت",
+            },
+          },
+
+          // --- مدیریت شبکه‌ها ---
+          networksManagement: {
+            title: "مدیریت شبکه‌ها",
+            addButton: "افزودن شبکه",
+            noItemsFound: "شبکه‌ای یافت نشد.",
+            fetchError: "خطا در دریافت لیست شبکه‌ها.",
+            form: {
+              name: "نام شبکه",
+              channelCount: "تعداد کانال",
+              status: "وضعیت",
+            },
+            table: {
+              name: "نام شبکه",
+              channelCount: "تعداد کانال",
+              status: "وضعیت",
+            },
+          },
+
+          // --- مدیریت کانال‌ها ---
+          channelsManagement: {
+            title: "مدیریت کانال‌ها",
+            addButton: "افزودن کانال",
+            noItemsFound: "کانالی یافت نشد.",
+            fetchError: "خطا در دریافت لیست کانال‌ها.",
+            form: {
+              number: "شماره کانال",
+              name: "نام کانال",
+              status: "وضعیت",
+            },
+            table: {
+              number: "شماره کانال",
+              name: "نام کانال",
+              status: "وضعیت",
+            },
+          },
+
+          // --- مدیریت گروه کانال‌ها ---
+          channelGroupsManagement: {
+            title: "مدیریت گروه کانال‌ها",
+            addButton: "افزودن گروه",
+            noItemsFound: "گروهی یافت نشد.",
+            fetchError: "خطا در دریافت لیست گروه‌ها.",
+            form: {
+              name: "نام گروه",
+            },
+            table: {
+              name: "نام گروه",
+            },
+          },
+
+          // --- دستگاه‌های متصل ---
+          connectedDevicesManagement: {
+            title: "دستگاه‌های متصل",
+            addButton: "افزودن دستگاه",
+            fetchError: "خطا در دریافت لیست دستگاه‌ها.",
+            noItemsFound: "دستگاهی یافت نشد.",
+            active: "متصل",
+            table: {
+              id: "شناسه",
+              ip: "آدرس IP",
+              connectionDate: "تاریخ اتصال",
+              connectionTime: "ساعت اتصال",
+              disconnectionTime: "ساعت قطع اتصال",
+            },
+          },
+
+          // --- کانال‌های در حال پخش ---
+          streamingChannelsManagement: {
+            title: "کانال‌های در حال پخش زنده",
+            addButton: "افزودن کانال",
+            fetchError: "خطا در دریافت لیست کانال‌ها.",
+            noItemsFound: "کانال در حال پخشی یافت نشد.",
+            table: {
+              channel: "کانال",
+              ip: "آدرس IP",
+              date: "تاریخ",
+              time: "زمان",
+              input: "ورودی",
+              output: "خروجی",
+            },
+          },
+
+          // --- مدیریت موارد ضبط شده ---
+          recordingsManagement: {
+            title: "مدیریت موارد ضبط شده",
+            addButton: "افزودن مورد",
+            noItemsFound: "مورد ضبط شده‌ای یافت نشد.",
+            fetchError: "خطا در دریافت لیست موارد ضبط شده.",
+            form: {
+              name: "نام",
+              channelName: "نام کانال",
+              status: "وضعیت",
+            },
+            table: {
+              name: "نام",
+              channelName: "نام کانال",
+              status: "وضعیت",
+            },
           },
         },
       },

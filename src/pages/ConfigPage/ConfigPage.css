@@ -1,0 +1,412 @@
+/* Configuration.css */
+/*
+ * NOTE: This file depends on variables defined in `colors.css` and `fonts.css`.
+ * Make sure to include them in your project for these styles to work correctly.
+ */
+
+
+/* --- General Styles & Font --- */
+/* body {
+    font-family: var(--font-family-main);
+    background-color: var(--color-background-main);
+    color: var(--color-text-primary);
+    margin: 0;
+    direction: rtl;
+} */
+
+/* --- Main Container --- */
+.configuration-wrapper {
+    max-width: 56rem;
+    margin: 2rem auto;
+    background-color: var(--color-background-content);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 25px -5px var(--color-shadow), 0 10px 10px -5px var(--color-shadow);
+    border: 1px solid var(--color-border);
+}
+
+/* --- Titles --- */
+.main-title {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.step-title-header {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+
+/* --- Progress Bar --- */
+.progress-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 4rem;
+}
+
+.progress-line-bg {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--color-border);
+    top: 20px;
+    right: 0;
+    z-index: 0;
+}
+
+.progress-line {
+    position: absolute;
+    height: 4px;
+    background-color: var(--color-primary);
+    top: 20px;
+    right: 0;
+    transition: width 0.5s ease-in-out;
+    width: 0;
+    z-index: 1;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--color-background-hover);
+    color: var(--color-text-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size-verylarge);
+    font-weight: var(--font-weight-bold);
+    transition: all 0.3s ease;
+}
+
+.step-name {
+    font-size: var(--font-size-verysmall);
+    margin-top: 0.5rem;
+    color: var(--color-text-secondary);
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Active & Completed Step States */
+.step.active .step-number {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    box-shadow: 0 4px 14px var(--color-shadow);
+    transform: scale(1.1);
+}
+
+.step.active .step-name {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+.step.completed .step-number {
+    background-color: var(--color-success);
+    color: var(--color-text-on-primary);
+    box-shadow: 0 4px 14px var(--color-shadow);
+}
+
+.step.completed .step-name {
+    color: var(--color-success);
+    font-weight: var(--font-weight-bold);
+}
+
+
+/* --- Form Grid & Fields --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: var(--font-size-verysmall);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.form-input {
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    background-color: var(--color-background-content);
+    color: var(--color-text-primary);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+
+/* --- Custom Select Box --- */
+.custom-select {
+    position: relative;
+    cursor: pointer;
+}
+
+.custom-select-button {
+    height: 48px;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-background-content);
+}
+
+.custom-select-button:focus, .custom-select-button:hover {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+.custom-select-button svg {
+    width: 1rem;
+    height: 1rem;
+    color: var(--color-text-secondary);
+    transition: transform 0.2s ease-in-out;
+}
+
+.custom-select-button svg.open {
+    transform: rotate(180deg);
+}
+
+.custom-select-options {
+    position: absolute;
+    width: 100%;
+    margin-top: 0.25rem;
+    background-color: var(--color-background-content);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px var(--color-shadow);
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.custom-select-options li {
+    padding: 0.75rem;
+    color: var(--color-text-primary);
+    cursor: pointer;
+}
+
+.custom-select-options li:hover {
+    background-color: var(--color-background-hover);
+}
+
+
+/* --- Custom iOS Checkbox --- */
+.ios-checkbox-wrapper {
+    --checkbox-color: var(--color-primary);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    background-color: var(--color-background-content);
+}
+
+.ios-checkbox-wrapper:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+.ios-checkbox-wrapper .ios-checkbox {
+    position: relative;
+    display: inline-block;
+    user-select: none;
+}
+
+.ios-checkbox-wrapper input {
+    display: none;
+}
+
+.ios-checkbox-wrapper .checkbox-wrapper {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.ios-checkbox-wrapper .checkbox-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    border: 2px solid var(--color-border);
+    background: var(--color-background-content);
+    transition: all 0.2s ease;
+}
+
+.ios-checkbox-wrapper .checkbox-icon {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    color: var(--color-text-on-primary);
+    transform: scale(0);
+    transition: all 0.2s ease;
+}
+
+.ios-checkbox-wrapper .check-path {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    transition: stroke-dashoffset 0.3s ease 0.1s;
+}
+
+.ios-checkbox-wrapper input:checked + .checkbox-wrapper .checkbox-bg {
+    background: var(--checkbox-color);
+    border-color: var(--checkbox-color);
+}
+
+.ios-checkbox-wrapper input:checked + .checkbox-wrapper .checkbox-icon {
+    transform: scale(1);
+}
+
+.ios-checkbox-wrapper input:checked + .checkbox-wrapper .check-path {
+    stroke-dashoffset: 0;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.ios-checkbox-wrapper input:checked + .checkbox-wrapper {
+    animation: bounce 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* --- Step 3 Table --- */
+.table-container {
+    overflow-x: auto;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    box-shadow: inset 0 2px 4px 0 var(--color-shadow);
+}
+
+.results-table {
+    width: 100%;
+    text-align: right;
+    font-size: var(--font-size-verysmall);
+    border-collapse: collapse;
+}
+
+.results-table thead {
+    font-size: 0.75rem; /* smaller than verysmall */
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    background-color: var(--color-table-header);
+}
+
+.results-table th, .results-table td {
+    padding: 0.75rem 1.5rem;
+}
+
+.results-table tbody tr {
+    background-color: var(--color-background-content);
+    border-bottom: 1px solid var(--color-border);
+}
+.results-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.results-table tbody tr:hover {
+    background-color: var(--color-background-hover);
+}
+
+.results-table th[scope="row"] {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+}
+
+
+/* --- Navigation Buttons --- */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.nav-btn {
+    font-weight: var(--font-weight-bold);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-small);
+}
+
+.nav-btn.prev-btn {
+    background-color: var(--color-background-hover);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+}
+
+.nav-btn.prev-btn:hover {
+    background-color: var(--color-border);
+    color: var(--color-text-primary);
+}
+
+.nav-btn.next-btn {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+    box-shadow: 0 4px 14px -4px var(--color-primary);
+}
+
+.nav-btn.next-btn:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 85%, black);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px -4px var(--color-primary);
+}
+
+.nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}

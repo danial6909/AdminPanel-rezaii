@@ -1,6 +1,5 @@
 /* src/layouts/AdminLayout.css */
 
-
 .admin-layout {
   display: flex;
   background-color: var(--color-background-main);
@@ -17,14 +16,27 @@
   padding: 24px;
   min-height: calc(100vh - 95px); /* ارتفاع هدر */
   animation: fadeInMain 0.4s ease;
-            background-color: var(--color-background-main);
-
-
-
+  background-color: var(--color-background-main);
 }
 
 @keyframes fadeInMain {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+
+
+@media (max-width: 600px) {
+
+
+ .admin-right{
+  right: -300px;
+  position: absolute  ;
+ }
+}

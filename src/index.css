@@ -1,10 +1,13 @@
-body{
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Vazirmatn" !important;
+}
+body {
   margin: 0;
   direction: rtl;
-
 }
 
-.right{
+.right {
   direction: ltr;
-
 }

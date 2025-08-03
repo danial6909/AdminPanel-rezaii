@@ -1,97 +1,190 @@
 /* =================================================================== */
-/* ۲. استایل‌های اصلی صفحه پروفایل */
+/* استایل‌های اصلی صفحه پروفایل */
 /* =================================================================== */
 
 .p-user-page-wrapper {
-  min-height: 100vh;
+    min-height: 100vh;
 }
 
 .p-user-card {
-  background: transparent;
-  border-radius: 28px !important;
-  box-shadow: 0 25px 50px -12px var(--color-shadow);
-  border: none;
-  overflow: hidden;
+    background: transparent;
+    border-radius: 28px !important;
+    box-shadow: 0 25px 50px -12px var(--color-shadow);
+    border: none;
+    overflow: hidden;
 }
 
 .p-user-content-divider {
-  height: 1.5px;
-  margin: 0 48px !important;
-  border: none !important;
-  background-image: linear-gradient(
-    to left,
-    transparent,
-    var(--color-border),
-    transparent
-  );
+    height: 1.5px;
+    margin: 0 48px !important;
+    border: none !important;
+    background-image: linear-gradient(
+        to left,
+        transparent,
+        var(--color-border),
+        transparent
+    );
 }
 
 .MuiContainer-maxWidthMd {
-  padding: 0 !important;
+    padding: 0 !important;
 }
 
 .p-user-hidden-input {
-  display: none;
+    display: none;
 }
 
 /* =================================================================== */
 /* استایل‌های مشترک TextField و دکمه‌ها (بهینه‌سازی شده برای هر دو حالت LTR/RTL) */
+/* این استایل‌ها به صورت عمومی در هر دو کامپوننت استفاده می‌شوند */
 /* =================================================================== */
 
+/* استایل کلی برای فیلدهای ورودی */
 .p-user-input-field .MuiOutlinedInput-root {
-  border-radius: 16px;
-  background-color: var(--color-background-hover);
-  transition: all 0.3s ease-in-out;
-  box-shadow: none;
-  border-color: var(--color-border) !important;
-}
-.p-user-input-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-  border-color: var(--color-primary);
-}
-.p-user-input-field .MuiOutlinedInput-root.Mui-focused {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent);
-}
-.p-user-input-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: var(--color-primary);
-  border-width: 1px;
-}
-.p-user-input-field .MuiFormLabel-root.Mui-focused {
-  color: var(--color-primary);
+    border-radius: 10px; /* گرد کردن گوشه‌ها */
+    background-color: var(--color-background-content); /* رنگ زمینه تیره از پالت */
+    transition: all 0.3s ease-in-out; /* انیمیشن نرم برای تغییرات */
+    box-shadow: none; /* حذف سایه پیش‌فرض */
+    border: 1px solid var(--color-border); /* حاشیه ظریف از پالت */
+    color: var(--color-text-primary); /* رنگ متن وارد شده از پالت */
 }
 
-/*
-    *** تغییرات اصلی برای RTL در اینجا اعمال شده است ***
-    با استفاده از specificity بالاتر و !important برای اطمینان از اعمال استایل‌ها
-*/
+/* استایل حاشیه هنگام هاور (وقتی موس روی اینپوت می‌رود) */
+.p-user-input-field .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: var(--color-text-secondary) !important; /* رنگ حاشیه هنگام هاور از پالت */
+}
+
+/* استایل حاشیه هنگام فوکوس (وقتی اینپوت فعال است) */
+.p-user-input-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: var(--color-text-secondary) !important; /* رنگ حاشیه هنگام فوکوس به رنگ حاشیه عادی تغییر یافت */
+    border-width: 2px; /* ضخیم‌تر شدن حاشیه */
+    box-shadow: none; /* افکت درخشش حذف شد */
+}
+
+/* استایل لیبل (متن بالای اینپوت) در حالت عادی */
+.p-user-input-field .MuiFormLabel-root {
+    font-family: "Vazirmatn";
+    color: var(--color-text-secondary); /* رنگ خاکستری روشن از پالت برای لیبل */
+    background-color: var(--color-background-content); /* پس‌زمینه تیره برای فرم از پالت */
+}
+
+/* استایل لیبل هنگام فوکوس */
+.p-user-input-field .MuiFormLabel-root.Mui-focused {
+    color: var(--color-text-secondary) !important;
+    background-color: var(--color-background-content);
+}
+
+/* استایل متن وارد شده توسط کاربر */
+.p-user-input-field .MuiInputBase-input {
+    color: var(--color-text-primary); /* رنگ سفید از پالت برای متن ورودی */
+}
+
+/* استایل متن راهنما یا خطا در زیر اینپوت */
+.p-user-input-field .MuiFormHelperText-root {
+    color: var(--color-error); /* رنگ قرمز روشن از پالت برای خطاها */
+}
+
+/* استایل آیکون چشم (نمایش/عدم نمایش رمز) */
+.p-user-input-field .MuiInputAdornment-root .MuiIconButton-root {
+    color: var(--color-text-secondary); /* رنگ خاکستری روشن از پالت برای آیکون */
+}
+
+/* استایل آیکون چشم هنگام هاور */
+.p-user-input-field .MuiInputAdornment-root .MuiIconButton-root:hover {
+    color: var(--color-text-primary); /* رنگ سفید از پالت هنگام هاور */
+}
+
+
+/* استایل کلی دکمه‌ها */
+.p-user-main-btn {
+    font-family: "Vazirmatn" !important;
+    border-radius: 14px !important;
+    padding: 12px 28px !important;
+    font-weight: 700 !important;
+    text-transform: none !important;
+    transition: all 0.25s ease !important;
+    box-shadow: 0 4px 15px -5px var(--color-primary);
+    will-change: transform;
+}
+
+/* استایل دکمه اصلی (ذخیره) */
+.p-user-main-btn.p-user-btn-primary {
+    background-image: var(--gradient-primary) !important;
+    color: var(--color-text-on-primary) !important;
+}
+
+.p-user-main-btn.p-user-btn-primary:hover {
+    box-shadow: 0 8px 25px -8px var(--color-primary) !important;
+}
+
+/* استایل دکمه ثانویه (کنسل/تغییر) */
+.p-user-main-btn.p-user-btn-secondary {
+    background-color: transparent;
+    border: 1.5px solid var(--color-text-secondary);
+    color: var(--color-text-secondary);
+}
+
+.p-user-main-btn:hover {
+    transform: translateY(-4px) scale(1.03);
+}
+
+.p-user-main-btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.p-user-form-buttons Button:not(.p-user-main-btn) {
+    background-color: transparent;
+    border: 1.5px solid var(--color-text-secondary);
+    color: var(--color-text-secondary);
+    padding: 10px 26px !important;
+    font-weight: 600 !important;
+    border-radius: 14px !important;
+    transition: all 0.25s ease !important;
+}
+.p-user-form-buttons Button:not(.p-user-main-btn):hover {
+    background-color: var(--color-text-secondary);
+    color: var(--color-text-on-primary);
+}
+
+
+/* ================================================================================== */
+/* *** تغییرات اصلی برای RTL در اینجا اعمال شده است *** */
+/* با استفاده از specificity بالاتر و !important برای اطمینان از اعمال استایل‌ها */
+/* ================================================================================== */
+
 :dir(rtl) .p-user-input-field .MuiFormLabel-root {
-  left: auto !important;
-  right: 14px !important; /* موقعیت لیبل در حالت عادی RTL */
-  transform-origin: top right !important; /* مبدا ترانسفورم برای انیمیشن لیبل */
+    left: auto !important;
+    right: 14px !important; /* موقعیت لیبل در حالت عادی RTL */
+    transform-origin: top right !important; /* مبدا ترانسفورم برای انیمیشن لیبل */
+    font-size: 13pt;
 }
+
 :dir(rtl) .p-user-input-field .MuiInputLabel-formControl {
-  transform: translate(0px, 16px) scale(1) !important; /* جابجایی لیبل در حالت عادی RTL */
+    transform: translate(0px, 16px) scale(1) !important; /* جابجایی لیبل در حالت عادی RTL */
 }
+
 :dir(rtl) .p-user-input-field .MuiInputLabel-shrink {
-  transform: translate(0px, -9px) scale(0.75) !important; /* جابجایی لیبل هنگام کوچک شدن RTL */
+    transform: translate(0px, -9px) scale(0.75) !important; /* جابجایی لیبل هنگام کوچک شدن RTL */
 }
 
 /* !!! این مهمترین بخش برای راست‌چین کردن متن ورودی است !!! */
 :dir(rtl) .p-user-input-field .MuiInputBase-input {
-  text-align: right !important; /* متن ورودی را راست‌چین می‌کند */
-  direction: rtl !important; /* جهت‌دهی متن را به RTL تغییر می‌دهد */
+    text-align: right !important; /* متن ورودی را راست‌چین می‌کند */
+    direction: rtl !important; /* جهت‌دهی متن را به RTL تغییر می‌دهد */
 }
 
 /* این هم برای کادر خالی لیبل در RTL مهم است */
 :dir(rtl) .p-user-input-field .MuiOutlinedInput-notchedOutline legend {
-  text-align: right !important; /* جهت گیری legend (فضای خالی لیبل) */
+    text-align: right !important; /* جهت گیری legend (فضای خالی لیبل) */
 }
 
 /* برای Adornments (مثل آیکون ایمیل یا چشم) در RTL */
 :dir(rtl) .p-user-input-field .MuiInputBase-adornedEnd {
-  padding-left: 0 !important;
-  padding-right: 14px !important; /* پدینگ برای Adornment سمت راست (که در RTL سمت چپ فیلد می‌شود) */
+    padding-left: 0 !important;
+    padding-right: 14px !important; /* پدینگ برای Adornment سمت راست (که در RTL سمت چپ فیلد می‌شود) */
 }
+
 :dir(rtl) .p-user-input-field .MuiInputBase-adornedStart {
-  padding-right: 0 !important;
-  padding-left: 14px !important; /* پدینگ برای Adornment سمت چپ (که در RTL سمت راست فیلد می‌شود) */
+    padding-right: 0 !important;
+    padding-left: 14px !important; /* پدینگ برای Adornment سمت چپ (که در RTL سمت راست فیلد می‌شود) */
 }

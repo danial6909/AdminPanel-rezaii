@@ -1,0 +1,356 @@
+<!-- <!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لودینگ بار در یک فایل</title>
+
+   
+    <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css" />
+
+
+    <style>
+        /* استایل‌های پایه برای ظاهر بهتر صفحه */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        nav a {
+            color: #007bff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #0056b3;
+        }
+
+        main {
+            padding: 2rem;
+            text-align: center;
+            min-height: 400px;
+        }
+
+        /* --- شخصی‌سازی NProgress برای ظاهر شبیه یوتیوب --- */
+        #nprogress .bar {
+            background: #ff0000 !important;
+            /* رنگ قرمز روشن */
+            height: 4px !important;
+            position: fixed;
+            z-index: 1031;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        #nprogress .peg {
+            display: none !important;
+        }
+
+        #nprogress .spinner {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <a data-page="صفحه اصلی">خانه</a>
+            <a data-page="محصولات">محصولات</a>
+            <a data-page="درباره ما">درباره ما</a>
+        </nav>
+    </header>
+
+    <main id="content-container">
+        <h1>به صفحه اصلی خوش آمدید</h1>
+        <p>برای دیدن لودینگ بار، روی یکی از لینک‌های منو کلیک کنید.</p>
+    </main>
+
+  
+    <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+
+    <script>
+        // صبر می‌کنیم تا تمام عناصر HTML صفحه بارگذاری شوند
+        document.addEventListener('DOMContentLoaded', function () {
+
+            if (typeof NProgress === 'undefined') {
+                console.error('خطا: کتابخانه NProgress پیدا نشد.');
+                alert('خطا: کتابخانه لودینگ بار بارگذاری نشده است. اتصال اینترنت خود را بررسی کنید.');
+                return;
+            }
+
+            const navLinks = document.querySelectorAll('nav a');
+            const contentContainer = document.getElementById('content-container');
+
+            if (!contentContainer) {
+                console.error('خطا: عنصری با آی‌دی "content-container" پیدا نشد.');
+                return;
+            }
+
+            function loadPageContent(pageName) {
+                NProgress.start();
+                console.log(`در حال بارگذاری صفحه: ${pageName}`);
+
+                setTimeout(() => {
+                    contentContainer.innerHTML = `
+                        <h1>صفحه ${pageName}</h1>
+                        <p>این محتوا به صورت داینامیک بارگذاری شده است.</p>
+                    `;
+                    NProgress.done();
+                    console.log("بارگذاری با موفقیت تمام شد.");
+                }, 1000);
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const pageToLoad = this.getAttribute('data-page');
+                    loadPageContent(pageToLoad);
+                });
+            });
+
+            console.log("اسکریپت صفحه با موفقیت اجرا شد.");
+        });
+    </script>
+
+</body>
+
+</html> -->
+
+
+
+
+<!-- =========================================================================================== -->
+<!-- =========================================================================================== -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لودینگ اسکلتی (Skeleton Loading)</title>
+
+  
+    <style>
+        /* استایل‌های پایه صفحه */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+        }
+
+        nav a {
+            color: #007bff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #0056b3;
+        }
+
+        main {
+            padding: 2rem;
+            width: 100%;
+            max-width: 600px;
+            /* محدود کردن عرض برای ظاهر بهتر */
+        }
+
+        /* استایل کارت محتوا */
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            /* برای اینکه گوشه‌های تصویر هم گرد شود */
+        }
+
+        .card img {
+            width: 100%;
+            display: block;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        /* --- استایل‌های لودینگ اسکلتی --- */
+        .skeleton {
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            animation: shimmer 1.5s infinite linear;
+        }
+
+        /* انیمیشن درخشش */
+        @keyframes shimmer {
+            0% {
+                background-color: #e0e0e0;
+            }
+
+            50% {
+                background-color: #f0f0f0;
+            }
+
+            100% {
+                background-color: #e0e0e0;
+            }
+        }
+
+        .skeleton-image {
+            width: 100%;
+            height: 250px;
+            /* ارتفاع جایگاه عکس */
+        }
+
+        .skeleton-content {
+            padding: 1.5rem;
+        }
+
+        .skeleton-title {
+            height: 2rem;
+            width: 60%;
+            margin-bottom: 1rem;
+        }
+
+        .skeleton-text {
+            height: 1rem;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        .skeleton-text:last-child {
+            width: 80%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <a data-page="خانه">خانه</a>
+            <a data-page="محصولات">محصولات</a>
+            <a data-page="درباره ما">درباره ما</a>
+        </nav>
+    </header>
+
+    <main id="content-container">
+   
+        <div class="card">
+            <div class="card-content">
+                <h1>به صفحه اصلی خوش آمدید</h1>
+                <p>برای دیدن افکت لودینگ اسکلتی، روی یکی از لینک‌های منو کلیک کنید.</p>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const navLinks = document.querySelectorAll('nav a');
+            const contentContainer = document.getElementById('content-container');
+
+            // تابعی برای نمایش لودر اسکلتی
+            function showSkeletonLoader() {
+                contentContainer.innerHTML = `
+                    <div class="card">
+                        <div class="skeleton skeleton-image"></div>
+                        <div class="skeleton-content">
+                            <div class="skeleton skeleton-title"></div>
+                            <div class="skeleton skeleton-text"></div>
+                            <div class="skeleton skeleton-text"></div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // تابعی برای بارگذاری محتوای نهایی
+            function loadPageContent(pageName) {
+                // محتوای واقعی که بعد از لود نمایش داده می‌شود
+                const realContent = `
+                    <div class="card">
+                        <img src="https://placehold.co/600x250/007bff/ffffff?text=${encodeURI(pageName)}" alt="تصویر بارگذاری شده برای ${pageName}">
+                        <div class="card-content">
+                            <h2>صفحه ${pageName}</h2>
+                            <p>این محتوا با موفقیت و به صورت داینامیک پس از نمایش لودر اسکلتی بارگذاری شد.</p>
+                        </div>
+                    </div>
+                `;
+
+                // شبیه‌سازی تأخیر شبکه (مثلاً 1.5 ثانیه)
+                setTimeout(() => {
+                    contentContainer.innerHTML = realContent;
+                    console.log(`محتوای صفحه "${pageName}" با موفقیت بارگذاری شد.`);
+                }, 1500);
+            }
+
+            // افزودن رویداد کلیک به لینک‌ها
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const pageToLoad = this.getAttribute('data-page');
+
+                    console.log(`درخواست برای بارگذاری صفحه: ${pageToLoad}`);
+
+                    // 1. ابتدا لودر اسکلتی را نمایش بده
+                    showSkeletonLoader();
+
+                    // 2. سپس محتوای واقعی را بارگذاری کن
+                    loadPageContent(pageToLoad);
+                });
+            });
+
+            console.log("اسکریپت صفحه با موفقیت اجرا شد.");
+        });
+    </script>
+
+</body>
+
+</html> -->
+
+
+<!-- =========================================================================================== -->
+<!-- =========================================================================================== -->
+
+
+
+
+
+

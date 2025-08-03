@@ -1,0 +1,64 @@
+
+/* --- استایل‌های لودینگ اسکلتی --- */
+
+/* کلاس اصلی برای تمام عناصر اسکلتی */
+.skeleton {
+  opacity: 0.7;
+  animation: shimmer 1.5s linear infinite;
+  background: linear-gradient(to right, #e0e0e0 8%, #f0f0f0 18%, #e0e0e0 33%);
+  background-size: 1200px 100%;
+  color: transparent; /* متن داخل را مخفی می‌کند */
+}
+
+/* انیمیشن درخشش (حرکت گرادیانت) */
+@keyframes shimmer {
+  0% {
+    background-position: -1200px 0;
+  }
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
+/* استایل برای جایگاه متن در سلول‌های جدول */
+.skeleton-text {
+  width: 85%;
+  height: 20px;
+  border-radius: 4px;
+}
+
+/* استایل برای سلول دارای آواتار */
+.skeleton-cell-with-avatar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* استایل برای جایگاه آواتار (دایره) */
+.skeleton-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0; /* جلوگیری از کوچک شدن آواتار */
+}
+
+/* استایل برای جایگاه نشانِ نقش (Badge) */
+.skeleton-badge {
+  width: 60px;
+  height: 24px;
+  border-radius: 12px; /* گرد کردن گوشه‌ها برای ظاهر بیضی */
+}
+
+/* استایل برای جایگاه دکمه‌های عملیات */
+.skeleton-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* استایل برای جایگاه هر دکمه */
+.skeleton-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+}

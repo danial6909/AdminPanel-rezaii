@@ -1,0 +1,191 @@
+{
+  "frequencies": [
+    {
+      "id": "freq-2",
+      "name": "12034 V",
+      "channel_count": 12,
+      "provider_count": 2,
+      "network": "Yahsat",
+      "status": "فعال"
+    },
+    {
+      "id": "freq-3",
+      "name": "10887 V",
+      "channel_count": 8,
+      "provider_count": 1,
+      "network": "Turksat",
+      "status": "غیر فعال"
+    }
+  ],
+  "services": [
+    {
+      "id": "srv-1",
+      "name": "Radio Javan SD",
+      "channel_number": "101",
+      "frequency_name": "11881 V",
+      "provider_name": "WNS",
+      "network": "Badr",
+      "status": "فعال"
+    },
+    {
+      "id": "srv-2",
+      "name": "GEM TV",
+      "channel_number": "102",
+      "frequency_name": "12034 V",
+      "provider_name": "Glow",
+      "network": "Yahsat",
+      "status": "فعال"
+    },
+    {
+      "id": "srv-3",
+      "name": "TRT World",
+      "channel_number": "201",
+      "frequency_name": "10887 V",
+      "provider_name": "Dogan",
+      "network": "Turksat",
+      "status": "غیر فعال"
+    },
+    {
+      "id": "srv-5",
+      "name": "Manoto",
+      "channel_number": "103",
+      "frequency_name": "12034 V",
+      "provider_name": "Glow",
+      "network": "Yahsat",
+      "status": "فعال"
+    }
+  ],
+  "networks": [
+    {
+      "id": "net-1",
+      "name": "Yahsat",
+      "channel_count": 150,
+      "status": "فعال"
+    },
+    {
+      "id": "net-2",
+      "name": "Badr",
+      "channel_count": 220,
+      "status": "فعال"
+    },
+    {
+      "id": "net-3",
+      "name": "Hotbird",
+      "channel_count": 450,
+      "status": "فعال"
+    },
+    {
+      "id": "net-4",
+      "name": "Eutelsat W3",
+      "channel_count": 80,
+      "status": "غیر فعال"
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch-1",
+      "channel_number": "101",
+      "name": "AVA Family",
+      "status": "فعال"
+    },
+    {
+      "id": "ch-2",
+      "channel_number": "102",
+      "name": "GEM TV",
+      "status": "فعال"
+    },
+    {
+      "id": "ch-3",
+      "channel_number": "103",
+      "name": "Radio Javan TV",
+      "status": "فعال"
+    },
+    {
+      "id": "ch-4",
+      "channel_number": "201",
+      "name": "TRT 1",
+      "status": "غیر فعال"
+    }
+  ],
+  "channelGroups": [
+    {
+      "id": "grp-1",
+      "name": "HD-Channels"
+    },
+    {
+      "id": "grp-2",
+      "name": "SD-Channels"
+    },
+    {
+      "id": "grp-3",
+      "name": "Radio"
+    },
+    {
+      "id": "grp-4",
+      "name": "News"
+    }
+  ],
+  "connectedDevices": [
+    {
+      "id": "dev-1",
+      "ip_address": "192.168.1.10",
+      "connection_date": "2025-08-03",
+      "connection_time": "10:30:15",
+      "disconnection_time": null
+    },
+    {
+      "id": "dev-2",
+      "ip_address": "192.168.1.12",
+      "connection_date": "2025-08-03",
+      "connection_time": "09:45:00",
+      "disconnection_time": "10:15:00"
+    },
+    {
+      "id": "dev-3",
+      "ip_address": "10.0.0.5",
+      "connection_date": "2025-08-02",
+      "connection_time": "22:10:00",
+      "disconnection_time": null
+    }
+  ],
+  "streamingChannels": [
+    {
+      "id": "st-1",
+      "ip_address": "192.168.1.10",
+      "date": "2025-08-03",
+      "time": "10:50:00",
+      "input_bitrate": "2.5 Mbps",
+      "output_bitrate": "2.4 Mbps",
+      "channel_name": "GEM TV"
+    },
+    {
+      "id": "st-2",
+      "ip_address": "10.0.0.5",
+      "date": "2025-08-03",
+      "time": "10:51:10",
+      "input_bitrate": "3.1 Mbps",
+      "output_bitrate": "3.0 Mbps",
+      "channel_name": "AVA Family"
+    }
+  ],
+  "recordings": [
+    {
+      "id": "rec-1",
+      "name": "اخبار ساعت ۱۴",
+      "channel_name": "IRINN",
+      "status": "ضبط شده"
+    },
+    {
+      "id": "rec-2",
+      "name": "فوتبال برتر",
+      "channel_name": "Varzesh TV",
+      "status": "در حال ضبط"
+    },
+    {
+      "id": "rec-3",
+      "name": "سریال شبانه",
+      "channel_name": "iFilm",
+      "status": "خطا در ضبط"
+    }
+  ]
+}

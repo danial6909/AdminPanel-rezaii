@@ -4,7 +4,9 @@ import axios from "axios";
 const axiosInstance = axios.create({
   // آدرس پایه سرور شما
   // نکته: بهتر است این آدرس را در فایل .env قرار دهید
-  baseURL: "http://192.168.1.92:3000",
+  // baseURL: "http://192.168.1.92:3000",
+  baseURL: "http://localhost:3001/api",
+
   // زمان انتظار برای پاسخ (مثلاً ۱۰ ثانیه)
   timeout: 10000,
   headers: {
