@@ -31,6 +31,7 @@
   font-size: var(--font-size-h2);
   font-weight: var(--font-weight-bold);
   color: var(--color-primary);
+  white-space: nowrap;
 }
 
 /* --- Ícones Genéricos e Menus --- */
@@ -76,4 +77,15 @@
 
 .sidebar-toggle-btn:hover {
   transform: scale(1.1) rotate(-15deg) !important;
+}
+
+
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0 16px;
+  }
+  .header-title {
+    display: none; /* مخفی کردن عنوان در موبایل */
+  }
 }

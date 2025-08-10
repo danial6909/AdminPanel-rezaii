@@ -3,10 +3,7 @@
 /* =================================================================== */
 .p-user-section {
   padding: 24px 48px;
-  
   background-color: var(--color-background-content);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
 .p-user-username-view {
@@ -17,7 +14,6 @@
 
 .p-user-username-view .MuiButton-root {
   border-radius: 12px !important;
-  font-family: "Vazirmatn" !important;
   background-color: var(--color-background-hover);
   color: var(--color-primary);
   font-weight: 600 !important;
@@ -32,7 +28,6 @@
 }
 
 .p-user-username-form {
-
   display: flex;
   align-items: center;
   gap: 16px;
@@ -44,7 +39,6 @@
 .p-user-username-form .MuiButton-root {
   padding: 12px 28px !important;
   font-weight: 700 !important;
-  font-family: "Vazirmatn" !important;
   text-transform: none !important;
   transition: all 0.25s ease !important;
   border-radius: 14px !important;
@@ -57,9 +51,22 @@
 .p-user-username-form .MuiButton-root[type="submit"]:hover {
   transform: translateY(-3px);
   box-shadow: 0 7px 20px -5px var(--color-primary) !important;
-  font-family: "Vazirmatn" !important;
 }
-.css-1wle3ir-MuiTypography-root{
-    font-family: "Vazirmatn" !important;
-    color: var(--color-text-primary) !important;
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 900px) {
+  .p-user-username-form {
+    flex-wrap: wrap; /* اجازه می‌دهد دکمه‌ها به خط بعدی بروند */
+  }
+}
+
+@media (max-width: 600px) {
+  .p-user-section {
+    padding: 24px;
+  }
+
+  .p-user-username-form {
+    flex-direction: column; /* چیدمان عمودی */
+    align-items: stretch; /* دکمه‌ها تمام عرض را می‌گیرند */
+  }
 }

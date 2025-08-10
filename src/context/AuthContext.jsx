@@ -32,76 +32,76 @@
 
 
 
-// import React, { createContext, useContext, useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-// // ✅ ۱. وارد کردن instance به جای axios خام
-// import axiosInstance from "../utils/axiosInstance";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+// ✅ ۱. وارد کردن instance به جای axios خام
+import axiosInstance from "../utils/axiosInstance";
 
-// const AuthContext = createContext(null);
+const AuthContext = createContext(null);
 
-// export const useAuth = () => {
-//   return useContext(AuthContext);
-// };
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
-// export const AuthProvider = ({ children }) => {
-//   const [user, setUser] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const navigate = useNavigate();
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-//   useEffect(() => {
-//     const storedUser = localStorage.getItem("user");
-//     if (storedUser) {
-//       setUser(JSON.parse(storedUser));
-//     }
-//     setLoading(false);
-//   }, []);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+    setLoading(false);
+  }, []);
 
-//   useEffect(() => {
-//     if (user) {
-//       localStorage.setItem("user", JSON.stringify(user));
-//     } else {
-//       localStorage.removeItem("user");
-//     }
-//   }, [user]);
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
 
-//   const login = async (username, password) => {
-//     try {
-//       // ✅ ۲. استفاده از axiosInstance و مسیر نسبی
-//       const response = await axiosInstance.post("/auth/signin", {
-//         username,
-//         password,
-//       });
+  const login = async (username, password) => {
+    try {
+      // ✅ ۲. استفاده از axiosInstance و مسیر نسبی
+      const response = await axiosInstance.post("/auth/signin", {
+        username,
+        password,
+      });
 
-//       if (response.data && response.data.token) {
-//         setUser(response.data);
-//         navigate("/dashboard");
-//         return true;
-//       }
-//       return false; // اگر پاسخ موفق بود ولی توکن نداشت
-//     } catch (error) {
-//       console.error(
-//         "Login failed:",
-//         error.response?.data?.message || error.message
-//       );
-//       return false;
-//     }
-//   };
+      if (response.data && response.data.token) {
+        setUser(response.data);
+        navigate("/dashboard");
+        return true;
+      }
+      return false; // اگر پاسخ موفق بود ولی توکن نداشت
+    } catch (error) {
+      console.error(
+        "Login failed:",
+        error.response?.data?.message || error.message
+      );
+      return false;
+    }
+  };
 
-//   const logout = () => {
-//     setUser(null);
-//     navigate("/login");
-//   };
+  const logout = () => {
+    setUser(null);
+    navigate("/login");
+  };
 
-//   const value = {
-//     user,
-//     loading,
-//     login,
-//     logout,
-//     setUser
-//   };
+  const value = {
+    user,
+    loading,
+    login,
+    logout,
+    setUser
+  };
 
-//   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-// };
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
 
 
 
@@ -115,86 +115,86 @@
 
 
 
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-// import axios from "axios"; // نیازی به axios در حالت آفلاین نیست
+// import React, { createContext, useContext, useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// // import axios from "axios"; // نیازی به axios در حالت آفلاین نیست
 
-const AuthContext = createContext(null);
+// const AuthContext = createContext(null);
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+// export const useAuth = () => {
+//   return useContext(AuthContext);
+// };
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+// export const AuthProvider = ({ children }) => {
+//   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const navigate = useNavigate();
 
-  // این بخش برای حفظ وضعیت لاگین هنگام رفرش است و بدون تغییر باقی می‌ماند
-  useEffect(() => {
-    try {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      }
-    } catch (error) {
-      console.error("Failed to parse user from localStorage", error);
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+//   // این بخش برای حفظ وضعیت لاگین هنگام رفرش است و بدون تغییر باقی می‌ماند
+//   useEffect(() => {
+//     try {
+//       const storedUser = localStorage.getItem("user");
+//       if (storedUser) {
+//         setUser(JSON.parse(storedUser));
+//       }
+//     } catch (error) {
+//       console.error("Failed to parse user from localStorage", error);
+//       setUser(null);
+//     } finally {
+//       setLoading(false);
+//     }
+//   }, []);
 
-  // این بخش برای ذخیره اطلاعات کاربر در حافظه است و بدون تغییر باقی می‌ماند
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem("user", JSON.stringify(user));
-    } else {
-      localStorage.removeItem("user");
-    }
-  }, [user]);
+//   // این بخش برای ذخیره اطلاعات کاربر در حافظه است و بدون تغییر باقی می‌ماند
+//   useEffect(() => {
+//     if (user) {
+//       localStorage.setItem("user", JSON.stringify(user));
+//     } else {
+//       localStorage.removeItem("user");
+//     }
+//   }, [user]);
 
-  // ✅ تغییر اصلی اینجاست
-  const login = async (username, password) => {
-    // به جای ارسال درخواست به سرور، یک شرط ساده قرار می‌دهیم
-    if (username === "admin" && password === "admin") {
-      console.log("Login successful (offline mode)");
+//   // ✅ تغییر اصلی اینجاست
+//   const login = async (username, password) => {
+//     // به جای ارسال درخواست به سرور، یک شرط ساده قرار می‌دهیم
+//     if (username === "admin" && password === "admin") {
+//       console.log("Login successful (offline mode)");
 
-      // یک آبجکت کاربر جعلی برای تست می‌سازیم
-      const fakeUser = {
-        username: "مدیر سیستم (آفلاین)",
-        token: "fake-token-for-testing-purpose",
-        roles: ["admin", "editor"], // می‌توانید نقش‌ها را هم تست کنید
-      };
+//       // یک آبجکت کاربر جعلی برای تست می‌سازیم
+//       const fakeUser = {
+//         username: "مدیر سیستم (آفلاین)",
+//         token: "fake-token-for-testing-purpose",
+//         roles: ["admin", "editor"], // می‌توانید نقش‌ها را هم تست کنید
+//       };
       
-      // وضعیت کاربر را آپدیت می‌کنیم
-      setUser(fakeUser);
+//       // وضعیت کاربر را آپدیت می‌کنیم
+//       setUser(fakeUser);
       
-      // کاربر را به داشبورد منتقل می‌کنیم
-      navigate("/dashboard");
+//       // کاربر را به داشبورد منتقل می‌کنیم
+//       navigate("/dashboard");
 
-      return true; // برای نمایش پیام موفقیت
-    }
+//       return true; // برای نمایش پیام موفقیت
+//     }
 
-    // اگر نام کاربری یا رمز عبور اشتباه بود
-    console.error("Login failed: Invalid credentials (offline mode)");
-    return false;
-  };
+//     // اگر نام کاربری یا رمز عبور اشتباه بود
+//     console.error("Login failed: Invalid credentials (offline mode)");
+//     return false;
+//   };
 
-  const logout = () => {
-    setUser(null);
-    navigate("/login");
-  };
+//   const logout = () => {
+//     setUser(null);
+//     navigate("/login");
+//   };
   
-  const value = {
-    user,
-    loading,
-    login,
-    logout,
-  };
+//   const value = {
+//     user,
+//     loading,
+//     login,
+//     logout,
+//   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
+//   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+// };
 
 
 

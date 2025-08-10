@@ -44,11 +44,9 @@ const ResourceManagementPage = ({
     try {
       setLoading(true);
       const response = await axiosInstance.get(`/${resourceName}`);
-      console.log(response.data);
       const formattedData = formatDataForDisplay
         ? response.data.map(formatDataForDisplay)
         : response.data;
-      console.log(formattedData)
       setItems(formattedData);
       setError(null);
     } catch (err) {
@@ -113,60 +111,79 @@ const ResourceManagementPage = ({
     }
   };
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+    const handleFormSubmit = async (data) => {
+      // ✅ یک کپی از دیتا می‌سازیم تا state اصلی رو تغییر ندیم
+      const submissionData = { ...data };
 
-    if (isEditing && !data.password) {
-      delete data.password;
-    }
+      // ✅ فیلدهایی که بک‌اند انتظار نداره رو از آبجکت ارسالی حذف می‌کنیم
+      delete submissionData.id;
+      delete submissionData.avatar;
 
-    try {
-      if (isEditing) {
-        await axiosInstance.patch(`/${resourceName}/${currentItem.id}`, data);
-      } else {
-        await axiosInstance.post(`/${resourceName}`, data);
+      // حذف فیلد پسورد اگر خالی باشد (در حالت ویرایش)
+      if (isEditing && !submissionData.password) {
+        delete submissionData.password;
       }
-      fetchData();
-      setIsModalOpen(false);
-      setCurrentItem(null);
-      // نمایش پیام موفقیت‌آمیز در اینجا هم می‌تواند ایده خوبی باشد
-    } catch (err) {
-      // منطق مدیریت خطا بدون تغییر
-      setIsModalOpen(false);
-      if (
-        err.response &&
-        err.response.status === 400 &&
-        err.response.data?.message?.includes("username is unique")
-      ) {
+
+      try {
+        let response;
+        if (isEditing) {
+          response = await axiosInstance.patch(
+            `/${resourceName}/${currentItem.id}`,
+            submissionData // ✅ ارسال دیتای تمیز شده
+          );
+        } else {
+          response = await axiosInstance.post(
+            `/${resourceName}`,
+            submissionData // ✅ ارسال دیتای تمیز شده
+          );
+        }
         Swal.fire({
-          title: "خطا!",
-          text: "این نام کاربری قبلاً استفاده شده است. لطفاً نام دیگری انتخاب کنید.",
-          icon: "error",
-          confirmButtonText: "متوجه شدم",
+          icon: "success",
+          title: "موفق!",
+          text: `آیتم با موفقیت ${isEditing ? "ویرایش شد" : "ذخیره شد"}.`,
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
         });
-      } else if (err.response && err.response.status === 403) {
-        Swal.fire({
-          title: "خطای دسترسی!",
-          text: "شما سطح دسترسی لازم برای انجام این عملیات را ندارید.",
-          icon: "error",
-          confirmButtonText: "متوجه شدم",
-        });
-      } else {
-        Swal.fire({
-          title: "عملیات ناموفق!",
-          text: "مشکلی در ذخیره اطلاعات پیش آمد. لطفاً دوباره تلاش کنید.",
-          icon: "error",
-          confirmButtonText: "باشه",
-        });
+        fetchData();
+        setIsModalOpen(false);
+        setCurrentItem(null);
+        // نمایش پیام موفقیت‌آمیز در اینجا هم می‌تواند ایده خوبی باشد
+      } catch (err) {
+        // منطق مدیریت خطا بدون تغییر
+        setIsModalOpen(false);
+        if (
+          err.response &&
+          err.response.status === 400 &&
+          err.response.data?.message?.includes("username is unique")
+        ) {
+          Swal.fire({
+            title: "خطا!",
+            text: "این نام کاربری قبلاً استفاده شده است. لطفاً نام دیگری انتخاب کنید.",
+            icon: "error",
+            confirmButtonText: "متوجه شدم",
+          });
+        } else if (err.response && err.response.status === 403) {
+          Swal.fire({
+            title: "خطای دسترسی!",
+            text: "شما سطح دسترسی لازم برای انجام این عملیات را ندارید.",
+            icon: "error",
+            confirmButtonText: "متوجه شدم",
+          });
+        } else {
+          Swal.fire({
+            title: "عملیات ناموفق!",
+            text: " رمز عبور باید حداقل 8 کاراکتر باشد.",
+            icon: "error",
+            confirmButtonText: "باشه",
+          });
+        }
+        console.error(
+          `Failed to save ${resourceName}:`,
+          err.response?.data || err.message
+        );
       }
-      console.error(
-        `Failed to save ${resourceName}:`,
-        err.response?.data || err.message
-      );
-    }
-  };
+    };
 
   return (
     <div className="container" dir={i18n.dir()}>

@@ -3,7 +3,7 @@
   background-color: var(--color-background-content);
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px var(--color-shadow);
-  overflow: hidden; /* جلوگیری از سرریز شدن محتوای داخلی */
+  overflow: auto; /* جلوگیری از سرریز شدن محتوای داخلی */
   animation: slideUp 0.5s ease-out;
   border: 1px solid var(--color-border);
 }
@@ -21,12 +21,13 @@
 
 .table-wrapper {
   max-height: 412px; /* ارتفاع حداکثر برای اسکرول خوردن */
-  overflow-y: auto; /* فقط اسکرول عمودی */
+  /* table-layout: fixed; */
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+
 }
 
 thead th {
@@ -48,6 +49,9 @@ td {
   border-bottom: 1px solid var(--color-border);
   color: var(--color-text-secondary);
   transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* word-break: break-all; */
+ 
 }
 
 tr:last-child td {
@@ -181,3 +185,5 @@ tbody tr:nth-child(3) { animation-delay: 0.15s; }
 tbody tr:nth-child(4) { animation-delay: 0.2s; }
 tbody tr:nth-child(5) { animation-delay: 0.25s; }
 tbody tr:nth-child(6) { animation-delay: 0.3s; }
+
+

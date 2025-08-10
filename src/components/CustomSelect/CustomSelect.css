@@ -1,0 +1,82 @@
+/* --- استایل‌های اختصاصی کامپوننت CustomSelect --- */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: var(--font-size-verysmall);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+  text-align: right;
+}
+
+.custom-select {
+  position: relative;
+  cursor: pointer;
+}
+
+.custom-select-button {
+  height: 48px;
+  /* width: 100%; */
+  min-width: 150px;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-background-content);
+  color: var(--color-text-primary);
+}
+
+.custom-select-button:focus,
+.custom-select-button:hover {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
+.custom-select-button svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-text-secondary);
+  transition: transform 0.2s ease-in-out;
+}
+
+.custom-select-button svg.open {
+  transform: rotate(180deg);
+}
+
+.custom-select-options {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin-top: 0.25rem;
+ 
+  background-color: var(--color-background-content);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px var(--color-shadow);
+  z-index: 1000;
+  /* max-height: 200px; */
+  /* overflow-y: auto; */
+}
+
+.custom-select-options li {
+  padding: 0.75rem;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.custom-select-options li:hover {
+  background-color: var(--color-background-hover);
+}

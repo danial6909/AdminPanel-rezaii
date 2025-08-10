@@ -47,6 +47,7 @@ const ResourceTable = ({
         className={item.id === currentUserId ? "highlighted-row" : ""}
       >
         {columns.map((col) => (
+          
           <td key={col.key}>{col.render ? col.render(item) : item[col.key]}</td>
         ))}
         {/* دکمه‌های عملیات */}

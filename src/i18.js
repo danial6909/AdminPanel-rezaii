@@ -104,9 +104,7 @@ i18n
 
           "dvb/cardsManagement": {
             addButton: "Cards Scan",
-          },
-
-          cards: {
+            title: "Cards Management",
             scan: "Cards Scan",
             table: {
               device: "Device",
@@ -118,6 +116,8 @@ i18n
               enabled: "Enabled",
             },
           },
+
+        
           // --- Profile Page Specific Keys ---
           profilePage: {
             fetchErrorTitle: "Error Fetching Information",
@@ -407,10 +407,8 @@ i18n
           },
 
           "dvb/cardsManagement": {
-            addButton: "اسکن کارت ها",
-          },
-
-          cards: {
+            title: "مدیریت کارت‌ها",
+            addButton: "اسکن کارت‌ها",
             table: {
               device: "دستگاه",
               adapter: "کارت",
@@ -420,6 +418,7 @@ i18n
               frequency: "فرکانس",
               enabled: "فعال",
             },
+            action: "عملیات",
           },
           // --- کلیدهای اختصاصی صفحه پروفایل ---
           profilePage: {

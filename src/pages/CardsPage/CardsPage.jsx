@@ -6,13 +6,13 @@ export default function CartsPage() {
   const { t } = useTranslation();
 
   const cardsColumns = [
-    { key: "device", header: t("cards.table.device") },
-    { key: "adapter", header: t("cards.table.adapter") },
-    { key: "frontend", header: t("cards.table.frontend") },
-    { key: "name", header: t("cards.table.name") },
-    { key: "type", header: t("cards.table.type") },
-    { key: "frequency", header: t("cards.table.frequency") },
-    { key: "enabled", header: t("cards.table.enabled") },
+    { key: "device", header: t("dvb/cardsManagement.table.device") },
+    { key: "adapter", header: t("dvb/cardsManagement.table.adapter") },
+    { key: "frontend", header: t("dvb/cardsManagement.table.frontend") },
+    { key: "name", header: t("dvb/cardsManagement.table.name") },
+    { key: "type", header: t("dvb/cardsManagement.table.type") },
+    { key: "frequency", header: t("dvb/cardsManagement.table.frequency") },
+    { key: "enabled", header: t("dvb/cardsManagement.table.enabled") },
   ];
 
   const formatUserData = (card) => ({

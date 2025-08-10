@@ -1,71 +1,44 @@
+// src/components/Menuitem/Menuitem.jsx
+
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./Menuitem.css";
 
-// آیکون‌های مورد نیاز از کتابخانه Material-UI
+// --- آیکون‌های مورد نیاز ---
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import SettingsIcon from "@mui/icons-material/Settings";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import VpnKeyIcon from "@mui/icons-material/VpnKey";
+// ... و بقیه آیکون‌ها
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import SecurityIcon from "@mui/icons-material/Security";
-import LoginIcon from "@mui/icons-material/Login";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import PasswordIcon from "@mui/icons-material/Password";
+import LanIcon from "@mui/icons-material/Lan";
+import LiveTvIcon from "@mui/icons-material/LiveTv";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import DevicesIcon from "@mui/icons-material/Devices";
+import VideocamIcon from "@mui/icons-material/Videocam";
+import StyleIcon from "@mui/icons-material/Style";
+import SensorsIcon from "@mui/icons-material/Sensors";
+import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
-import SensorsIcon from "@mui/icons-material/Sensors";
-import StyleIcon from "@mui/icons-material/Style";
-// --- آیکون‌های جدید --- // ADDED
-import LanIcon from '@mui/icons-material/Lan';
-import LiveTvIcon from '@mui/icons-material/LiveTv';
-import ViewListIcon from '@mui/icons-material/ViewList';
-import DevicesIcon from '@mui/icons-material/Devices';
-import StreamIcon from '@mui/icons-material/Stream';
-import VideocamIcon from '@mui/icons-material/Videocam';
-///////////////////////////////////////////////////////////////////////////////
 
-
-function MenuList({ isCollapsed }) {
-
+// ۱. prop های جدید `viewMode` و `closeMobileSidebar` را از ورودی بگیر
+function MenuList({ isCollapsed, viewMode, closeMobileSidebar }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
 
   const menuItems = React.useMemo(
     () => [
-      {
-        text: t("ConfigPage"),
-        icon: <DashboardIcon />,
-        path: "/ConfigPage",
-      },
+      { text: t("ConfigPage"), icon: <DashboardIcon />, path: "/ConfigPage" },
       { text: t("Cards"), icon: <StyleIcon />, path: "/cards" },
-     
       {
         text: t("Frequency"),
         icon: <SignalCellularAltIcon />,
         path: "/Frequency",
       },
-      {
-        text: t("Service"),
-        icon: <SensorsIcon />,
-        path: "/Service",
-      },
-      // --- منوهای جدید --- // ADDED
-      {
-        text: t("Network"),
-        icon: <LanIcon />,
-        path: "/Network",
-      },
-      {
-        text: t("Channel"),
-        icon: <LiveTvIcon />,
-        path: "/Channel",
-      },
+      { text: t("Service"), icon: <SensorsIcon />, path: "/Service" },
+      { text: t("Network"), icon: <LanIcon />, path: "/Network" },
+      { text: t("Channel"), icon: <LiveTvIcon />, path: "/Channel" },
       {
         text: t("ChannelGroup"),
         icon: <ViewListIcon />,
@@ -84,7 +57,7 @@ function MenuList({ isCollapsed }) {
           {
             text: t("roles"),
             icon: <AdminPanelSettingsIcon />,
-            path: "/users/roles", // CORRECTED
+            path: "/users/roles",
           },
         ],
       },
@@ -93,42 +66,11 @@ function MenuList({ isCollapsed }) {
         icon: <DevicesIcon />,
         path: "/ConnectedDevices",
       },
-      // {
-      //   text: t("StreamingChannels"),
-      //   icon: <StreamIcon />,
-      //   path: "/StreamingChannels",
-      // },
-      {
-        text: t("Recordings"),
-        icon: <VideocamIcon />,
-        path: "/Recordings",
-      },
-      // --- پایان منوهای جدید ---
-      // {
-      //   text: t("settings"),
-      //   icon: <SettingsIcon />,
-      //   path: "/settings",
-      //   subItems: [
-      //     {
-      //       text: t("profile"),
-      //       icon: <AccountCircleIcon />,
-      //       path: "/settings/profile",
-      //     },
-      //     {
-      //       text: t("security"),
-      //       icon: <VpnKeyIcon />,
-      //       path: "/settings/security",
-      //     },
-      //   ],
-      // },
-     
+      { text: t("Recordings"), icon: <VideocamIcon />, path: "/Recordings" },
     ],
     [t]
   );
 
-
-  // بقیه کد بدون تغییر باقی می‌ماند
-  // ...
   const [openMenu, setOpenMenu] = useState(null);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [activeParent, setActiveParent] = useState(null);
@@ -139,14 +81,27 @@ function MenuList({ isCollapsed }) {
     );
     if (currentParent) {
       setActiveParent(currentParent.path);
-      // Open the parent menu if a child is active and menu is not collapsed
       if (!isCollapsed) {
-          setOpenMenu(currentParent.path);
+        setOpenMenu(currentParent.path);
       }
+    } else {
+      // این خط باگ فعال ماندن دکمه قبلی را حل می‌کند
+      setActiveParent(null);
     }
   }, [location.pathname, menuItems, isCollapsed]);
 
+  // ۲. یک تابع برای بستن منو در موبایل تعریف کن
+  const handleMobileMenuClose = () => {
+    // اگر viewMode برابر 'mobile' بود، تابع closeMobileSidebar را صدا بزن
+    if (viewMode === "mobile") {
+      closeMobileSidebar();
+    }
+  };
+
   const handleParentMenuClick = (item) => {
+    // ۳. تابع بستن منو را اینجا هم صدا بزن
+    handleMobileMenuClose();
+
     if (item.subItems && item.subItems.length > 0) {
       navigate(item.subItems[0].path);
     }
@@ -158,6 +113,9 @@ function MenuList({ isCollapsed }) {
   };
 
   const handleTopLevelLinkClick = () => {
+    // ۳. تابع بستن منو را اینجا هم صدا بزن
+    handleMobileMenuClose();
+
     setOpenMenu(null);
     setActiveParent(null);
   };
@@ -168,9 +126,8 @@ function MenuList({ isCollapsed }) {
         {menuItems.map((item) => {
           const hasSubItems = item.subItems && item.subItems.length > 0;
           const isOpen = !isCollapsed && openMenu === item.path;
-          const isParentActive =
-            (hasSubItems && location.pathname.startsWith(item.path)) ||
-            activeParent === item.path;
+          // ⭐ باگ فعال ماندن دکمه قبلی با این خط اصلاح می‌شود
+          const isParentActive = activeParent === item.path;
 
           return (
             <li
@@ -204,7 +161,6 @@ function MenuList({ isCollapsed }) {
                       </>
                     )}
                   </div>
-
                   {!isCollapsed && (
                     <ul className={`submenu-list ${isOpen ? "open" : ""}`}>
                       {item.subItems.map((subItem) => (
@@ -212,7 +168,11 @@ function MenuList({ isCollapsed }) {
                           <NavLink
                             to={subItem.path}
                             end
-                            onClick={() => setActiveParent(item.path)}
+                            // ۴. onClick رو به همه لینک‌های نهایی اضافه کن
+                            onClick={() => {
+                              setActiveParent(item.path);
+                              handleMobileMenuClose();
+                            }}
                             className={({ isActive }) =>
                               isActive ? "submenu-link active" : "submenu-link"
                             }
@@ -223,7 +183,6 @@ function MenuList({ isCollapsed }) {
                       ))}
                     </ul>
                   )}
-
                   {isCollapsed && (
                     <div
                       className={`sub-icon-container ${
@@ -236,7 +195,11 @@ function MenuList({ isCollapsed }) {
                           key={subItem.path}
                           className="sub-icon-item"
                           title={subItem.text}
-                          onClick={() => setActiveParent(item.path)}
+                          // ۴. onClick رو به همه لینک‌های نهایی اضافه کن
+                          onClick={() => {
+                            setActiveParent(item.path);
+                            handleMobileMenuClose();
+                          }}
                         >
                           <div className="sub-icon-image">{subItem.icon}</div>
                           <span className="sub-icon-text">{subItem.text}</span>

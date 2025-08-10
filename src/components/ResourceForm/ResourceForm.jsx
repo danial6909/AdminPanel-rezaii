@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import "./ResourceForm.css";
+import CustomSelect from '../CustomSelect/CustomSelect';
 
 
 const ResourceForm = ({
@@ -22,33 +23,29 @@ const ResourceForm = ({
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(e); // رویداد را به والد پاس می‌دهیم تا به داده‌های فرم دسترسی داشته باشد
+    onSubmit(formData);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       {formFields.map((field) => (
+ 
+        
         <div className="form-group" key={field.id}>
           <label htmlFor={field.id}>{field.label}</label>
           {field.type === "select" ? (
-            <select
-              id={field.id}
+            
+            <CustomSelect
               name={field.id}
-              className="form-control"
+              options={field.options || []}
               value={formData?.[field.id] || ""}
               onChange={handleInputChange}
-              required={field.required}
-            >
-              {field.options?.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+            />
           ) : (
             <input
               type={field.type}

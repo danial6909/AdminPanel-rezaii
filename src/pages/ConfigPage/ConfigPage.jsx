@@ -1,60 +1,11 @@
-// Configuration.js
 import React, { useState, useMemo } from "react";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
-import "./ConfigPage.css"; // وارد کردن فایل CSS
+import "./ConfigPage.css"; // وارد کردن فایل CSS اصلی
+import CustomSelect from "../../components/CustomSelect/CustomSelect"; // ایمپورت کردن کامپوننت جدا شده
 
-// کامپوننت‌های کوچک‌تر برای خوانایی بهتر کد
-
-// کامپوننت برای Select Box سفارشی
-const CustomSelect = ({ label, options, value, onChange }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleSelect = (optionValue) => {
-    onChange(optionValue);
-    setIsOpen(false);
-  };
-
-  return (
-    <div className="form-field">
-      <label className="form-label">{label}</label>
-      <div className="custom-select">
-        <div
-          className="custom-select-button"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <span>{value}</span>
-          <svg
-            className={isOpen ? "open" : ""}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M19 9l-7 7-7-7"
-            ></path>
-          </svg>
-        </div>
-        {isOpen && (
-          <ul className="custom-select-options">
-            {options.map((opt) => (
-              <li key={opt} onClick={() => handleSelect(opt)}>
-                {opt}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
-  );
-};
-
-// کامپوننت برای Checkbox سفارشی
+// کامپوننت IosCheckbox رو هم برای تمیزی بیشتر می‌تونیم جدا کنیم، ولی فعلا اینجا نگهش می‌داریم
 const IosCheckbox = ({ label, checked, onChange, name }) => {
   return (
     <div className="form-field">
@@ -88,7 +39,6 @@ const IosCheckbox = ({ label, checked, onChange, name }) => {
   );
 };
 
-// کامپوننت اصلی
 const Configuration = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 3;
@@ -101,7 +51,6 @@ const Configuration = () => {
     addCardAction: "اضافه کردن شبکه",
   });
 
-  // مدیریت تغییرات در input ها و checkbox ها
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -110,20 +59,10 @@ const Configuration = () => {
     }));
   };
 
-  // مدیریت تغییرات در select box های سفارشی
-  const handleSelectChange = (name, value) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // رفتن به مرحله بعد
   const handleNext = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     } else {
-      // نمایش پیام اتمام با SweetAlert2
       Swal.fire({
         icon: "success",
         title: "فرایند تکمیل شد!",
@@ -133,30 +72,43 @@ const Configuration = () => {
     }
   };
 
-  // برگشت به مرحله قبل
   const handlePrev = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
 
-  // متن دکمه "بعدی" بر اساس مرحله فعلی
   const nextButtonText = useMemo(() => {
     if (currentStep === 1) return "ایجاد";
     if (currentStep === 2) return "ثبت";
     return "اتمام";
   }, [currentStep]);
 
-  // محاسبه عرض نوار پیشرفت
   const progressWidth = useMemo(() => {
     return `${((currentStep - 1) / (totalSteps - 1)) * 100}%`;
   }, [currentStep, totalSteps]);
+
+  // تعریف آپشن‌ها برای خوانایی بهتر
+   const networkTypeOptions = [
+     { value: "satellite", label: "ماهواره‌ای" },
+     { value: "terrestrial", label: "زمینی" },
+   ];
+
+   const cardNetworkOptions = [
+     { value: "net1", label: "شبکه ۱" },
+     { value: "net2", label: "شبکه ۲" },
+   ];
+
+   const addCardActionOptions = [
+     { value: "add", label: "اضافه کردن شبکه" },
+     { value: "edit", label: "ویرایش شبکه" },
+   ];
+
 
   return (
     <div className="configuration-wrapper">
       <h1 className="main-title">تنظیمات شبکه</h1>
 
-      {/* Progress Bar */}
       <div className="progress-bar-container">
         <div className="progress-line-bg"></div>
         <div className="progress-line" style={{ width: progressWidth }}></div>
@@ -173,18 +125,17 @@ const Configuration = () => {
         ))}
       </div>
 
-      {/* Form Content */}
       <div className="form-content">
-        {/* Step 1 */}
         {currentStep === 1 && (
           <div>
             <h2 className="step-title-header">جزئیات شبکه جدید را وارد کنید</h2>
             <div className="form-grid">
               <CustomSelect
                 label="نوع شبکه"
-                options={["ماهواره‌ای", "زمینی"]}
+                name="networkType"
+                options={networkTypeOptions}
                 value={formData.networkType}
-                onChange={(value) => handleSelectChange("networkType", value)}
+                onChange={handleChange}
               />
               <div className="form-field">
                 <label htmlFor="networkName" className="form-label">
@@ -215,27 +166,29 @@ const Configuration = () => {
             </div>
           </div>
         )}
-        {/* Step 2 */}
+
         {currentStep === 2 && (
           <div>
             <h2 className="step-title-header">کارت مورد نظر را انتخاب کنید</h2>
             <div className="form-grid">
               <CustomSelect
                 label="شبکه"
-                options={["شبکه ۱", "شبکه ۲"]}
+                name="cardNetwork"
+                options={cardNetworkOptions}
                 value={formData.cardNetwork}
-                onChange={(value) => handleSelectChange("cardNetwork", value)}
+                onChange={handleChange}
               />
               <CustomSelect
                 label="افزودن شبکه"
-                options={["اضافه کردن شبکه", "ویرایش شبکه"]}
+                name="addCardAction"
+                options={addCardActionOptions}
                 value={formData.addCardAction}
-                onChange={(value) => handleSelectChange("addCardAction", value)}
+                onChange={handleChange}
               />
             </div>
           </div>
         )}
-        {/* Step 3 */}
+
         {currentStep === 3 && (
           <div>
             <h2 className="step-title-header">شبکه‌های در حال اسکن</h2>
@@ -263,7 +216,6 @@ const Configuration = () => {
         )}
       </div>
 
-      {/* Navigation Buttons */}
       <div className="navigation-buttons">
         <button
           onClick={handlePrev}

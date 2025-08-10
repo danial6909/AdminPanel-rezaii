@@ -37,15 +37,6 @@
       "status": "فعال"
     },
     {
-      "id": "srv-3",
-      "name": "TRT World",
-      "channel_number": "201",
-      "frequency_name": "10887 V",
-      "provider_name": "Dogan",
-      "network": "Turksat",
-      "status": "غیر فعال"
-    },
-    {
       "id": "srv-5",
       "name": "Manoto",
       "channel_number": "103",

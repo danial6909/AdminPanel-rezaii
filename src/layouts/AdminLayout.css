@@ -3,40 +3,43 @@
 .admin-layout {
   display: flex;
   background-color: var(--color-background-main);
-  transition: background-color 0.3s ease;
+  position: relative; 
 }
 
-.admin-left {
-  width: 100%;
+/* ⭐ کلاس جدید برای ناحیه محتوا */
+.admin-content-area {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  min-width: 0; /* ✅✅✅ این خط کلیدی رو اینجا اضافه کن */
 }
 
 .admin-main {
   padding: 24px;
-  min-height: calc(100vh - 95px); /* ارتفاع هدر */
-  animation: fadeInMain 0.4s ease;
+  min-height: calc(100vh - 75px);
   background-color: var(--color-background-main);
 }
 
-@keyframes fadeInMain {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1999; /* بالاتر از محتوا، پایین‌تر از سایدبار موبایل */
+  animation: fadeIn 0.3s ease;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
-
-@media (max-width: 600px) {
-
-
- .admin-right{
-  right: -300px;
-  position: absolute  ;
- }
+/* این مدیا کوئری برای اطمینان از چیدمان صحیح در موبایل خوبه */
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: row;
+  }
 }

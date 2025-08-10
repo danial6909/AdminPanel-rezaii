@@ -33,29 +33,4 @@
   font-weight: 600;
 }
 
-/* --- استایل‌های واکنشگرایی برای چیدمان اصلی --- */
-@media (max-width: 768px) {
-  .controls {
-    flex-direction: column;
-  }
-  [dir="rtl"] .controls {
-    flex-direction: column-reverse;
-  }
-  /* .search-box,
-  .filter-select,
-  .add-user-btn {
-    width: 100%;
-  } */
-}
 
-
-@media (max-width: 600px) {
- 
- 
-  .search-box,
-  .filter-select,
-  .add-user-btn {
-    font-size: 8pt !important;
-    padding: 10px !important;
-  }
-}

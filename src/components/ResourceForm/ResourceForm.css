@@ -71,3 +71,62 @@
   justify-content: flex-start;
   flex-direction: row-reverse;
 }
+
+
+
+
+/* =================================================== */
+
+
+
+
+@media (max-width: 768px) {
+
+  .modal-content {
+    max-width: 400px; 
+  }
+  .form-control {
+    padding: 0.65rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+
+
+}
+
+@media (max-width: 450Px) {
+
+  .modal-content {
+    margin: 0px 30px ;
+  }
+  .form-control {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.8rem;
+  }
+  .form-group label {
+    font-size: 0.9rem;
+  }
+  .form-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .btn-cancel,
+  .btn-submit {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

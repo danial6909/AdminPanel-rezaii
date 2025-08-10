@@ -192,3 +192,96 @@
   color: var(--color-text-primary) !important;
 font-size: 17pt !important;
 }
+
+
+
+
+/* ================================================================== */
+
+
+
+
+/* --- برای تبلت و دستگاه‌های کوچک‌تر (کمتر از 900px) --- */
+@media (max-width: 900px) {
+  .p-user-identity-area {
+    padding: 24px;
+    align-items: center;
+  }
+  .p-user-inline-form {
+    flex-wrap: wrap; /* اجازه می‌دهد آیتم‌ها به خط بعدی بروند */
+  }
+  .p-user-inline-form .p-user-input-field {
+    flex-basis: 100%; /* هر فیلد ورودی تمام عرض را بگیرد */
+  }
+  .p-user-inline-form .MuiTooltip-root {
+    margin: 0 auto; /* دکمه‌ها در مرکز قرار بگیرند */
+  }
+  .p-user-avatar-wrapper {
+    bottom: 60px;
+  }
+    
+}
+
+/* --- برای موبایل (کمتر از 600px) --- */
+@media (max-width: 600px) {
+  .p-user-card-banner {
+    height: 200px;
+ 
+  }
+  .p-user-identity-area {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+  .p-user-avatar-wrapper {
+    margin-top: -90px;
+    margin-bottom: 1rem;
+    bottom: 0px;
+  }
+  .p-user-avatar-img {
+    width: 140px !important;
+    height: 140px !important;
+    border-width: 6px !important;
+  }
+  .p-user-avatar-uploader {
+    width: 40px;
+    height: 40px;
+    bottom: 12px;
+    right: 12px;
+  }
+  :dir(rtl) .p-user-avatar-uploader {
+    left: 12px;
+    right: auto;
+  }
+  .p-user-banner-uploader {
+    top: 12px;
+    right: 12px;
+    padding: 8px 10px;
+    font-size: 0.7rem;
+  }
+  :dir(rtl) .p-user-banner-uploader {
+    left: 12px;
+    right: auto;
+  }
+  .p-user-details {
+    padding-bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .p-user-name {
+    font-size: 1.5rem !important;
+    justify-content: center;
+  }
+  .p-user-role-badge {
+    margin-top: 8px !important;
+    padding: 6px 16px;
+    font-size: 0.8rem !important;
+  }
+  .p-user-inline-form {
+    gap: 12px;
+  }
+
+}
