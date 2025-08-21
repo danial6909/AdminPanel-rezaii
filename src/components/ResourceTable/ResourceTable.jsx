@@ -5,7 +5,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./ResourceTable.css";
 
-
 const ResourceTable = ({
   loading,
   error,
@@ -15,12 +14,13 @@ const ResourceTable = ({
   onDeleteClick,
   currentUserId,
   resourceName,
+  isReadOnly, // پراپرتی جدید رو اینجا دریافت می‌کنیم
 }) => {
   const { t } = useTranslation();
 
   const renderTableBody = () => {
     if (loading) {
-      return <TableSkeleton columns={columns} />;
+      return <TableSkeleton columns={columns} isReadOnly={isReadOnly} />;
     }
     if (error) {
       return (
@@ -47,30 +47,31 @@ const ResourceTable = ({
         className={item.id === currentUserId ? "highlighted-row" : ""}
       >
         {columns.map((col) => (
-          
           <td key={col.key}>{col.render ? col.render(item) : item[col.key]}</td>
         ))}
-        {/* دکمه‌های عملیات */}
-        <td>
-          {item.id !== currentUserId ? (
-            <div className="action-buttons">
-              <button
-                className="btn btn-edit"
-                title={t("management.edit")}
-                onClick={() => onEditClick(item)}
-              >
-                <EditIcon fontSize="small" />
-              </button>
-              <button
-                className="btn btn-delete"
-                title={t("management.delete")}
-                onClick={() => onDeleteClick(item.id)}
-              >
-                <DeleteIcon fontSize="small" />
-              </button>
-            </div>
-          ) : null}
-        </td>
+        {/* این ستون فقط زمانی نمایش داده می‌شه که صفحه فقط خواندنی نباشه */}
+        {!isReadOnly && (
+          <td>
+            {resourceName !== "users" || item.id !== currentUserId ? (
+              <div className="action-buttons">
+                <button
+                  className="btn btn-edit"
+                  title={t("management.edit")}
+                  onClick={() => onEditClick(item)}
+                >
+                  <EditIcon fontSize="small" />
+                </button>
+                <button
+                  className="btn btn-delete"
+                  title={t("management.delete")}
+                  onClick={() => onDeleteClick(item.id)}
+                >
+                  <DeleteIcon fontSize="small" />
+                </button>
+              </div>
+            ) : null}
+          </td>
+        )}
       </tr>
     ));
   };
@@ -83,7 +84,8 @@ const ResourceTable = ({
             {columns.map((col) => (
               <th key={col.key}>{col.header}</th>
             ))}
-            <th>{t("management.actions")}</th>
+            {/* این هدر هم فقط زمانی نمایش داده می‌شه که صفحه فقط خواندنی نباشه */}
+            {!isReadOnly && <th>{t("management.actions")}</th>}
           </tr>
         </thead>
         <tbody>{renderTableBody()}</tbody>

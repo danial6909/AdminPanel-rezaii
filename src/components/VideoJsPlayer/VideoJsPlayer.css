@@ -1,0 +1,23 @@
+/* src/components/VlcPlayer/VlcPlayer.css */
+
+.vlc-player-wrapper {
+  width: 100%;
+}
+
+.vlc-player-container {
+  position: relative;
+  /* استفاده از تکنیک نسبت ابعاد 16:9 */
+  padding-top: 56.25%;
+  background-color: #000;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* vlc.js یک تگ video داخل این div ایجاد می‌کند، این استایل آن را تمام صفحه می‌کند */
+.vlc-player-container > video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

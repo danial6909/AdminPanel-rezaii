@@ -6,6 +6,8 @@
   overflow: auto; /* جلوگیری از سرریز شدن محتوای داخلی */
   animation: slideUp 0.5s ease-out;
   border: 1px solid var(--color-border);
+  max-height: 412px; /* ارتفاع حداکثر برای اسکرول خوردن */
+
 }
 
 @keyframes slideUp {

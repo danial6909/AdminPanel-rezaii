@@ -28,6 +28,7 @@
     "express": "^5.1.0",
     "framer-motion": "^12.19.2",
     "gh-pages": "^6.3.0",
+    "hls.js": "^1.6.10",
     "i18next": "^25.3.0",
     "i18next-browser-languagedetector": "^8.2.0",
     "material-react-table": "^3.2.1",
@@ -37,11 +38,15 @@
     "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.59.0",
     "react-i18next": "^15.5.3",
+    "react-player": "^3.3.1",
     "react-router-dom": "^7.6.2",
+    "react-video-js-player": "^1.1.1",
     "stylis": "^4.3.6",
     "stylis-plugin-rtl": "^2.1.1",
     "sweetalert2": "^11.22.2",
     "sweetalert2-react-content": "^5.1.0",
+    "video.js": "^8.23.4",
+    "vlc.js": "^5.0.0-alpha",
     "yup": "^1.6.1"
   },
   "devDependencies": {

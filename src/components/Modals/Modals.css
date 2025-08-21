@@ -23,12 +23,14 @@
 .modal-content {
   background-color: var(--color-background-content);
   border-radius: 0.5rem;
+  max-height: 500px;
   width: 100%;
   max-width: 450px;
   padding: 1.5rem;
   transform: translateY(20px);
   transition: transform 0.3s ease;
   box-shadow: 0 10px 25px var(--color-shadow);
+  overflow: auto;
 }
 
 .modal.active .modal-content {

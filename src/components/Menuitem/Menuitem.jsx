@@ -32,17 +32,39 @@ function MenuList({ isCollapsed, viewMode, closeMobileSidebar }) {
       { text: t("ConfigPage"), icon: <DashboardIcon />, path: "/ConfigPage" },
       { text: t("Cards"), icon: <StyleIcon />, path: "/cards" },
       {
-        text: t("Frequency"),
-        icon: <SignalCellularAltIcon />,
-        path: "/Frequency",
+        text: t("ConfigStream"),
+        icon: <StyleIcon />,
+        path: "/ConfigStream",
+        subItems: [
+          {
+            text: t("dvb-s_list"),
+            icon: <ChecklistRtlIcon />,
+            path: "/ConfigStream/DVB-S",
+          },
+          {
+            text: t("dvb-t_list"),
+            icon: <AdminPanelSettingsIcon />,
+            path: "/ConfigStream/DVB-T",
+          },
+        ],
       },
-      { text: t("Service"), icon: <SensorsIcon />, path: "/Service" },
-      { text: t("Network"), icon: <LanIcon />, path: "/Network" },
-      { text: t("Channel"), icon: <LiveTvIcon />, path: "/Channel" },
+
       {
-        text: t("ChannelGroup"),
-        icon: <ViewListIcon />,
-        path: "/ChannelGroup",
+        text: t("Channel"),
+        icon: <LiveTvIcon />,
+        path: "/Channel",
+        subItems: [
+          {
+            text: "لیست کانال ها",
+            icon: <ChecklistRtlIcon />,
+            path: "/Channel/Channellist",
+          },
+          {
+            text: "استریم ها",
+            icon: <AdminPanelSettingsIcon />,
+            path: "/Channel/streams",
+          },
+        ],
       },
       {
         text: t("users"),
@@ -60,6 +82,11 @@ function MenuList({ isCollapsed, viewMode, closeMobileSidebar }) {
             path: "/users/roles",
           },
         ],
+      },
+      {
+        text: t("ChannelGroup"),
+        icon: <ViewListIcon />,
+        path: "/ChannelGroup",
       },
       {
         text: t("ConnectedDevices"),

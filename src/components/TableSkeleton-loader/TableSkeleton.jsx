@@ -1,13 +1,11 @@
 import React from "react";
-import "./TableSkeleton.css"
+import "./TableSkeleton.css";
 
-// کامپوننت برای نمایش یک سطر اسکلتی (خاکستری)
-const SkeletonRow = ({ columns }) => (
+// پراپ isReadOnly رو اینجا دریافت می‌کنیم
+const SkeletonRow = ({ columns, isReadOnly }) => (
   <tr>
-    {/* به ازای هر ستون تعریف شده، یک جایگاه اسکلتی مناسب رندر کن */}
     {columns.map((col) => (
       <td key={col.key}>
-        {/* برای ستون نام، جایگاه آواتار و متن را نمایش بده */}
         {col.key === "firstName" ? (
           <div className="skeleton-cell-with-avatar">
             <div className="skeleton skeleton-avatar"></div>
@@ -17,31 +15,31 @@ const SkeletonRow = ({ columns }) => (
             ></div>
           </div>
         ) : col.key === "role" ? (
-          // برای ستون نقش، یک نشان (badge) اسکلتی نمایش بده
           <div className="skeleton skeleton-badge"></div>
         ) : (
-          // برای بقیه ستون‌ها، یک متن اسکلتی ساده نمایش بده
           <div className="skeleton skeleton-text"></div>
         )}
       </td>
     ))}
-    {/* یک ستون ثابت برای جایگاه دکمه‌های عملیات */}
-    <td>
-      <div className="skeleton-actions">
-        <div className="skeleton skeleton-button"></div>
-        <div className="skeleton skeleton-button"></div>
-      </div>
-    </td>
+    
+    {/* ✅ تصحیح اصلی: ستون عملیات فقط زمانی نمایش داده می‌شود که جدول فقط-خواندنی نباشد */}
+    {!isReadOnly && (
+      <td>
+        <div className="skeleton-actions">
+          <div className="skeleton skeleton-button"></div>
+          <div className="skeleton skeleton-button"></div>
+        </div>
+      </td>
+    )}
   </tr>
 );
 
-// کامپوننت اصلی که کل جدول اسکلتی را نمایش می‌دهد
-const TableSkeleton = ({ columns, rowCount = 3 }) => {
+// پراپ isReadOnly رو اینجا هم دریافت می‌کنیم تا به فرزند پاس بدیم
+const TableSkeleton = ({ columns, rowCount = 3, isReadOnly }) => {
   return (
     <>
-      {/* چندین سطر اسکلتی را برای پر کردن جدول رندر کن */}
       {Array.from({ length: rowCount }).map((_, index) => (
-        <SkeletonRow key={index} columns={columns} />
+        <SkeletonRow key={index} columns={columns} isReadOnly={isReadOnly} />
       ))}
     </>
   );

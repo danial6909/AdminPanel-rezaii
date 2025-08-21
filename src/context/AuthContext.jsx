@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
 
       if (response.data && response.data.token) {
         setUser(response.data);
-        navigate("/dashboard");
+        navigate("/ConfigPage");
         return true;
       }
       return false; // اگر پاسخ موفق بود ولی توکن نداشت
@@ -109,7 +109,7 @@ export const AuthProvider = ({ children }) => {
 
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

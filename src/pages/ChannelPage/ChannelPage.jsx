@@ -6,34 +6,43 @@ const ChannelPage = () => {
   const { t } = useTranslation();
 
   const columns = [
-    { key: "channel_number", header: t("channelsManagement.table.number") },
-    { key: "name", header: t("channelsManagement.table.name") },
-    { key: "status", header: t("channelsManagement.table.status") },
+    { key: "channelNumber", header: t("channelsManagement.table.number") },
+    { key: "channelName", header: t("channelsManagement.table.name") },
+    { key: "serviceId", header: "service-ID" },
+    { key: "multicastIpv4",header: "multicast-ipv4" },
   ];
 
   const formFields = [
     {
-      id: "channel_number",
+      id: "channelNumber",
       label: t("channelsManagement.form.number"),
       type: "number",
       required: true,
     },
     {
-      id: "name",
+      id: "channelName",
       label: t("channelsManagement.form.name"),
       type: "text",
       required: true,
     },
     {
-      id: "status",
+      id: "serviceId",
       label: t("channelsManagement.form.status"),
       type: "select",
       options: ["فعال", "غیر فعال"],
       required: true,
     },
+    {
+      id: "multicastIpv4",
+      label: "ipv4",
+      type: "select",
+      options: ["فعال", "غیر فعال"],
+      required: true,
+    },
   ];
+  
 
-  const searchFields = ["name", "channel_number"];
+  const searchFields = ["channelName", "channelNumber"];
 
   const initialState = {
     channel_number: "",
@@ -42,7 +51,9 @@ const ChannelPage = () => {
   };
 
   const formatDataForDisplay = (data) => ({
-    ...data,
+    ...data
+    // channelName: data.channelName,
+    // channelNumber: data.channelNumber,
   });
 
   return (
@@ -52,6 +63,7 @@ const ChannelPage = () => {
       formFields={formFields}
       searchFields={searchFields}
       initialState={initialState}
+      isReadOnly={true}
       formatDataForDisplay={formatDataForDisplay}
     />
   );

@@ -31,6 +31,7 @@ i18n
           StreamingChannels: "Streaming Channels",
           Recordings: "Recordings",
           Cards: "Cards",
+          ConfigStream: "Streams",
           orders: "Orders",
           users: "Users",
           user_list: "Users List",
@@ -102,8 +103,8 @@ i18n
             },
           },
 
-          "dvb/cardsManagement": {
-            addButton: "Cards Scan",
+          "cards?autoscan=trueManagement": {
+            addButton: "Cards install",
             title: "Cards Management",
             scan: "Cards Scan",
             table: {
@@ -117,7 +118,6 @@ i18n
             },
           },
 
-        
           // --- Profile Page Specific Keys ---
           profilePage: {
             fetchErrorTitle: "Error Fetching Information",
@@ -311,6 +311,28 @@ i18n
               status: "Status",
             },
           },
+          // ConfigStreamPage: {
+          //   title: "Streams Management",
+          //   addButton: "Add Stream",
+          //   noItemsFound: "No streams found.",
+          //   fetchError: "Error fetching streams.",
+          //   form: {
+          //     device: "Device",
+          //     adapter: "Adapter",
+          //     frontend: "Frontend",
+          //     name: "Name",
+          //     type: "Type",
+          //     frequency: "Frequency",
+          //   },
+          //   table: {
+          //     device: "Device",
+          //     adapter: "Adapter",
+          //     frontend: "Frontend",
+          //     name: "Name",
+          //     type: "Type",
+          //     frequency: "Frequency",
+          //   },
+          // },
         },
       },
       fa: {
@@ -325,7 +347,7 @@ i18n
           changeLanguage: "تغییر زبان",
           theme_light: "حالت روشن",
           theme_dark: "حالت تاریک",
-          ConfigPage: "پیکربندی",
+          ConfigPage: "داشبورد",
           Frequency: "فرکانس",
           Service: "سرویس",
           Network: "شبکه",
@@ -335,6 +357,9 @@ i18n
           StreamingChannels: "کانال‌های در حال پخش",
           Recordings: "موارد ضبط شده",
           Cards: "کارت ها",
+          ConfigStream: "پیکربندی",
+          "dvb-s_list": "DVB-S",
+          "dvb-t_list": "DVB-T",
           orders: "سفارشات",
           users: "کاربران",
           user_list: "لیست کاربران",
@@ -406,9 +431,9 @@ i18n
             },
           },
 
-          "dvb/cardsManagement": {
+          "cards?autoscan=trueManagement": {
             title: "مدیریت کارت‌ها",
-            addButton: "اسکن کارت‌ها",
+            addButton: "نصب کارت‌ها",
             table: {
               device: "دستگاه",
               adapter: "کارت",
@@ -609,6 +634,47 @@ i18n
               channelName: "نام کانال",
               status: "وضعیت",
             },
+          },
+          "mumudvb/dvb-sManagement": {
+            title: "مدیریت پیکربندی استریم‌ها",
+            addButton: "افزودن پیکربندی",
+            addTitle: "افزودن پیکربندی",
+            editTitle: "ویرایش  پیکربندی",
+            noItemsFound: "هیچ استریمی یافت نشد.",
+            fetchError: "خطا در دریافت لیست استریم‌ها.",
+            form: {
+              name: "نام کارت",
+              adapter: "کارت",
+              polarization: "جهت امواج ارسالی از ماهواره",
+              symbolRate: "سرعت ارسال داده از ماهواره",
+              forwardErrorCorrection: "تصحیح خطاهای ارسالی",
+              multicastIpAddressAndPort: "آدرس مولتی کست",
+              rewritePat: "بازنویسی لیست کانال ها",
+              dedicatedThread: "استفاده از پردازش اختصاصی",
+              dedicatedThreadBufferSize: "حافظه موقت پردازش اختصاصی",
+              multicastTimeToLive: "مولتی کست time to live",
+              autoConfiguration: "پیکربندی خودکار",
+              frequency: "فرکانس",
+              bandwidth: "پهنای باند",
+            },
+            table: {
+              id: "شناسه",
+              name: "نام",
+              frequency: "فرکانس",
+              status: "وضعیت",
+            },
+          },
+          "mumudvb/dvb-tManagement": {
+            title: "مدیریت پیکربندی استریم‌ها",
+            addButton: "افزودن پیکربندی",
+            editTitle: "ویرایش  پیکربندی",
+            addTitle: "افزودن پیکربندی",
+            noItemsFound: "هیچ استریمی یافت نشد.",
+            fetchError: "خطا در دریافت لیست استریم‌ها.",
+          },
+          "channels/streamsManagement": {
+            addButton: "افزودن استریم ها",
+            title:"مدیریت پیکیربندی استریم ها"
           },
         },
       },

@@ -22,14 +22,14 @@ import CardsPage from "./pages/CardsPage/CardsPage";
 import UsersPage from "./pages/UsersPage/UsersPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import RolesPage from "./pages/RolesPage/RolesPage";
-import FrequencyPage from "./pages/FrequencyPage/FrequencyPage";
-import ServicePage from "./pages/ServicePage/ServicePage";
-import NetworkPage from "./pages/NetworkPage/NetworkPage";
 import ChannelPage from "./pages/ChannelPage/ChannelPage";
 import ChannelGroupPage from "./pages/ChannelGroupPage/ChannelGroupPage";
 import ConnectedDevicesPage from "./pages/ConnectedDevicesPage/ConnectedDevicesPage";
 import StreamingChannelsPage from "./pages/StreamingChannelsPage/StreamingChannelsPage";
 import RecordingsPage from "./pages/RecordingsPage/RecordingsPage";
+import DVB_SPage from "./pages/DVB_SPage/DVB_SPage";
+import DVB_TPage from "./pages/DVB_TPage/DVB_TPage";
+import StreamsPage from "./pages/StreamsPage/StreamsPage";
 
 // وارد کردن فایل‌های تنظیمات عمومی برنامه
 import "./i18";
@@ -65,13 +65,11 @@ function App() {
               {/* مسیرهای تو در تو که داخل کامپوننت AdminLayout رندر می‌شوند */}
               <Route path="ConfigPage" element={<ConfigPage />} />
               <Route path="Cards" element={<CardsPage />} />
-              <Route path="Frequency" element={<FrequencyPage />} />
-              <Route path="Service" element={<ServicePage />} />
+              <Route path="ConfigStream/DVB-S" element={<DVB_SPage />} />
+              <Route path="ConfigStream/DVB-T" element={<DVB_TPage />} />
 
-
-              {/* --- مسیرهای جدید --- */} 
-              <Route path="Network" element={<NetworkPage />} />
-              <Route path="Channel" element={<ChannelPage />} />
+              <Route path="Channel/Channellist" element={<ChannelPage />} />
+              <Route path="Channel/Streams" element={<StreamsPage />} />
               <Route path="ChannelGroup" element={<ChannelGroupPage />} />
               <Route
                 path="ConnectedDevices"
@@ -82,12 +80,6 @@ function App() {
                 element={<StreamingChannelsPage />}
               />
               <Route path="Recordings" element={<RecordingsPage />} />
-
-
-
-
-
-
 
               <Route path="users/userslist" element={<UsersPage />} />
               {/* <Route path="/roles" element={<RolesPage/>} /> */}

@@ -1,14 +1,10 @@
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-
 import React, { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import axiosInstance from "../../utils/axiosInstance";
 import { useAuth } from "../../context/AuthContext";
 import "./ResourceManagementPage.css";
-// import "../../components/ResourceManagementPage.css";
-
-// --- وارد کردن کامپوننت‌های جدا شده ---
 import { Modal, ConfirmationDialog } from "../../components/Modals/Modals";
 import ResourceControls from "../../components/ResourceControls/ResourceControls";
 import ResourceTable from "../../components/ResourceTable/ResourceTable";
@@ -24,11 +20,16 @@ const ResourceManagementPage = ({
   FilterComponent,
   filterField,
   filterValue,
+  onDataChange,
+  isReadOnly = false,
+  overrideAddItemClick,
+  manualDataFetching = false, // پراپ جدید برای کنترل گرفتن دیتا
+  items: parentItems, // پراپ جدید برای دریافت آیتم‌ها از والد
+  loading: parentLoading, // پراپ جدید برای دریافت وضعیت لودینگ از والد
 }) => {
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
 
-  // --- استیت‌ها بدون تغییر باقی می‌مانند ---
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -39,14 +40,17 @@ const ResourceManagementPage = ({
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   const [itemToDeleteId, setItemToDeleteId] = useState(null);
 
-  // --- توابع اصلی مدیریت داده بدون تغییر باقی می‌مانند ---
   const fetchData = useCallback(async () => {
+    // فقط اگر به صورت دستی کنترل نمی‌شد، دیتا بگیر
+    if (manualDataFetching) return;
+
     try {
       setLoading(true);
       const response = await axiosInstance.get(`/${resourceName}`);
       const formattedData = formatDataForDisplay
         ? response.data.map(formatDataForDisplay)
         : response.data;
+      console.log("get",formattedData);
       setItems(formattedData);
       setError(null);
     } catch (err) {
@@ -55,13 +59,17 @@ const ResourceManagementPage = ({
     } finally {
       setTimeout(() => setLoading(false), 500);
     }
-  }, [resourceName, t, formatDataForDisplay]);
+  }, [resourceName, t, formatDataForDisplay, manualDataFetching]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
-  const filteredItems = items.filter((item) => {
+  // اگر دیتا به صورت دستی پاس داده شده بود، از اون استفاده کن
+  const displayItems = manualDataFetching ? parentItems : items;
+  const displayLoading = manualDataFetching ? parentLoading : loading;
+
+  const filteredItems = displayItems.filter((item) => {
     if (!item) return false;
     const matchesSearch = searchFields.some((field) =>
       item[field]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
@@ -70,27 +78,33 @@ const ResourceManagementPage = ({
     return matchesSearch && matchesSelect;
   });
 
+  // ... بقیه توابع (handleAddItemClick, handleEditClick, و ...) بدون تغییر باقی می‌مونن ...
   const handleAddItemClick = () => {
     setIsEditing(false);
     setCurrentItem(initialState);
     setIsModalOpen(true);
   };
-
   const handleEditClick = (item) => {
     setIsEditing(true);
-    setCurrentItem(item); // نیازی به کپی عمیق نیست چون فرم استیت داخلی خودش را مدیریت می‌کند
+    console.log(item)
+    setCurrentItem(item);
     setIsModalOpen(true);
   };
-
   const handleDeleteClick = (id) => {
     setItemToDeleteId(id);
     setIsConfirmDialogOpen(true);
   };
-
   const handleConfirmDelete = async () => {
     try {
       await axiosInstance.delete(`/${resourceName}/${itemToDeleteId}`);
-      setItems(items.filter((item) => item.id !== itemToDeleteId));
+      // اگر به صورت دستی کنترل می‌شد، باید تابع آپدیت رو هم از والد بگیریم
+      // فعلا فرض می‌کنیم حذف برای این صفحه غیرفعاله
+      if (manualDataFetching) {
+        if (onDataChange) onDataChange();
+        
+      }else {
+          setItems(items.filter((item) => item.id !== itemToDeleteId));
+        }
       Swal.fire({
         icon: "success",
         title: "حذف شد!",
@@ -110,80 +124,87 @@ const ResourceManagementPage = ({
       setItemToDeleteId(null);
     }
   };
+  const handleFormSubmit = async (data) => {
+    const allowedFieldIds = formFields.map((field) => field.id);
 
-    const handleFormSubmit = async (data) => {
-      // ✅ یک کپی از دیتا می‌سازیم تا state اصلی رو تغییر ندیم
-      const submissionData = { ...data };
+    // 2. آبجکت ارسالی را با فیلتر کردن دیتای فرم ایجاد کن
+    //    فقط کلیدهایی را انتخاب کن که در آرایه بالا وجود دارند
+    // چون ارایه چیز های دیگه هم داشت که نباید به بک اند ارسال میکردم برای همین باید فیلتر میکردم
+    const submissionData = Object.keys(data)
+      .filter((key) => allowedFieldIds.includes(key))
+      .reduce((obj, key) => {
+        obj[key] = data[key];
+        return obj;
+      }, {});
 
-      // ✅ فیلدهایی که بک‌اند انتظار نداره رو از آبجکت ارسالی حذف می‌کنیم
-      delete submissionData.id;
-      delete submissionData.avatar;
+    console.log("Clean data to be submitted:", submissionData);
 
-      // حذف فیلد پسورد اگر خالی باشد (در حالت ویرایش)
-      if (isEditing && !submissionData.password) {
-        delete submissionData.password;
-      }
-
-      try {
-        let response;
-        if (isEditing) {
-          response = await axiosInstance.patch(
-            `/${resourceName}/${currentItem.id}`,
-            submissionData // ✅ ارسال دیتای تمیز شده
-          );
-        } else {
-          response = await axiosInstance.post(
-            `/${resourceName}`,
-            submissionData // ✅ ارسال دیتای تمیز شده
-          );
-        }
-        Swal.fire({
-          icon: "success",
-          title: "موفق!",
-          text: `آیتم با موفقیت ${isEditing ? "ویرایش شد" : "ذخیره شد"}.`,
-          showConfirmButton: false,
-          timer: 1500,
-          timerProgressBar: true,
-        });
-        fetchData();
-        setIsModalOpen(false);
-        setCurrentItem(null);
-        // نمایش پیام موفقیت‌آمیز در اینجا هم می‌تواند ایده خوبی باشد
-      } catch (err) {
-        // منطق مدیریت خطا بدون تغییر
-        setIsModalOpen(false);
-        if (
-          err.response &&
-          err.response.status === 400 &&
-          err.response.data?.message?.includes("username is unique")
-        ) {
-          Swal.fire({
-            title: "خطا!",
-            text: "این نام کاربری قبلاً استفاده شده است. لطفاً نام دیگری انتخاب کنید.",
-            icon: "error",
-            confirmButtonText: "متوجه شدم",
-          });
-        } else if (err.response && err.response.status === 403) {
-          Swal.fire({
-            title: "خطای دسترسی!",
-            text: "شما سطح دسترسی لازم برای انجام این عملیات را ندارید.",
-            icon: "error",
-            confirmButtonText: "متوجه شدم",
-          });
-        } else {
-          Swal.fire({
-            title: "عملیات ناموفق!",
-            text: " رمز عبور باید حداقل 8 کاراکتر باشد.",
-            icon: "error",
-            confirmButtonText: "باشه",
-          });
-        }
-        console.error(
-          `Failed to save ${resourceName}:`,
-          err.response?.data || err.message
+    delete submissionData.id;
+    delete submissionData.avatar;
+    console.log("Created new item:", submissionData);
+    if (isEditing && !submissionData.password) {
+      delete submissionData.password;
+    }
+    try {
+      let response;
+      if (isEditing) {
+        response = await axiosInstance.patch(
+          `/${resourceName}/${currentItem.id}`,
+          submissionData
         );
+      } else {
+        response = await axiosInstance.post(`/${resourceName}`, submissionData);
       }
-    };
+      Swal.fire({
+        icon: "success",
+        title: "موفق!",
+        text: `آیتم با موفقیت ${isEditing ? "ویرایش شد" : "ذخیره شد"}.`,
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+      });
+      if (manualDataFetching) {
+        if (onDataChange) onDataChange(); // <-- خبر دادن به والد برای رفرش
+      } else {
+        // در حالت خودکار، خودش رفرش می‌کند
+        fetchData();
+      }
+      setIsModalOpen(false);
+      setCurrentItem(null);
+    } catch (err) {
+      setIsModalOpen(false);
+      if (
+        err.response &&
+        err.response.status === 400 &&
+        err.response.data?.message?.includes("username is unique")
+      ) {
+        Swal.fire({
+          title: "خطا!",
+          text: "این نام کاربری قبلاً استفاده شده است. لطفاً نام دیگری انتخاب کنید.",
+          icon: "error",
+          confirmButtonText: "متوجه شدم",
+        });
+      } else if (err.response && err.response.status === 403) {
+        Swal.fire({
+          title: "خطای دسترسی!",
+          text: "شما سطح دسترسی لازم برای انجام این عملیات را ندارید.",
+          icon: "error",
+          confirmButtonText: "متوجه شدم",
+        });
+      } else {
+        Swal.fire({
+          title: "عملیات ناموفق!",
+          text: " رمز عبور باید حداقل 8 کاراکتر باشد.",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+      }
+      console.error(
+        `Failed to save ${resourceName}:`,
+        err.response?.data || err.message
+      );
+    }
+  };
 
   return (
     <div className="container" dir={i18n.dir()}>
@@ -194,22 +215,24 @@ const ResourceManagementPage = ({
       <ResourceControls
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
-        onAddItemClick={handleAddItemClick}
+        onAddItemClick={overrideAddItemClick || handleAddItemClick}
         FilterComponent={FilterComponent}
         resourceName={resourceName}
       />
 
       <ResourceTable
-        loading={loading}
+        loading={displayLoading} // استفاده از استیت لودینگ درست
         error={error}
         columns={columns}
-        items={filteredItems}
+        items={filteredItems} // استفاده از آیتم‌های درست
         onEditClick={handleEditClick}
         onDeleteClick={handleDeleteClick}
         currentUserId={user.id}
         resourceName={resourceName}
+        isReadOnly={isReadOnly}
       />
 
+      {/* بقیه کامپوننت مودال بدون تغییر */}
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -219,7 +242,6 @@ const ResourceManagementPage = ({
             : `${resourceName}Management.addTitle`
         )}
       >
-        {/* currentItem باید وجود داشته باشد تا فرم رندر شود */}
         {currentItem && (
           <ResourceForm
             formFields={formFields}
