@@ -2,6 +2,7 @@
 
 import React from "react";
 import TVPlayer from "../TVPlayer/TVPlayer"; // آدرس TVPlayer را چک کنید
+
 import "./StreamModal.css"; // استایل‌های مودال را ایمپورت می‌کنیم
 
 const StreamModal = ({ isOpen, onClose, streamUrl }) => {

@@ -18,9 +18,12 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import StyleIcon from "@mui/icons-material/Style";
 import SensorsIcon from "@mui/icons-material/Sensors";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
+import PermDataSettingIcon from "@mui/icons-material/PermDataSetting";
+import SettingsIcon from "@mui/icons-material/Settings";
 import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-
+import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
+import AlarmIcon from "@mui/icons-material/Alarm";
 // ۱. prop های جدید `viewMode` و `closeMobileSidebar` را از ورودی بگیر
 function MenuList({ isCollapsed, viewMode, closeMobileSidebar }) {
   const { t } = useTranslation();
@@ -33,7 +36,7 @@ function MenuList({ isCollapsed, viewMode, closeMobileSidebar }) {
       { text: t("Cards"), icon: <StyleIcon />, path: "/cards" },
       {
         text: t("ConfigStream"),
-        icon: <StyleIcon />,
+        icon: <PermDataSettingIcon />,
         path: "/ConfigStream",
         subItems: [
           {
@@ -84,16 +87,16 @@ function MenuList({ isCollapsed, viewMode, closeMobileSidebar }) {
         ],
       },
       {
-        text: t("ChannelGroup"),
-        icon: <ViewListIcon />,
-        path: "/ChannelGroup",
-      },
-      {
-        text: t("ConnectedDevices"),
-        icon: <DevicesIcon />,
-        path: "/ConnectedDevices",
+        text: t("EPG"),
+        icon: <AlarmIcon />,
+        path: "/EPG",
       },
       { text: t("Recordings"), icon: <VideocamIcon />, path: "/Recordings" },
+      {
+        text: t("Setting"),
+        icon: <SettingsIcon />,
+        path: "/Setting",
+      },
     ],
     [t]
   );

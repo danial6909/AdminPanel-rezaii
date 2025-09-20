@@ -1,4 +1,38 @@
 {
+  "cardGroups": [
+    {
+      "id": "group_1",
+      "name": "Daily Tasks",
+
+      "cards": [
+        {
+          "id": "card_1_1",
+          "title": "Buy groceries",
+          "status": "Incomplete"
+        },
+        {
+          "id": "card_1_2",
+          "title": "Code a new feature",
+          "status": "In Progress"
+        }
+      ]
+    },
+    
+    {
+      "id": "group_2",
+      "name": "Important Tasks",
+      
+      "cards": [
+        {
+          "id": "card_2_1",
+          "title": "Submit React project",
+          "due_date": "2025-01-01"
+        }
+      ]
+    }
+  ]
+,
+
   "frequencies": [
     {
       "id": "freq-2",

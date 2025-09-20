@@ -23,8 +23,8 @@ import UsersPage from "./pages/UsersPage/UsersPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import RolesPage from "./pages/RolesPage/RolesPage";
 import ChannelPage from "./pages/ChannelPage/ChannelPage";
-import ChannelGroupPage from "./pages/ChannelGroupPage/ChannelGroupPage";
-import ConnectedDevicesPage from "./pages/ConnectedDevicesPage/ConnectedDevicesPage";
+import SettingPage from "./pages/SettingPage/SettingPage";
+import EPG_Page from "./pages/EPG_Page/EPG_Page";
 import StreamingChannelsPage from "./pages/StreamingChannelsPage/StreamingChannelsPage";
 import RecordingsPage from "./pages/RecordingsPage/RecordingsPage";
 import DVB_SPage from "./pages/DVB_SPage/DVB_SPage";
@@ -70,11 +70,8 @@ function App() {
 
               <Route path="Channel/Channellist" element={<ChannelPage />} />
               <Route path="Channel/Streams" element={<StreamsPage />} />
-              <Route path="ChannelGroup" element={<ChannelGroupPage />} />
-              <Route
-                path="ConnectedDevices"
-                element={<ConnectedDevicesPage />}
-              />
+              <Route path="Setting" element={<SettingPage />} />
+              <Route path="EPG" element={<EPG_Page />} />
               <Route
                 path="StreamingChannels"
                 element={<StreamingChannelsPage />}

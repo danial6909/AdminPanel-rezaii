@@ -334,6 +334,16 @@ i18n
           //   },
           // },
         },
+
+        streams: {
+          form: {
+            streamTypeLabel: "Protocol",
+            durationLabel: "Timeshift Duration (hours)",
+            rtpUrlLabel: "Destination IP Address",
+            channelLabel: "Channels",
+            urlLabel: "Stream Address",
+          },
+        },
       },
       fa: {
         translation: {
@@ -352,8 +362,8 @@ i18n
           Service: "سرویس",
           Network: "شبکه",
           Channel: "کانال",
-          ChannelGroup: "گروه کانال",
-          ConnectedDevices: "دستگاه‌های متصل",
+          Setting: "تنظیمات",
+          EPG: "EPG",
           StreamingChannels: "کانال‌های در حال پخش",
           Recordings: "موارد ضبط شده",
           Cards: "کارت ها",
@@ -573,21 +583,23 @@ i18n
           },
 
           // --- مدیریت گروه کانال‌ها ---
-          channelGroupsManagement: {
-            title: "مدیریت گروه کانال‌ها",
-            addButton: "افزودن گروه",
+          settingsManagement: {
+            title: "مدیریت تنظیمات",
+            addButton: "افزودن تنظیمات",
             noItemsFound: "گروهی یافت نشد.",
             fetchError: "خطا در دریافت لیست گروه‌ها.",
             form: {
-              name: "نام گروه",
+              name: "نام فیلد",
+              value: "مقدار",
             },
             table: {
-              name: "نام گروه",
+              name: "نام فیلد",
+              value: "مقدار",
             },
           },
 
           // --- دستگاه‌های متصل ---
-          connectedDevicesManagement: {
+          EPGsManagement: {
             title: "دستگاه‌های متصل",
             addButton: "افزودن دستگاه",
             fetchError: "خطا در دریافت لیست دستگاه‌ها.",
@@ -595,10 +607,10 @@ i18n
             active: "متصل",
             table: {
               id: "شناسه",
-              ip: "آدرس IP",
-              connectionDate: "تاریخ اتصال",
-              connectionTime: "ساعت اتصال",
-              disconnectionTime: "ساعت قطع اتصال",
+              name: "نام برنامه",
+              description: "توضیحات",
+              startTime: "تاریخ شروع",
+              endTime: "تاریخ پایان",
             },
           },
 
@@ -630,9 +642,10 @@ i18n
               status: "وضعیت",
             },
             table: {
-              name: "نام",
-              channelName: "نام کانال",
-              status: "وضعیت",
+              id: "شناسه",
+              user: "نام کاربر",
+              address: "آدرس استریم",
+              status: "وضعیت ضبط",
             },
           },
           "mumudvb/dvb-sManagement": {
@@ -674,7 +687,17 @@ i18n
           },
           "channels/streamsManagement": {
             addButton: "افزودن استریم ها",
-            title:"مدیریت پیکیربندی استریم ها"
+            title: "مدیریت پیکیربندی استریم ها",
+          },
+
+          streams: {
+            form: {
+              streamTypeLabel: "پروتکل",
+              durationLabel: "زمان تایم شیفت (ساعت)",
+              rtpUrlLabel: "آدرس آیپی مقصد",
+              channelLabel: "کانال ها",
+              urlLabel: "آدرس استریم",
+            },
           },
         },
       },

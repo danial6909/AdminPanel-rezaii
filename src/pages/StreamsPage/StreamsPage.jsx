@@ -3,16 +3,20 @@ import { useTranslation } from "react-i18next";
 import ResourceManagementPage from "../ResourceManagementPage/ResourceManagementPage";
 import axiosInstance from "../../utils/axiosInstance";
 import CustomSelect from "../../components/CustomSelect/CustomSelect";
-import StreamModal from "../../components/StreamModal/StreamModal"; // اطمینان حاصل کنید که این مسیر درست است
+import StreamModal from "../../components/StreamModal/StreamModal";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import Swal from "sweetalert2";
+import StreamsForm from "../../components/StreamsForm/StreamsForm";
+import { Modal } from "../../components/Modals/Modals";
+
 const StreamPage = () => {
   const { t } = useTranslation();
   const [channels, setChannels] = useState([]);
   const [channelFilter, setChannelFilter] = useState("");
-
-  // State برای مدیریت مودال
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStreamUrl, setSelectedStreamUrl] = useState("");
+  const [isAddFormModalOpen, setIsAddFormModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchChannelName = async () => {
@@ -33,23 +37,67 @@ const StreamPage = () => {
     }));
   }, [channels]);
 
-  // توابع برای باز و بسته کردن مودال
   const handleViewStream = (url) => {
     setSelectedStreamUrl(url);
     setIsModalOpen(true);
   };
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedStreamUrl("");
   };
 
-  // تعریف ستون‌های جدول
+  const handleOpenAddFormModal = () => {
+    setIsAddFormModalOpen(true);
+  };
+
+  const handleFormSubmit = (formData) => {
+    console.log("Form submitted with data:", formData);
+    setIsAddFormModalOpen(false);
+  };
+
+  const handleCancelForm = () => {
+    setIsAddFormModalOpen(false);
+  }; // ✅ New function to handle copying the URL
+
+  const handleCopyUrl = (url) => {
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "کپی شد!",
+          text: "لینک با موفقیت کپی شد.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((err) => {
+        console.error("Failed to copy:", err);
+        Swal.fire({
+          icon: "error",
+          title: "خطا",
+          text: "مشکلی در کپی کردن لینک پیش آمد.",
+        });
+      });
+  }; // ✅ Updated `columns` array
+
   const columns = [
     { key: "id", header: "id" },
     { key: "channelName", header: t("channelsManagement.table.name") },
     { key: "protocol", header: "protocol" },
-    { key: "unicastIpv4", header: "unicast-ipv4" },
+    {
+      key: "unicastIpv4",
+      header: "unicast-ipv4", // ✅ Use a custom render function to display a copy button
+      render: (row) => (
+        <button
+          style={{ cursor: "pointer", border: "none", background: "none" }}
+          onClick={() => handleCopyUrl(row.unicastIpv4)}
+          title="کپی کردن آدرس"
+        >
+               <ContentCopyIcon />   
+        </button>
+      ),
+    },
     {
       header: "نمایش",
       render: (row) => (
@@ -58,56 +106,23 @@ const StreamPage = () => {
           onClick={() => handleViewStream(row.unicastIpv4)}
           title="پخش زنده"
         >
-          <RemoveRedEyeIcon />
+               <RemoveRedEyeIcon />   
         </button>
       ),
     },
   ];
 
-  // فیلدهای فرم (در صورت نیاز برای ساخت یا ویرایش)
-  const formFields = [
-    {
-      id: "channelNumber",
-      label: t("channelsManagement.form.number"),
-      type: "number",
-      required: true,
-    },
-    {
-      id: "channelName",
-      label: t("channelsManagement.form.name"),
-      type: "text",
-      required: true,
-    },
-    {
-      id: "serviceId",
-      label: t("channelsManagement.form.status"),
-      type: "select",
-      options: ["فعال", "غیر فعال"],
-      required: true,
-    },
-    {
-      id: "multicastIpv4",
-      label: "ipv4",
-      type: "select",
-      options: ["فعال", "غیر فعال"],
-      required: true,
-    },
-  ];
-
   const searchFields = ["channelName", "id"];
-
   const initialState = {
     channel_number: "",
     name: "",
     status: "فعال",
   };
-
   const formatDataForDisplay = (data) => ({
     ...data,
     channelName: data.channel.channelName,
   });
 
-  // کامپوننت فیلتر بر اساس نام کانال
   const ChannelNameFilterComponent = () => {
     const filterOptions = [
       { value: "", label: "همه کانال‌ها" },
@@ -130,10 +145,10 @@ const StreamPage = () => {
 
   return (
     <>
+        
       <ResourceManagementPage
         resourceName="channels/streams"
         columns={columns}
-        formFields={formFields}
         searchFields={searchFields}
         initialState={initialState}
         isReadOnly={true}
@@ -141,13 +156,25 @@ const StreamPage = () => {
         FilterComponent={ChannelNameFilterComponent}
         filterValue={channelFilter}
         filterField="channelName"
+        overrideAddItemClick={handleOpenAddFormModal}
       />
-
+        
       <StreamModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         streamUrl={selectedStreamUrl}
       />
+        
+      <Modal
+        isOpen={isAddFormModalOpen}
+        onClose={handleCancelForm}
+        title={t("Stream.addStream")}
+      >
+           
+        <StreamsForm onSubmit={handleFormSubmit} onCancel={handleCancelForm} />
+         
+      </Modal>
+       
     </>
   );
 };
