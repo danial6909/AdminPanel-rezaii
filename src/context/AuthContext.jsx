@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
 
       if (response.data && response.data.token) {
         setUser(response.data);
-        navigate("/ConfigPage");
+        navigate("/Dashboard");
         return true;
       }
       return false; // اگر پاسخ موفق بود ولی توکن نداشت

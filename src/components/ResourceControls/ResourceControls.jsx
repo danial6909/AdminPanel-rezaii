@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import "./ResourceControls.css"
+import "./ResourceControls.css";
 
 const ResourceControls = ({
   searchTerm,
@@ -10,6 +10,7 @@ const ResourceControls = ({
   onAddItemClick,
   FilterComponent,
   resourceName,
+  disableAdd,
 }) => {
   const { t } = useTranslation();
 
@@ -27,13 +28,15 @@ const ResourceControls = ({
         />
       </div>
 
-      {/* اگر کامپوننت فیلتر وجود داشت، آن را رندر کن */}
       {FilterComponent && <FilterComponent />}
 
-      <button className="add-user-btn" onClick={onAddItemClick}>
-        <PersonAddAltIcon />
-        <span>{t(`${resourceName}Management.addButton`)}</span>
-      </button>
+      {/* ✅ با استفاده از شرط، دکمه رو فقط زمانی نمایش بده که disableAdd برابر با true نباشه */}
+      {!disableAdd && (
+        <button className="add-user-btn" onClick={onAddItemClick}>
+          <PersonAddAltIcon />
+          <span>{t(`${resourceName}Management.addButton`)}</span>
+        </button>
+      )}
     </div>
   );
 };

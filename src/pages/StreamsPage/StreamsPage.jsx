@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import ResourceManagementPage from "../ResourceManagementPage/ResourceManagementPage";
 import axiosInstance from "../../utils/axiosInstance";
@@ -13,22 +13,40 @@ import { Modal } from "../../components/Modals/Modals";
 const StreamPage = () => {
   const { t } = useTranslation();
   const [channels, setChannels] = useState([]);
+  const [streams, setStreams] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [channelFilter, setChannelFilter] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStreamUrl, setSelectedStreamUrl] = useState("");
   const [isAddFormModalOpen, setIsAddFormModalOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchChannelName = async () => {
-      try {
-        const response = await axiosInstance.get("channels");
-        setChannels(response.data);
-      } catch (error) {
-        console.error("Failed to fetch channelname:", error);
-      }
-    };
-    fetchChannelName();
+  const fetchChannels = async () => {
+    try {
+      const response = await axiosInstance.get("channels");
+      setChannels(response.data);
+    
+    } catch (error) {
+      console.error("Failed to fetch channelname:", error);
+    }
+  };
+
+  const fetchStreams = useCallback(async () => {
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get("/channels/streams");
+      setStreams(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error("Failed to fetch streams:", error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchChannels();
+    fetchStreams();
+  }, [fetchStreams]);
 
   const channelNameOptions = useMemo(() => {
     return channels.map((channel) => ({
@@ -48,16 +66,38 @@ const StreamPage = () => {
 
   const handleOpenAddFormModal = () => {
     setIsAddFormModalOpen(true);
-  };
+  }; // ✅ تابع جدید برای ذخیره استریم با آدرس پویا
 
-  const handleFormSubmit = (formData) => {
-    console.log("Form submitted with data:", formData);
-    setIsAddFormModalOpen(false);
+  const handleAddStream = async (formData) => {
+    try {
+      // ✅ تعیین آدرس API بر اساس streamType
+      const endpoint =
+        formData.streamType === "hls" ? "/channels/hls" : "/channels/rtp";
+      delete formData.streamType
+      console.log("data",formData);
+      await axiosInstance.post(endpoint, formData);
+      Swal.fire({
+        icon: "success",
+        title: "موفق!",
+        text: "استریم با موفقیت ذخیره شد.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setIsAddFormModalOpen(false);
+      fetchStreams();
+    } catch (error) {
+      console.error("Failed to add stream:", error);
+      Swal.fire({
+        icon: "error",
+        title: "خطا",
+        text: error.response?.data?.message || "مشکلی در ذخیره استریم پیش آمد.",
+      });
+    }
   };
 
   const handleCancelForm = () => {
     setIsAddFormModalOpen(false);
-  }; // ✅ New function to handle copying the URL
+  };
 
   const handleCopyUrl = (url) => {
     navigator.clipboard
@@ -79,34 +119,34 @@ const StreamPage = () => {
           text: "مشکلی در کپی کردن لینک پیش آمد.",
         });
       });
-  }; // ✅ Updated `columns` array
+  };
 
   const columns = [
     { key: "id", header: "id" },
     { key: "channelName", header: t("channelsManagement.table.name") },
-    { key: "protocol", header: "protocol" },
+    { key: "protocol", header: t("streams.form.protocol") },
     {
       key: "unicastIpv4",
-      header: "unicast-ipv4", // ✅ Use a custom render function to display a copy button
+      header: "unicast-ipv4",
       render: (row) => (
         <button
           style={{ cursor: "pointer", border: "none", background: "none" }}
           onClick={() => handleCopyUrl(row.unicastIpv4)}
           title="کپی کردن آدرس"
         >
-               <ContentCopyIcon />   
+          <ContentCopyIcon />
         </button>
       ),
     },
     {
-      header: "نمایش",
+      header: t("streams.form.preview"),
       render: (row) => (
         <button
           style={{ cursor: "pointer", border: "none", background: "none" }}
           onClick={() => handleViewStream(row.unicastIpv4)}
           title="پخش زنده"
         >
-               <RemoveRedEyeIcon />   
+          <RemoveRedEyeIcon />
         </button>
       ),
     },
@@ -118,14 +158,28 @@ const StreamPage = () => {
     name: "",
     status: "فعال",
   };
-  const formatDataForDisplay = (data) => ({
+const formatDataForDisplay = (data) => {
+
+  console.log("Data to format:", data);
+
+  const channelName = data?.channel?.channelName || "N/A";
+
+  console.log("Formatted channelName:", channelName);
+
+  return {
     ...data,
-    channelName: data.channel.channelName,
-  });
+    channelName: channelName,
+  };
+};
+
+
+const formattedStreams = useMemo(() => {
+  return streams.map(formatDataForDisplay);
+}, [streams]);
 
   const ChannelNameFilterComponent = () => {
     const filterOptions = [
-      { value: "", label: "همه کانال‌ها" },
+      { value: "", label: t("streams.filter") },
       ...channelNameOptions,
     ];
 
@@ -145,36 +199,35 @@ const StreamPage = () => {
 
   return (
     <>
-        
       <ResourceManagementPage
         resourceName="channels/streams"
         columns={columns}
         searchFields={searchFields}
         initialState={initialState}
-        isReadOnly={true}
+        isReadOnly={false}
         formatDataForDisplay={formatDataForDisplay}
         FilterComponent={ChannelNameFilterComponent}
         filterValue={channelFilter}
         filterField="channelName"
         overrideAddItemClick={handleOpenAddFormModal}
+        manualDataFetching={true}
+        items={formattedStreams}
+        loading={loading}
       />
-        
+
       <StreamModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         streamUrl={selectedStreamUrl}
       />
-        
+
       <Modal
         isOpen={isAddFormModalOpen}
         onClose={handleCancelForm}
-        title={t("Stream.addStream")}
+        title={t("channels/streamsManagement.addButton")}
       >
-           
-        <StreamsForm onSubmit={handleFormSubmit} onCancel={handleCancelForm} />
-         
+        <StreamsForm onSubmit={handleAddStream} onCancel={handleCancelForm} />
       </Modal>
-       
     </>
   );
 };

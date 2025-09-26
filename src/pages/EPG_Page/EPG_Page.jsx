@@ -45,19 +45,19 @@ const EPG_Page = () => {
     };
   
   const columns = [
-    { key: "id", header: t("EPGsManagement.table.id") },
-    { key: "name", header: t("EPGsManagement.table.name") },
+    { key: "id", header: t("EPGManagement.table.id") },
+    { key: "name", header: t("EPGManagement.table.name") },
     {
       key: "description",
-      header: t("EPGsManagement.table.description"),
+      header: t("EPGManagement.table.description"),
     },
     {
       key: "startTime",
-      header: t("EPGsManagement.table.startTime"),
+      header: t("EPGManagement.table.startTime"),
     },
     {
       key: "endTime",
-      header: t("EPGsManagement.table.endTime"),
+      header: t("EPGManagement.table.endTime"),
     },
   ];
 
@@ -90,7 +90,7 @@ const formatCardData = (Epg) => {
    <div className="cards-page-container" dir={i18n.dir()}>
      {/* هدر اصلی در بالای کامپوننت */}
      <div className="header">
-       <h1>{t("cardsManagement.title")}</h1>
+       <h1>{t("EPGManagement.title")}</h1>
      </div>
      <ResourceControls
        searchTerm={searchTerm}
@@ -135,6 +135,7 @@ const formatCardData = (Epg) => {
                    columns={columns}
                    items={filteredCards}
                    isReadOnly={true}
+                   
                  />
                </div>
              )}

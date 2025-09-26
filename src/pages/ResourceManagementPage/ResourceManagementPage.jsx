@@ -27,8 +27,9 @@ const ResourceManagementPage = ({
   loading: parentLoading,
   disableEdit = false,
   disableDelete = false,
-  disableAdd = false,
-  getFormFields, // The new prop
+  disableAdd = false, 
+  formFields,
+  getFormFields,
 }) => {
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
@@ -123,106 +124,112 @@ const ResourceManagementPage = ({
     }
   };
 
-const handleFormSubmit = async (data) => {
-  // 1. Get the form fields dynamically for validation
-  const currentFormFields = getFormFields(currentItem);
-  const allowedFieldIds = currentFormFields.map((field) => field.id);
-
-  // 2. Filter the submission data to include only allowed fields
-  const submissionData = Object.keys(data)
-    .filter((key) => allowedFieldIds.includes(key))
-    .reduce((obj, key) => {
-      obj[key] = data[key];
-      return obj;
-    }, {});
-
-  // ✅ New logic: Convert 'value' to a number if the fieldType is "Number"
-  // This is the key change to fix the issue.
-  if (currentItem && currentItem.fieldType === "Number") {
-    submissionData.value = Number(submissionData.value);
-  }
-console.log(submissionData);
-  try {
-    let response;
-    if (isEditing) {
-      // 3. ✅ Use 'fieldName' as the unique identifier for the PATCH request
-      response = await axiosInstance.patch(
-        `/${resourceName}/${currentItem.id}`,
-        submissionData
+  const handleFormSubmit = async (data) => {
+    // ✅ منطق جدید برای انتخاب فیلدهای فرم
+    const currentFormFields = getFormFields
+      ? getFormFields(currentItem)
+      : formFields; // ⚠️ افزودن بررسی null/undefined برای جلوگیری از خطا
+    if (!currentFormFields) {
+      console.error(
+        "Form fields are not defined. Check your parent component props."
       );
-    } else {
-      // This part is for POST, which is not used for settings in this case
-      response = await axiosInstance.post(`/${resourceName}`, submissionData);
+      return;
     }
+    const allowedFieldIds = currentFormFields.map((field) => field.id); // 2. Filter the submission data to include only allowed fields
 
-    Swal.fire({
-      icon: "success",
-      title: "موفق!",
-      text: `آیتم با موفقیت ${isEditing ? "ویرایش شد" : "ذخیره شد"}.`,
-      showConfirmButton: false,
-      timer: 1500,
-      timerProgressBar: true,
-    });
+    const submissionData = Object.keys(data)
+      .filter((key) => allowedFieldIds.includes(key))
+      .reduce((obj, key) => {
+        obj[key] = data[key];
+        return obj;
+      }, {}); // ✅ بررسی نوع فیلد قبل از تبدیل
 
-    // 4. Trigger a data refresh in the parent component
-    if (manualDataFetching && onDataChange) {
-      onDataChange();
-    } else {
-      fetchData();
+    const valueField = currentFormFields.find((field) => field.id === "value");
+    if (valueField && valueField.type === "number") {
+      submissionData.value = Number(submissionData.value);
     }
+    console.log(submissionData);
+    try {
+      let response;
+      if (isEditing) {
+        response = await axiosInstance.patch(
+          `/${resourceName}/${currentItem.id}`,
+          submissionData
+        );
+      } else {
+        response = await axiosInstance.post(`/${resourceName}`, submissionData);
+        console.log(submissionData);
+      }
 
-    setIsModalOpen(false);
-    setCurrentItem(null);
-  } catch (err) {
-    setIsModalOpen(false);
-    const errorMessage =
-      err.response?.data?.message || "مشکلی در ذخیره آیتم پیش آمد.";
+      Swal.fire({
+        icon: "success",
+        title: "موفق!",
+        text: `آیتم با موفقیت ${isEditing ? "ویرایش شد" : "ذخیره شد"}.`,
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+      });
 
-    // 5. Handle specific error messages
-    if (err.response && err.response.status === 400) {
-      if (errorMessage && errorMessage.includes("Field type")) {
+      if (manualDataFetching && onDataChange) {
+        onDataChange();
+      } else {
+        fetchData();
+      }
+
+      setIsModalOpen(false);
+      setCurrentItem(null);
+    } catch (err) {
+      setIsModalOpen(false);
+      const errorMessage =
+        err.response?.data?.message || "مشکلی در ذخیره آیتم پیش آمد.";
+
+      if (err.response && err.response.status === 400) {
+        if (errorMessage && errorMessage.includes("Field type")) {
+          Swal.fire({
+            title: "خطا!",
+            text: "مقدار وارد شده با نوع فیلد (مانند عدد یا متن) سازگار نیست.",
+            icon: "error",
+            confirmButtonText: "متوجه شدم",
+          });
+        } else if (
+          errorMessage &&
+          errorMessage.includes("username is unique")
+        ) {
+          Swal.fire({
+            title: "خطا!",
+            text: "این نام کاربری قبلاً استفاده شده است. لطفاً نام دیگری انتخاب کنید.",
+            icon: "error",
+            confirmButtonText: "متوجه شدم",
+          });
+        } else {
+          Swal.fire({
+            title: "عملیات ناموفق!",
+            text: errorMessage || "مشکلی در داده‌های ارسالی پیش آمد.",
+            icon: "error",
+            confirmButtonText: "باشه",
+          });
+        }
+      } else if (err.response && err.response.status === 403) {
         Swal.fire({
-          title: "خطا!",
-          text: "مقدار وارد شده با نوع فیلد (مانند عدد یا متن) سازگار نیست.",
-          icon: "error",
-          confirmButtonText: "متوجه شدم",
-        });
-      } else if (errorMessage && errorMessage.includes("username is unique")) {
-        Swal.fire({
-          title: "خطا!",
-          text: "این نام کاربری قبلاً استفاده شده است. لطفاً نام دیگری انتخاب کنید.",
+          title: "خطای دسترسی!",
+          text: "شما سطح دسترسی لازم برای انجام این عملیات را ندارید.",
           icon: "error",
           confirmButtonText: "متوجه شدم",
         });
       } else {
         Swal.fire({
           title: "عملیات ناموفق!",
-          text: errorMessage || "مشکلی در داده‌های ارسالی پیش آمد.",
+          text: "مشکلی در ارتباط با سرور پیش آمد.",
           icon: "error",
           confirmButtonText: "باشه",
         });
       }
-    } else if (err.response && err.response.status === 403) {
-      Swal.fire({
-        title: "خطای دسترسی!",
-        text: "شما سطح دسترسی لازم برای انجام این عملیات را ندارید.",
-        icon: "error",
-        confirmButtonText: "متوجه شدم",
-      });
-    } else {
-      Swal.fire({
-        title: "عملیات ناموفق!",
-        text: "مشکلی در ارتباط با سرور پیش آمد.",
-        icon: "error",
-        confirmButtonText: "باشه",
-      });
+      console.error(
+        `Failed to save ${resourceName}:`,
+        err.response?.data || err.message
+      );
     }
-    console.error(
-      `Failed to save ${resourceName}:`,
-      err.response?.data || err.message
-    );
-  }
-};
+  };
 
   return (
     <div className="container" dir={i18n.dir()}>
@@ -259,12 +266,12 @@ console.log(submissionData);
         title={t(
           isEditing
             ? `${resourceName}Management.editTitle`
-            : `${resourceName}Management.addTitle`
+            : `${resourceName}Management.addButton`
         )}
       >
         {currentItem && (
-          <ResourceForm
-            formFields={getFormFields(currentItem)}
+          <ResourceForm // ✅ استفاده از منطق شرطی برای انتخاب فیلدهای فرم
+            formFields={getFormFields ? getFormFields(currentItem) : formFields}
             initialData={currentItem}
             isEditing={isEditing}
             onSubmit={handleFormSubmit}

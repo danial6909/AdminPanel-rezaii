@@ -6,7 +6,6 @@ import axiosInstance from "../../utils/axiosInstance";
 import ToggleSwitch from "../../components/ToggleSwitch/ToggleSwitch";
 import { useMemo } from "react";
 
-
 export default function DVB_SPage() {
   const { t } = useTranslation();
   const [config, setconfig] = useState([]);
@@ -17,6 +16,7 @@ export default function DVB_SPage() {
     setIsLoading(true);
     try {
       const response = await axiosInstance.get("/mumudvb/dvb-s");
+      console.log(response.data);
       setconfig(response.data);
     } catch (error) {
       console.error("Failed to fetch stream configs:", error);
@@ -33,13 +33,13 @@ export default function DVB_SPage() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
-  
-  
-  
+
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await axiosInstance.get("/cards?autoscan=false&type=DVB-S");
+        const response = await axiosInstance.get(
+          "/cards?autoscan=false&type=DVB-S"
+        );
         setCards(response.data);
       } catch (error) {
         console.error("Failed to fetch cards:", error);
@@ -49,9 +49,9 @@ export default function DVB_SPage() {
           text: "نتوانستیم لیست کارت‌ها را از سرور دریافت کنیم.",
         });
       }
-    }
+    };
     fetchCards();
-}, []);
+  }, []);
 
   const cardOptions = useMemo(() => {
     return cards.map((card) => ({
@@ -59,8 +59,6 @@ export default function DVB_SPage() {
       label: card.name,
     }));
   }, [cards]);
-
- 
 
   // 2. تابع برای تغییر وضعیت فعال/غیرفعال
   const handleStatusToggle = async (cardId, newEnabledStatus) => {
@@ -91,19 +89,18 @@ export default function DVB_SPage() {
     }
   };
 
-// 3. تابع فرمت کردن دیتا برای نمایش (نسخه اصلاح شده)
-const formatCardData = (stream) => ({
-  ...stream, // ۱. تمام خصوصیات اصلی شیء stream را کپی کن
-  ...stream.convertedConfig, // ۲. تمام خصوصیات شیء تودرتوی convertedConfig را هم کپی کن (برای frequency, polarization و غیره)
-  id: stream.id,
-  name: stream.card.name || "N/A",
-  status: stream?.enabled ? "فعال" : "غیرفعال",
-  cardId: stream.card?.id,
-});
+  // 3. تابع فرمت کردن دیتا برای نمایش (نسخه اصلاح شده)
+  const formatCardData = (stream) => ({
+    ...stream, // ۱. تمام خصوصیات اصلی شیء stream را کپی کن
+    ...stream.convertedConfig, // ۲. تمام خصوصیات شیء تودرتوی convertedConfig را هم کپی کن (برای frequency, polarization و غیره)
+    id: stream.id,
+    name: stream.name || "N/A",
+    status: stream?.enabled ? "فعال" : "غیرفعال",
+    cardId: stream.card?.id,
+  });
 
   // دیتای خام را به دیتای فرمت‌شده برای نمایش تبدیل می‌کنیم
   const formattedconfig = config.map(formatCardData);
-
 
   // 4. تعریف ستون‌ها با تابع render برای وضعیت
   const configColumns = [
@@ -125,100 +122,103 @@ const formatCardData = (stream) => ({
     },
   ];
 
-  const searchFields = [ "id", "frequency"];
+  const searchFields = ["id", "frequency"];
 
+  const FormFields = [
+    {
+      id: "name",
+      label: t("mumudvb/dvb-sManagement.form.configName"),
+      type: "text",
+      required: true,
+      // placeholder: "2/3",
+    },
+    {
+      id: "cardId",
+      label: t("mumudvb/dvb-sManagement.form.name"),
+      type: "select",
+      required: true,
+      options: cardOptions,
+    },
+    {
+      id: "frequency",
+      label: t("mumudvb/dvb-sManagement.form.frequency"),
+      type: "number",
+      required: true,
+      placeholder: "10884",
+    },
+    {
+      id: "polarization",
+      label: t("mumudvb/dvb-sManagement.form.polarization"),
+      type: "select",
+      required: true,
+      options: [
+        { value: "h", label: "horizontal" },
+        { value: "v", label: "vertical" },
+        { value: "r", label: "right" },
+        { value: "l", label: "left" },
+      ],
+    },
+    {
+      id: "symbolRate",
+      label: t("mumudvb/dvb-sManagement.form.symbolRate"),
+      type: "number",
+      required: false,
+      placeholder: "27500",
+    },
+    {
+      id: "forwardErrorCorrection",
+      label: t("mumudvb/dvb-sManagement.form.forwardErrorCorrection"),
+      type: "text",
+      required: true,
+      placeholder: "2/3",
+    },
+    {
+      id: "multicastIpAddressAndPort",
+      label: t("mumudvb/dvb-sManagement.form.multicastIpAddressAndPort"),
+      type: "text",
+      required: true,
+      placeholder: "239.0.0.1",
+    },
+    {
+      id: "rewritePat",
+      label: t("mumudvb/dvb-sManagement.form.rewritePat"),
+      type: "checkbox",
+      // required: true,
+    },
+    {
+      id: "dedicatedThread",
+      label: t("mumudvb/dvb-sManagement.form.dedicatedThread"),
+      type: "checkbox",
+      // required: true,
+    },
+    {
+      id: "dedicatedThreadBufferSize",
+      label: t("mumudvb/dvb-sManagement.form.dedicatedThreadBufferSize"),
+      type: "number",
+      // required: true,
+      placeholder: "100",
+    },
+    {
+      id: "multicastTimeToLive",
+      label: t("mumudvb/dvb-sManagement.form.multicastTimeToLive"),
+      type: "number",
+      placeholder: "10",
 
+      // required: true,
+    },
 
-    const FormFields = [
-      {
-        id: "cardId",
-        label: t("mumudvb/dvb-sManagement.form.name"),
-        type: "select",
-        required: true,
-        options: cardOptions,
-      },
-      {
-        id: "frequency",
-        label: t("mumudvb/dvb-sManagement.form.frequency"),
-        type: "number",
-        required: true,
-        placeholder: "10884",
-      },
-      {
-        id: "polarization",
-        label: t("mumudvb/dvb-sManagement.form.polarization"),
-        type: "select",
-        required: true,
-        options: [
-          { value: "h", label: "horizontal" },
-          { value: "v", label: "vertical" },
-          { value: "r", label: "right" },
-          { value: "l", label: "left" },
-        ],
-      },
-      {
-        id: "symbolRate",
-        label: t("mumudvb/dvb-sManagement.form.symbolRate"),
-        type: "number",
-        required: false,
-        placeholder: "27500",
-      },
-      {
-        id: "forwardErrorCorrection",
-        label: t("mumudvb/dvb-sManagement.form.forwardErrorCorrection"),
-        type: "text",
-        required: true,
-        placeholder: "2/3",
-      },
-      {
-        id: "multicastIpAddressAndPort",
-        label: t("mumudvb/dvb-sManagement.form.multicastIpAddressAndPort"),
-        type: "text",
-        required: true,
-        placeholder: "239.0.0.1",
-      },
-      {
-        id: "rewritePat",
-        label: t("mumudvb/dvb-sManagement.form.rewritePat"),
-        type: "checkbox",
-        // required: true,
-      },
-      {
-        id: "dedicatedThread",
-        label: t("mumudvb/dvb-sManagement.form.dedicatedThread"),
-        type: "checkbox",
-        // required: true,
-      },
-      {
-        id: "dedicatedThreadBufferSize",
-        label: t("mumudvb/dvb-sManagement.form.dedicatedThreadBufferSize"),
-        type: "number",
-        // required: true,
-        placeholder: "100",
-      },
-      {
-        id: "multicastTimeToLive",
-        label: t("mumudvb/dvb-sManagement.form.multicastTimeToLive"),
-        type: "number",
-        placeholder: "10",
-
-        // required: true,
-      },
-
-      {
-        id: "autoConfiguration",
-        label: t("mumudvb/dvb-sManagement.form.autoConfiguration"),
-        type: "select",
-        options: [
-          { value: "full", label: "full" },
-          { value: "pid", label: "pid" },
-          { value: "none", label: "none" },
-        ],
-        // required: true,
-      },
-    ];
-
-  
+    {
+      id: "autoConfiguration",
+      label: t("mumudvb/dvb-sManagement.form.autoConfiguration"),
+      type: "select",
+      options: [
+        { value: "full", label: "full" },
+        { value: "pid", label: "pid" },
+        { value: "none", label: "none" },
+      ],
+      // required: true,
+    },
+  ];
 
   const initialState = {
     frequency: 0,
@@ -227,7 +227,6 @@ const formatCardData = (stream) => ({
     polarization: "h",
     cardId: "",
   };
-
 
   return (
     <ResourceManagementPage

@@ -213,22 +213,22 @@ export default function CardsPage() {
   };
 
  const cardsColumns = [
-    { key: "device", header: t("cards?autoscan=trueManagement.table.device") },
-    {
-      key: "adapter",
-      header: t("cards?autoscan=trueManagement.table.adapter"),
-    },
-    {
-      key: "frontend",
-      header: t("cards?autoscan=trueManagement.table.frontend"),
-    },
-    
-    { key: "type", header: t("cards?autoscan=trueManagement.table.type") },
-    {
-      key: "frequency",
-      header: t("cards?autoscan=trueManagement.table.frequency"),
-    },
-  ];
+   { key: "device", header: t("cardsManagement.table.device") },
+   {
+     key: "adapter",
+     header: t("cardsManagement.table.adapter"),
+   },
+   {
+     key: "frontend",
+     header: t("cardsManagement.table.frontend"),
+   },
+
+   { key: "type", header: t("cardsManagement.table.type") },
+   {
+     key: "frequency",
+     header: t("cardsManagement.table.frequency"),
+   },
+ ];
 
 const formatCardData = (card) => {
   

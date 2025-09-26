@@ -32,7 +32,7 @@ function MenuList({ isCollapsed, viewMode, closeMobileSidebar }) {
 
   const menuItems = React.useMemo(
     () => [
-      { text: t("ConfigPage"), icon: <DashboardIcon />, path: "/ConfigPage" },
+      { text: t("ConfigPage"), icon: <DashboardIcon />, path: "/Dashboard" },
       { text: t("Cards"), icon: <StyleIcon />, path: "/cards" },
       {
         text: t("ConfigStream"),
@@ -58,12 +58,12 @@ function MenuList({ isCollapsed, viewMode, closeMobileSidebar }) {
         path: "/Channel",
         subItems: [
           {
-            text: "لیست کانال ها",
+            text: t("channelsList"),
             icon: <ChecklistRtlIcon />,
             path: "/Channel/Channellist",
           },
           {
-            text: "استریم ها",
+            text: t("streamss"),
             icon: <AdminPanelSettingsIcon />,
             path: "/Channel/streams",
           },
@@ -93,7 +93,7 @@ function MenuList({ isCollapsed, viewMode, closeMobileSidebar }) {
       },
       { text: t("Recordings"), icon: <VideocamIcon />, path: "/Recordings" },
       {
-        text: t("Setting"),
+        text: t("Settings"),
         icon: <SettingsIcon />,
         path: "/Setting",
       },

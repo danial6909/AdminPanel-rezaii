@@ -15,7 +15,7 @@ import PrivateRoute from "./components/PrivateRoute";
 
 // وارد کردن کامپوننت‌های مربوط به هر صفحه
 import AdminLayout from "./layouts/AdminLayout";
-import ConfigPage from "./pages/ConfigPage/ConfigPage";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import LoginForm from "./pages/LoginFormPage/LoginForm";
 import NotFound from "./pages/NotFoundPage/NotFound";
 import CardsPage from "./pages/CardsPage/CardsPage";
@@ -25,7 +25,7 @@ import RolesPage from "./pages/RolesPage/RolesPage";
 import ChannelPage from "./pages/ChannelPage/ChannelPage";
 import SettingPage from "./pages/SettingPage/SettingPage";
 import EPG_Page from "./pages/EPG_Page/EPG_Page";
-import StreamingChannelsPage from "./pages/StreamingChannelsPage/StreamingChannelsPage";
+// import StreamingChannelsPage from "./pages/StreamingChannelsPage/StreamingChannelsPage";
 import RecordingsPage from "./pages/RecordingsPage/RecordingsPage";
 import DVB_SPage from "./pages/DVB_SPage/DVB_SPage";
 import DVB_TPage from "./pages/DVB_TPage/DVB_TPage";
@@ -61,9 +61,9 @@ function App() {
               }
             >
               {/* مسیر پیش‌فرض: اگر کاربر به آدرس اصلی ('/') برود، به '/dashboard' منتقل می‌شود */}
-              <Route index element={<Navigate to="/ConfigPage" replace />} />
+              <Route index element={<Navigate to="/Dashboard" replace />} />
               {/* مسیرهای تو در تو که داخل کامپوننت AdminLayout رندر می‌شوند */}
-              <Route path="ConfigPage" element={<ConfigPage />} />
+              <Route path="Dashboard" element={<Dashboard />} />
               <Route path="Cards" element={<CardsPage />} />
               <Route path="ConfigStream/DVB-S" element={<DVB_SPage />} />
               <Route path="ConfigStream/DVB-T" element={<DVB_TPage />} />
@@ -72,10 +72,7 @@ function App() {
               <Route path="Channel/Streams" element={<StreamsPage />} />
               <Route path="Setting" element={<SettingPage />} />
               <Route path="EPG" element={<EPG_Page />} />
-              <Route
-                path="StreamingChannels"
-                element={<StreamingChannelsPage />}
-              />
+             
               <Route path="Recordings" element={<RecordingsPage />} />
 
               <Route path="users/userslist" element={<UsersPage />} />

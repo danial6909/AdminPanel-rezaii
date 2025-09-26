@@ -97,7 +97,7 @@ const formatCardData = (stream) => ({
   ...stream, // ۱. تمام خصوصیات اصلی شیء stream را کپی کن
   ...stream.convertedConfig, // ۲. تمام خصوصیات شیء تودرتوی convertedConfig را هم کپی کن (برای frequency, polarization و غیره)
   id: stream.id, 
-  name: stream.card.name || "N/A", 
+  name: stream.name || "N/A", 
   status: stream.enabled ? "فعال" : "غیرفعال", 
   cardId: stream.card.id, 
 });
@@ -130,75 +130,82 @@ const formatCardData = (stream) => ({
 
 
 
-    const FormFields = [
-      {
-        id: "cardId",
-        label: t("mumudvb/dvb-sManagement.form.name"),
-        type: "select",
-        required: true,
-        options: cardOptions,
-      },
-      {
-        id: "frequency",
-        label: t("mumudvb/dvb-sManagement.form.frequency"),
-        type: "number",
-        required: true,
-        placeholder: "564000",
-      },
-      {
-        id: "bandwidth",
-        label: t("mumudvb/dvb-sManagement.form.bandwidth"),
-        type: "number",
-        required: true,
-        placeholder: "8",
-      },
+  const FormFields = [
+    {
+      id: "name",
+      label: t("mumudvb/dvb-sManagement.form.configName"),
+      type: "text",
+      required: true,
+      // placeholder: "2/3",
+    },
+    {
+      id: "cardId",
+      label: t("mumudvb/dvb-sManagement.form.name"),
+      type: "select",
+      required: true,
+      options: cardOptions,
+    },
+    {
+      id: "frequency",
+      label: t("mumudvb/dvb-sManagement.form.frequency"),
+      type: "number",
+      required: true,
+      placeholder: "564000",
+    },
+    {
+      id: "bandwidth",
+      label: t("mumudvb/dvb-sManagement.form.bandwidth"),
+      type: "number",
+      required: true,
+      placeholder: "8",
+    },
 
-      {
-        id: "multicastIpAddressAndPort",
-        label: t("mumudvb/dvb-sManagement.form.multicastIpAddressAndPort"),
-        type: "text",
-        required: true,
-        placeholder: "239.0.0.1",
-      },
-      {
-        id: "rewritePat",
-        label: t("mumudvb/dvb-sManagement.form.rewritePat"),
-        type: "checkbox",
-        // required: true,
-      },
-      {
-        id: "dedicatedThread",
-        label: t("mumudvb/dvb-sManagement.form.dedicatedThread"),
-        type: "checkbox",
-        // required: true,
-      },
-      {
-        id: "dedicatedThreadBufferSize",
-        label: t("mumudvb/dvb-sManagement.form.dedicatedThreadBufferSize"),
-        type: "number",
-        // required: true,
-        placeholder: "100",
-      },
-      {
-        id: "multicastTimeToLive",
-        label: t("mumudvb/dvb-sManagement.form.multicastTimeToLive"),
-        type: "number",
-        // required: true,
-        placeholder: "10",
-      },
+    {
+      id: "multicastIpAddressAndPort",
+      label: t("mumudvb/dvb-sManagement.form.multicastIpAddressAndPort"),
+      type: "text",
+      required: true,
+      placeholder: "239.0.0.1",
+    },
+    {
+      id: "rewritePat",
+      label: t("mumudvb/dvb-sManagement.form.rewritePat"),
+      type: "checkbox",
+      // required: true,
+    },
+    {
+      id: "dedicatedThread",
+      label: t("mumudvb/dvb-sManagement.form.dedicatedThread"),
+      type: "checkbox",
+      // required: true,
+    },
+    {
+      id: "dedicatedThreadBufferSize",
+      label: t("mumudvb/dvb-sManagement.form.dedicatedThreadBufferSize"),
+      type: "number",
+      // required: true,
+      placeholder: "100",
+    },
+    {
+      id: "multicastTimeToLive",
+      label: t("mumudvb/dvb-sManagement.form.multicastTimeToLive"),
+      type: "number",
+      // required: true,
+      placeholder: "10",
+    },
 
-      {
-        id: "autoConfiguration",
-        label: t("mumudvb/dvb-sManagement.form.autoConfiguration"),
-        type: "select",
-        options: [
-          { value: "full", label: "full" },
-          { value: "pid", label: "pid" },
-          { value: "none", label: "none" },
-        ],
-        // required: true,
-      },
-    ];
+    {
+      id: "autoConfiguration",
+      label: t("mumudvb/dvb-sManagement.form.autoConfiguration"),
+      type: "select",
+      options: [
+        { value: "full", label: "full" },
+        { value: "pid", label: "pid" },
+        { value: "none", label: "none" },
+      ],
+      // required: true,
+    },
+  ];
 
   
 

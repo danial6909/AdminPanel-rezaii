@@ -1,0 +1,195 @@
+/* Dashboard.css */
+
+.dashboard-wrapper {
+  min-height: 100vh;
+  padding: 1rem;
+  
+  /* استفاده از متغیرهای رنگی شما برای تم روشن */
+  background-color: var(--color-background-main);
+  color: var(--color-text-primary);
+}
+
+.dashboard-wrapper.dark-mode {
+  /* استفاده از متغیرهای رنگی شما برای تم تیره */
+  background-color: var(--color-background-main);
+  color: var(--color-text-primary);
+}
+
+.dashboard-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.dashboard-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-success); /* رنگ سبز */
+}
+
+.network-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.network-card,
+.resource-card {
+  border-radius: 0.75rem;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  /* رنگ‌ها برای تم روشن */
+  background-color: var(--color-background-content);
+  box-shadow: 0 4px 6px var(--color-shadow);
+}
+
+.network-card.dark-mode,
+.resource-card.dark-mode {
+  /* رنگ‌ها برای تم تیره */
+  background-color: var(--color-background-content);
+  box-shadow: 0 2px 4px var(--color-shadow);
+}
+
+.network-card:hover,
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px var(--color-shadow);
+}
+
+.network-card.dark-mode:hover,
+.resource-card.dark-mode:hover {
+  box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+.network-title {
+  margin-bottom: 0.5rem;
+  color: var(--color-text-primary);
+}
+
+.network-in {
+  color: var(--color-error); /* رنگ قرمز */
+}
+
+.network-out {
+  color: var(--color-accent); /* رنگ فیروزه‌ای */
+}
+
+.network-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.resource-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.resource-card {
+  padding: 1.5rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-success); /* رنگ سبز */
+}
+
+.card-info {
+  text-align: right;
+}
+
+.usage-value {
+  font-size: 1.875rem;
+  font-weight: 800;
+}
+
+.cpu-usage {
+  color: var(--color-accent); /* رنگ فیروزه‌ای */
+}
+
+.mem-usage {
+  color: var(--color-primary); /* رنگ آبی */
+}
+
+.disk-usage {
+  color: var(--color-error); /* رنگ قرمز */
+}
+
+.usage-detail {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.chart-wrapper {
+  height: 200px;
+}
+
+.disk-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-chart-container {
+  width: 10rem;
+  height: 10rem;
+  position: relative;
+}
+
+.circle-chart-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.circle-background {
+  stroke-width: 10;
+  fill: transparent;
+  stroke: var(--color-border);
+}
+
+.circle-progress {
+  stroke-width: 10;
+  stroke-linecap: round;
+  fill: transparent;
+  stroke: var(--color-error); /* رنگ قرمز */
+}
+
+.circle-value {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-percentage {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.card-description {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.chart-container {
+  height: 100%;
+  width: 100%;
+}

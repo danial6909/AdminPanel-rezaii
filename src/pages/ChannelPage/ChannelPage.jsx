@@ -94,7 +94,7 @@ const ChannelPage = () => {
     { key: "multicastIpv4", header: "multicast-ipv4" },
     {
       key: "actions",
-      header: "اقدامات",
+      header: t("channelsManagement.table.action"),
       render: (channel) => (
         <button
           onClick={() => handleRecordClick(channel)}
@@ -127,6 +127,7 @@ const ChannelPage = () => {
         initialState={initialState}
         isReadOnly={true}
         formatDataForDisplay={formatDataForDisplay}
+        disableAdd={true}
       />
       {/* پاس دادن props به RecordModal */}
       <RecordModal

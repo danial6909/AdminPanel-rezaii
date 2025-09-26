@@ -26,7 +26,8 @@ i18n
           Service: "Service",
           Network: "Network",
           Channel: "Channel",
-          ChannelGroup: "Channel Group",
+          channelsList: "ChannelsList",
+          streamss: "Streams",
           ConnectedDevices: "Connected Devices",
           StreamingChannels: "Streaming Channels",
           Recordings: "Recordings",
@@ -36,7 +37,7 @@ i18n
           users: "Users",
           user_list: "Users List",
           roles: "Roles",
-          settings: "Settings",
+          Settings: "Settings",
           security: "Security",
           authentication: "Authentication",
           login: "Login",
@@ -103,19 +104,19 @@ i18n
             },
           },
 
-          "cards?autoscan=trueManagement": {
-            addButton: "Cards install",
+          cardsManagement: {
             title: "Cards Management",
-            scan: "Cards Scan",
+            addButton: "Install Cards",
             table: {
               device: "Device",
               adapter: "Adapter",
               frontend: "Frontend",
-              name: "name",
+              name: "Name",
               type: "Type",
               frequency: "Frequency",
               enabled: "Enabled",
             },
+            action: "Actions",
           },
 
           // --- Profile Page Specific Keys ---
@@ -245,6 +246,7 @@ i18n
               number: "Channel Number",
               name: "Channel Name",
               status: "Status",
+              action: "Action",
             },
           },
 
@@ -260,6 +262,45 @@ i18n
             table: {
               name: "Group Name",
             },
+          },
+
+          "mumudvb/dvb-sManagement": {
+            title: "Stream Configuration Management",
+            addButton: "Add Configuration",
+            addTitle: "Add Configuration",
+            editTitle: "Edit Configuration",
+            noItemsFound: "No streams found.",
+            fetchError: "Error fetching stream list.",
+            form: {
+              name: "Card Name",
+              adapter: "Adapter",
+              polarization: "Polarization",
+              symbolRate: "Symbol Rate",
+              forwardErrorCorrection: "Forward Error Correction",
+              multicastIpAddressAndPort: "Multicast IP Address",
+              rewritePat: "Rewrite PAT",
+              dedicatedThread: "Dedicated Thread",
+              dedicatedThreadBufferSize: "Dedicated Thread Buffer Size",
+              multicastTimeToLive: "Multicast Time to Live",
+              autoConfiguration: "Auto Configuration",
+              frequency: "Frequency",
+              bandwidth: "Bandwidth",
+              configName: "Configuration Name",
+            },
+            table: {
+              id: "ID",
+              name: "Name",
+              frequency: "Frequency",
+              status: "Status",
+            },
+          },
+          "mumudvb/dvb-tManagement": {
+            title: "Stream Configuration Management",
+            addButton: "Add Configuration",
+            addTitle: "Add Configuration",
+            editTitle: "Edit Configuration",
+            noItemsFound: "No streams found.",
+            fetchError: "Error fetching stream list.",
           },
 
           // --- Connected Devices ---
@@ -294,21 +335,65 @@ i18n
             },
           },
 
-          // --- Recordings Management ---
-          recordingsManagement: {
-            title: "Recordings Management",
-            addButton: "Add Recording",
-            noItemsFound: "No recordings found.",
-            fetchError: "Error fetching recordings.",
+          "channels/admin/recordManagement": {
+            title: "Recorded Items Management",
+
+            addButton: "Add Item",
+            noItemsFound: "No recorded items found.",
+            fetchError: "Error fetching recorded items list.",
             form: {
-              name: "Recording Name",
+              name: "Name",
               channelName: "Channel Name",
               status: "Status",
             },
             table: {
-              name: "Recording Name",
-              channelName: "Channel Name",
-              status: "Status",
+              id: "ID",
+              user: "User Name",
+              address: "Stream Address",
+              status: "Recording Status",
+            },
+          },
+          "channels/streamsManagement": {
+            addButton: "Add Streams",
+            title: "Streams Config Management",
+          },
+
+          streams: {
+            filter: "All channels",
+            form: {
+              streamTypeLabel: "Protocol",
+              timeshiftMinuteLabel: "Timeshift Duration (minute)",
+              rtpUrlLabel: "Destination IP Address",
+              channelLabel: "Channels",
+              urlLabel: "Stream Address",
+              preview: "preview",
+              protocol: "protocol",
+              sourceTypeLabel: "Format",
+            },
+          },
+
+          EPGManagement: {
+            title: "EPG Management",
+            addButton: "Add EPG",
+            fetchError: "Error fetching device list.",
+            noItemsFound: "No devices found.",
+            active: "Connected",
+            table: {
+              id: "ID",
+              name: "Program Name",
+              description: "Description",
+              startTime: "Start Date",
+              endTime: "End Date",
+            },
+          },
+          settingManagement: {
+            title: "Settings Management",
+            addButton: "Add Setting",
+            noItemsFound: "No groups found.",
+            fetchError: "Error fetching groups list.",
+            table: {
+              name: "Field Name",
+              value: "Value",
             },
           },
           // ConfigStreamPage: {
@@ -334,16 +419,6 @@ i18n
           //   },
           // },
         },
-
-        streams: {
-          form: {
-            streamTypeLabel: "Protocol",
-            durationLabel: "Timeshift Duration (hours)",
-            rtpUrlLabel: "Destination IP Address",
-            channelLabel: "Channels",
-            urlLabel: "Stream Address",
-          },
-        },
       },
       fa: {
         translation: {
@@ -362,7 +437,9 @@ i18n
           Service: "سرویس",
           Network: "شبکه",
           Channel: "کانال",
-          Setting: "تنظیمات",
+          channelsList: "لیست کانال ها",
+          streamss: "استریم ها",
+          Settings: "تنظیمات",
           EPG: "EPG",
           StreamingChannels: "کانال‌های در حال پخش",
           Recordings: "موارد ضبط شده",
@@ -441,13 +518,13 @@ i18n
             },
           },
 
-          "cards?autoscan=trueManagement": {
+          cardsManagement: {
             title: "مدیریت کارت‌ها",
             addButton: "نصب کارت‌ها",
             table: {
               device: "دستگاه",
               adapter: "کارت",
-              frontend: "جلو",
+              frontend: "فرانت‌اند",
               name: "نام",
               type: "نوع",
               frequency: "فرکانس",
@@ -579,19 +656,16 @@ i18n
               number: "شماره کانال",
               name: "نام کانال",
               status: "وضعیت",
+              action: "عملیات",
             },
           },
 
           // --- مدیریت گروه کانال‌ها ---
-          settingsManagement: {
+          settingManagement: {
             title: "مدیریت تنظیمات",
             addButton: "افزودن تنظیمات",
             noItemsFound: "گروهی یافت نشد.",
             fetchError: "خطا در دریافت لیست گروه‌ها.",
-            form: {
-              name: "نام فیلد",
-              value: "مقدار",
-            },
             table: {
               name: "نام فیلد",
               value: "مقدار",
@@ -599,9 +673,9 @@ i18n
           },
 
           // --- دستگاه‌های متصل ---
-          EPGsManagement: {
-            title: "دستگاه‌های متصل",
-            addButton: "افزودن دستگاه",
+          EPGManagement: {
+            title: "مدیریت EPG",
+            addButton: "افزودن EPG",
             fetchError: "خطا در دریافت لیست دستگاه‌ها.",
             noItemsFound: "دستگاهی یافت نشد.",
             active: "متصل",
@@ -631,7 +705,7 @@ i18n
           },
 
           // --- مدیریت موارد ضبط شده ---
-          recordingsManagement: {
+          "channels/admin/recordManagement": {
             title: "مدیریت موارد ضبط شده",
             addButton: "افزودن مورد",
             noItemsFound: "مورد ضبط شده‌ای یافت نشد.",
@@ -669,6 +743,7 @@ i18n
               autoConfiguration: "پیکربندی خودکار",
               frequency: "فرکانس",
               bandwidth: "پهنای باند",
+              configName: "نام پیکربندی",
             },
             table: {
               id: "شناسه",
@@ -689,14 +764,17 @@ i18n
             addButton: "افزودن استریم ها",
             title: "مدیریت پیکیربندی استریم ها",
           },
-
           streams: {
+            filter: "همه کانال ها",
             form: {
               streamTypeLabel: "پروتکل",
-              durationLabel: "زمان تایم شیفت (ساعت)",
-              rtpUrlLabel: "آدرس آیپی مقصد",
-              channelLabel: "کانال ها",
+              timeshiftMinuteLabel: "مدت زمان تایم‌شیفت (دقیقه)",
+              rtpUrlLabel: "آدرس IP مقصد",
+              channelLabel: "کانال‌ها",
               urlLabel: "آدرس استریم",
+              preview: "پیش‌نمایش",
+              protocol: "پروتکل",
+              sourceTypeLabel: "فرمت ورودی",
             },
           },
         },
